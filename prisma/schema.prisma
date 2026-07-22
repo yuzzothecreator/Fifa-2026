@@ -1,0 +1,169 @@
+// World Cup 2026 Hub — Prisma schema
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  FINISHED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  password     String?
+  image        String?
+  role         Role     @default(USER)
+  favoriteTeam String?
+  provider     String?  // "credentials" | "google" | ...
+  createdAt    DateTime @default(now())
+
+  reminders   MatchReminder[]
+  predictions Prediction[]
+  comments    Comment[]
+  favorites   FavoriteTeam[]
+}
+
+model Team {
+  id        String   @id @default(cuid())
+  country   String   @unique
+  code      String   // ISO code, used for flag CDN e.g. "br"
+  flag      String
+  logo      String?
+  coach     String
+  ranking   Int
+  continent String
+  group     String?
+
+  players       Player[]
+  homeMatches   Match[]        @relation("HomeTeam")
+  awayMatches   Match[]        @relation("AwayTeam")
+  favoritedBy   FavoriteTeam[]
+}
+
+model Player {
+  id         String  @id @default(cuid())
+  name       String
+  country    String
+  position   String
+  club       String
+  number     Int?
+  photo      String?
+  goals      Int     @default(0)
+  assists    Int     @default(0)
+  appearances Int    @default(0)
+  rating     Float   @default(0)
+
+  team   Team?   @relation(fields: [teamId], references: [id])
+  teamId String?
+}
+
+model Stadium {
+  id       String  @id @default(cuid())
+  name     String
+  city     String
+  country  String
+  capacity Int
+  image    String
+  matches  Match[]
+}
+
+model Match {
+  id         String      @id @default(cuid())
+  date       DateTime
+  status     MatchStatus @default(SCHEDULED)
+  homeScore  Int?
+  awayScore  Int?
+  stage      String      @default("Group Stage")
+  minute     Int?
+
+  homeTeam   Team   @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  homeTeamId String
+  awayTeam   Team   @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  awayTeamId String
+  stadium    Stadium @relation(fields: [stadiumId], references: [id])
+  stadiumId  String
+
+  reminders   MatchReminder[]
+  predictions Prediction[]
+}
+
+model News {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String
+  content       String?
+  image         String
+  category      String
+  featured      Boolean  @default(false)
+  publishedDate DateTime @default(now())
+}
+
+model FavoriteTeam {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  team   Team   @relation(fields: [teamId], references: [id])
+  teamId String
+
+  @@unique([userId, teamId])
+}
+
+model MatchReminder {
+  id      String @id @default(cuid())
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  match   Match  @relation(fields: [matchId], references: [id])
+  matchId String
+
+  @@unique([userId, matchId])
+}
+
+model Prediction {
+  id          String @id @default(cuid())
+  user        User   @relation(fields: [userId], references: [id])
+  userId      String
+  match       Match  @relation(fields: [matchId], references: [id])
+  matchId     String
+  homeScore   Int
+  awayScore   Int
+  points      Int    @default(0)
+
+  @@unique([userId, matchId])
+}
+
+model Poll {
+  id       String       @id @default(cuid())
+  question String
+  options  PollOption[]
+  createdAt DateTime    @default(now())
+}
+
+model PollOption {
+  id     String @id @default(cuid())
+  label  String
+  votes  Int    @default(0)
+  poll   Poll   @relation(fields: [pollId], references: [id])
+  pollId String
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
