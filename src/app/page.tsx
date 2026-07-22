@@ -4,10 +4,13 @@ import { Hero } from "@/components/home/hero";
 import { LiveScoreTicker } from "@/components/home/live-score-ticker";
 import { HostNations } from "@/components/home/host-nations";
 import { GoldenBootBoard } from "@/components/home/golden-boot-board";
+import { GoldenGloveBoard } from "@/components/home/golden-glove-board";
+import { TotalGoalsChart } from "@/components/home/total-goals-chart";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/shared/reveal";
 import { StatsCard } from "@/components/cards/stats-card";
 import { MatchCard } from "@/components/cards/match-card";
+import { ResultPill } from "@/components/cards/result-pill";
 import { TeamCard } from "@/components/cards/team-card";
 import { StadiumCard } from "@/components/cards/stadium-card";
 import { NewsCard } from "@/components/cards/news-card";
@@ -21,6 +24,7 @@ export default function HomePage() {
     ...matches.filter((m) => m.status === "SCHEDULED"),
     ...matches.filter((m) => m.status === "FINISHED").reverse(),
   ].slice(0, 3);
+  const recentResults = matches.filter((m) => m.status === "FINISHED").slice(-15);
   const topTeams = [...teams].sort((a, b) => a.ranking - b.ranking).slice(0, 4);
   const featuredStadiums = stadiums.slice(0, 3);
   const featuredNews = news.find((n) => n.featured) ?? news[0];
@@ -65,6 +69,28 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+
+        {recentResults.length > 0 && (
+          <div className="mt-10">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <h3 className="font-heading text-xl tracking-wide text-white">Results wall</h3>
+              <Button asChild variant="ghost" size="sm">
+                <Link href="/fixtures?view=results">Full results →</Link>
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {recentResults.map((m) => (
+                <ResultPill key={m.id} match={m} />
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section className="container py-10">
+        <Reveal>
+          <TotalGoalsChart />
+        </Reveal>
       </section>
 
       <section className="container grid gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -86,7 +112,9 @@ export default function HomePage() {
                   <span className="w-6 font-display text-xl text-white/30">{i + 1}</span>
                   <img src={flagUrl(row.code, "w40")} alt="" className="h-4 w-6 rounded-sm object-cover" />
                   <span className="flex-1 font-medium text-white">{row.country}</span>
-                  <span className="text-xs text-white/40">{row.gf}:{row.ga}</span>
+                  <span className="text-xs text-white/40">
+                    {row.gf}:{row.ga}
+                  </span>
                   <span className="font-display text-xl text-electric">{row.points}</span>
                 </Link>
               ))}
@@ -97,10 +125,22 @@ export default function HomePage() {
       </section>
 
       <section className="container py-16">
+        <Reveal>
+          <GoldenGloveBoard />
+        </Reveal>
+      </section>
+
+      <section className="container py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading label="Contenders" title="Top Ranked Nations" description="FIFA ranking favourites chasing the ultimate prize." />
+          <SectionHeading
+            label="Contenders"
+            title="Top Ranked Nations"
+            description="FIFA ranking favourites chasing the ultimate prize."
+          />
           <Button asChild variant="outline">
-            <Link href="/teams">All 48 Teams <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/teams">
+              All 48 Teams <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -117,7 +157,9 @@ export default function HomePage() {
             <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-pitch/20 blur-3xl" />
             <div className="relative grid gap-8 lg:grid-cols-2 lg:items-center">
               <div>
-                <Badge variant="default"><BrainCircuit className="h-3.5 w-3.5" /> AI Match Predictor</Badge>
+                <Badge variant="default">
+                  <BrainCircuit className="h-3.5 w-3.5" /> AI Match Predictor
+                </Badge>
                 <h3 className="mt-4 font-display text-4xl uppercase leading-none tracking-tight text-white md:text-5xl">
                   Build your <span className="spectrum-text">Fantasy XI</span>
                 </h3>
@@ -125,7 +167,9 @@ export default function HomePage() {
                   Use real WC 2026 form — Messi, Mbappé, Haaland and more — to craft an 11-player squad within budget.
                 </p>
                 <Button asChild className="mt-6" variant="pitch">
-                  <Link href="/fantasy"><Sparkles className="h-4 w-4" /> Open Fantasy</Link>
+                  <Link href="/fantasy">
+                    <Sparkles className="h-4 w-4" /> Open Fantasy
+                  </Link>
                 </Button>
                 <Button asChild className="mt-6 ml-3" variant="outline">
                   <Link href="/fan-zone">Fan Zone</Link>
@@ -140,7 +184,9 @@ export default function HomePage() {
                   <div key={p.m} className="glass rounded-2xl p-4">
                     <div className="flex items-center justify-between text-sm font-semibold text-white">
                       <span>{p.m}</span>
-                      <span className="text-electric">{p.a}% – {p.b}%</span>
+                      <span className="text-electric">
+                        {p.a}% – {p.b}%
+                      </span>
                     </div>
                     <div className="mt-2 flex h-2 overflow-hidden rounded-full bg-white/10">
                       <div className="bg-electric" style={{ width: `${p.a}%` }} />
@@ -156,9 +202,15 @@ export default function HomePage() {
 
       <section className="container py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading label="Venues" title="Iconic Stadiums" description="16 FIFA-confirmed arenas across North America." />
+          <SectionHeading
+            label="Venues"
+            title="Iconic Stadiums"
+            description="16 FIFA-confirmed arenas across North America."
+          />
           <Button asChild variant="outline">
-            <Link href="/stadiums">All Stadiums <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/stadiums">
+              All Stadiums <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -170,9 +222,15 @@ export default function HomePage() {
 
       <section className="container py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading label="Latest" title="Newsroom" description="Breaking stories and analysis from the tournament." />
+          <SectionHeading
+            label="Latest"
+            title="Newsroom"
+            description="Breaking stories and analysis from the tournament."
+          />
           <Button asChild variant="outline">
-            <Link href="/news">All News <ArrowRight className="h-4 w-4" /></Link>
+            <Link href="/news">
+              All News <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
         <div className="mt-8 grid gap-5">
@@ -197,8 +255,12 @@ export default function HomePage() {
               Favourite teams, set reminders, climb the fan leaderboard and build your Fantasy XI.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg"><Link href="/login">Create Account</Link></Button>
-              <Button asChild size="lg" variant="outline"><Link href="/fan-zone">Enter Fan Zone</Link></Button>
+              <Button asChild size="lg">
+                <Link href="/login">Create Account</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/fan-zone">Enter Fan Zone</Link>
+              </Button>
             </div>
           </div>
         </Reveal>

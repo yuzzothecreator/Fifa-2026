@@ -6,6 +6,7 @@ import {
   PLAYER_FALLBACK,
   HERO_IMAGE,
   LOGIN_IMAGE,
+  unsplash,
 } from "./images";
 
 export { STADIUM_FALLBACK, PLAYER_FALLBACK, HERO_IMAGE, LOGIN_IMAGE };
@@ -456,6 +457,82 @@ export const getPlayersByCountry = (code: string) =>
 export const goldenBoot = [...players]
   .sort((a, b) => b.tournamentGoals - a.tournamentGoals || b.worldCupGoals - a.worldCupGoals)
   .slice(0, 8);
+
+/** Adidas Golden Glove winners — design reference data */
+export const goldenGlove = [
+  {
+    year: 2026,
+    name: "Unai Simón",
+    country: "Spain",
+    code: "es",
+    featured: true,
+    photo: unsplash("photo-1574629810360-7efbbe195018", 1200),
+    frame: "spectrum" as const,
+  },
+  {
+    year: 2022,
+    name: "Emiliano Martínez",
+    country: "Argentina",
+    code: "ar",
+    featured: false,
+    photo: unsplash("photo-1522778119026-d647f0596c20", 900),
+    frame: "blue" as const,
+  },
+  {
+    year: 2018,
+    name: "Thibaut Courtois",
+    country: "Belgium",
+    code: "be",
+    featured: false,
+    photo: unsplash("photo-1431324155629-1a6deb1dec8d", 900),
+    frame: "fire" as const,
+  },
+  {
+    year: 2014,
+    name: "Manuel Neuer",
+    country: "Germany",
+    code: "de",
+    featured: false,
+    photo: unsplash("photo-1508098682722-e99c43a406b2", 900),
+    frame: "cyan" as const,
+  },
+  {
+    year: 2010,
+    name: "Iker Casillas",
+    country: "Spain",
+    code: "es",
+    featured: false,
+    photo: unsplash("photo-1518091043644-c1d4457512c6", 900),
+    frame: "lime" as const,
+  },
+];
+
+/** Total goals scored at every FIFA World Cup™ (2026 projected for 48-team format) */
+export const worldCupGoalsHistory: { year: number; goals: number; highlight?: boolean }[] = [
+  { year: 1930, goals: 70 },
+  { year: 1934, goals: 70 },
+  { year: 1938, goals: 84 },
+  { year: 1950, goals: 88 },
+  { year: 1954, goals: 140 },
+  { year: 1958, goals: 126 },
+  { year: 1962, goals: 89 },
+  { year: 1966, goals: 89 },
+  { year: 1970, goals: 95 },
+  { year: 1974, goals: 97 },
+  { year: 1978, goals: 102 },
+  { year: 1982, goals: 146 },
+  { year: 1986, goals: 132 },
+  { year: 1990, goals: 115 },
+  { year: 1994, goals: 141 },
+  { year: 1998, goals: 171 },
+  { year: 2002, goals: 161 },
+  { year: 2006, goals: 147 },
+  { year: 2010, goals: 145 },
+  { year: 2014, goals: 171 },
+  { year: 2018, goals: 169 },
+  { year: 2022, goals: 172 },
+  { year: 2026, goals: 308, highlight: true },
+];
 
 export const HOST_NATIONS = [
   { code: "mx", country: "Mexico", role: "Opening Match · Azteca", matches: 5 },
