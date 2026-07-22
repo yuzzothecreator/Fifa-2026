@@ -24,7 +24,7 @@ export default function TeamsPage() {
       <PageHeader
         label="48 Nations"
         title="The Teams"
-        description="Explore every qualified nation, their squads, coaches and FIFA rankings on the road to glory."
+        description="All 48 qualified nations from the official Final Draw — search, filter by continent, and favourite your team."
       />
 
       <section className="container py-10">

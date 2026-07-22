@@ -1,15 +1,16 @@
 "use client";
 
-import * as React from "react";
 import { motion } from "framer-motion";
 import { Heart, Trophy } from "lucide-react";
 import type { Team } from "@/lib/types";
 import { flagUrl } from "@/lib/data";
+import { useFavoriteTeams } from "@/lib/favorites";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
-  const [fav, setFav] = React.useState(false);
+  const { isFavorite, toggle, ready } = useFavoriteTeams();
+  const fav = ready && isFavorite(team.id);
 
   return (
     <motion.article
@@ -39,7 +40,7 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
           </div>
         </div>
         <button
-          onClick={() => setFav((f) => !f)}
+          onClick={() => toggle(team.id)}
           aria-label="Favorite team"
           className={cn(
             "flex h-9 w-9 items-center justify-center rounded-full border transition-all",
@@ -50,11 +51,12 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
         </button>
       </div>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-4 flex flex-wrap items-center gap-2">
         <Badge variant="gold">
           <Trophy className="h-3 w-3" /> FIFA #{team.ranking}
         </Badge>
         <Badge variant="muted">{team.continent}</Badge>
+        {(team.titles ?? 0) > 0 && <Badge variant="pitch">{team.titles}× champions</Badge>}
       </div>
 
       <div className="mt-4 space-y-1 border-t border-white/10 pt-4">

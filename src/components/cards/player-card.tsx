@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { flagUrl } from "@/lib/data";
+import { flagUrl, playerPhotoFallback } from "@/lib/data";
 import type { Player } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
+import { SafeImage } from "@/components/shared/safe-image";
 
 const posColor: Record<Player["position"], "default" | "pitch" | "gold" | "muted"> = {
   GK: "gold",
@@ -60,10 +61,11 @@ export function PlayerCard({
         } ${selected ? "ring-2 ring-gold" : ""}`}
       >
         <div className="relative h-56 overflow-hidden">
-          <img
+          <SafeImage
             src={player.photo}
+            fallback={playerPhotoFallback}
             alt={player.name}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
@@ -76,18 +78,25 @@ export function PlayerCard({
             className="absolute left-4 top-4 h-6 w-9 rounded-sm object-cover ring-1 ring-white/30"
             loading="lazy"
           />
-          <div className="absolute bottom-3 left-4" style={{ transform: "translateZ(30px)" }}>
+          <div className="absolute bottom-3 left-4 flex gap-2" style={{ transform: "translateZ(30px)" }}>
             <Badge variant={posColor[player.position]}>{player.position}</Badge>
+            <Badge variant="gold">WC26: {player.tournamentGoals}</Badge>
           </div>
         </div>
 
         <div className="p-5">
-          <h3 className="font-heading text-2xl leading-none tracking-wide text-white">{player.name}</h3>
-          <p className="mt-1 text-sm text-white/50">{player.club}</p>
+          <div className="flex items-start justify-between gap-2">
+            <div>
+              <h3 className="font-heading text-2xl leading-none tracking-wide text-white">{player.name}</h3>
+              <p className="mt-1 text-sm text-white/50">{player.club} · Age {player.age}</p>
+            </div>
+          </div>
+          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-white/55">{player.bio}</p>
 
-          <div className="mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-center">
+          <div className="mt-4 grid grid-cols-4 gap-2 border-t border-white/10 pt-4 text-center">
             <Stat label="Caps" value={player.appearances} />
-            <Stat label="Goals" value={player.goals} />
+            <Stat label="Int. G" value={player.goals} />
+            <Stat label="WC G" value={player.worldCupGoals} />
             <Stat label="Rating" value={player.rating} accent />
           </div>
         </div>
@@ -99,8 +108,8 @@ export function PlayerCard({
 function Stat({ label, value, accent }: { label: string; value: number; accent?: boolean }) {
   return (
     <div>
-      <p className={`font-display text-2xl leading-none ${accent ? "gold-text" : "text-white"}`}>{value}</p>
-      <p className="mt-1 text-[10px] uppercase tracking-widest text-white/40">{label}</p>
+      <p className={`font-display text-xl leading-none ${accent ? "gold-text" : "text-white"}`}>{value}</p>
+      <p className="mt-1 text-[9px] uppercase tracking-widest text-white/40">{label}</p>
     </div>
   );
 }

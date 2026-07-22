@@ -16,7 +16,7 @@ export default function StadiumsPage() {
       <PageHeader
         label="Host Venues"
         title="Stadiums"
-        description="From the Azteca to MetLife — the cathedrals of football that will host the world's greatest show."
+        description="FIFA-confirmed tournament capacities across 16 venues in Canada, Mexico and the USA."
       />
 
       <section className="container py-10">
@@ -25,7 +25,7 @@ export default function StadiumsPage() {
             { label: "Stadiums", value: stadiums.length },
             { label: "Host Cities", value: 16 },
             { label: "Countries", value: 3 },
-            { label: "Total Seats", value: `${Math.round(totalCapacity / 1000)}K` },
+            { label: "Total Seats", value: `${(totalCapacity / 1_000_000).toFixed(2)}M` },
           ].map((s) => (
             <div key={s.label} className="glass rounded-2xl p-5 text-center">
               <p className="font-display text-4xl text-white">{s.value}</p>

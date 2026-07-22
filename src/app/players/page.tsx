@@ -36,7 +36,7 @@ export default function PlayersPage() {
       <PageHeader
         label="The Stars"
         title="Players"
-        description="Meet the icons and rising stars. Filter by position and compare head-to-head stats."
+        description="Real international caps, career goals, World Cup tallies and 2026 tournament form. Compare stars head-to-head."
       />
 
       <section className="container py-10">
@@ -101,8 +101,9 @@ export default function PlayersPage() {
 function ComparePanel({ a, b, onClose }: { a: Player; b: Player; onClose: () => void }) {
   const rows: { label: string; key: keyof Player }[] = [
     { label: "Int'l Goals", key: "goals" },
-    { label: "Int'l Assists", key: "assists" },
     { label: "Caps", key: "appearances" },
+    { label: "WC Career", key: "worldCupGoals" },
+    { label: "WC 2026", key: "tournamentGoals" },
     { label: "Rating", key: "rating" },
   ];
   return (

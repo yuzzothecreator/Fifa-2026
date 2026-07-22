@@ -13,7 +13,11 @@ import { Badge } from "@/components/ui/badge";
 import { matches, teams, stadiums, news, tournamentStats } from "@/lib/data";
 
 export default function HomePage() {
-  const liveOrNext = matches.filter((m) => m.status !== "SCHEDULED").concat(matches.filter((m) => m.status === "SCHEDULED")).slice(0, 3);
+  const liveOrNext = [
+    ...matches.filter((m) => m.status === "LIVE"),
+    ...matches.filter((m) => m.status === "SCHEDULED"),
+    ...matches.filter((m) => m.status === "FINISHED"),
+  ].slice(0, 3);
   const topTeams = [...teams].sort((a, b) => a.ranking - b.ranking).slice(0, 4);
   const featuredStadiums = stadiums.slice(0, 3);
   const featuredNews = news.find((n) => n.featured) ?? news[0];
@@ -37,9 +41,14 @@ export default function HomePage() {
       <section className="container py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <SectionHeading label="Match Center" title="Live & Upcoming" description="Follow every kickoff in real time across all 16 host cities." />
+          <div className="flex flex-wrap gap-2">
+          <Button asChild variant="outline">
+            <Link href="/groups">View Groups <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
           <Button asChild variant="outline">
             <Link href="/fixtures">All Fixtures <ArrowRight className="h-4 w-4" /></Link>
           </Button>
+          </div>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {liveOrNext.map((m, i) => (
@@ -80,7 +89,10 @@ export default function HomePage() {
                   forecast every fixture. Test your instincts against the machine.
                 </p>
                 <Button asChild className="mt-6" variant="pitch">
-                  <Link href="/fan-zone"><Sparkles className="h-4 w-4" /> Make a Prediction</Link>
+                  <Link href="/fantasy"><Sparkles className="h-4 w-4" /> Build Fantasy XI</Link>
+                </Button>
+                <Button asChild className="mt-6 ml-3" variant="outline">
+                  <Link href="/fan-zone">Make a Prediction</Link>
                 </Button>
               </div>
               <div className="space-y-3">

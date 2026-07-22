@@ -14,6 +14,21 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
   const d = formatMatchDate(match.date);
   const isLive = match.status === "LIVE";
   const isDone = match.status === "FINISHED";
+  const stageLabel = match.group !== "—" ? `${match.stage} · Group ${match.group}` : match.stage;
+
+  const Flag = ({ code, country }: { code: string; country: string }) =>
+    code === "tbd" ? (
+      <div className="flex h-14 w-20 items-center justify-center rounded-md bg-white/10 text-xs font-semibold text-white/50">
+        TBD
+      </div>
+    ) : (
+      <img
+        src={flagUrl(code, "w160")}
+        alt={country}
+        className="h-14 w-20 rounded-md object-cover ring-1 ring-white/20"
+        loading="lazy"
+      />
+    );
 
   return (
     <motion.article
@@ -27,9 +42,9 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
         isLive && "border-red-500/40"
       )}
     >
-      <div className="flex items-center justify-between">
-        <Badge variant="muted">
-          {match.stage} · Group {match.group}
+      <div className="flex items-center justify-between gap-2">
+        <Badge variant="muted" className="max-w-[70%] truncate">
+          {stageLabel}
         </Badge>
         {isLive ? (
           <Badge variant="live">
@@ -53,14 +68,16 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
 
       <div className="mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
         <div className="flex flex-col items-center gap-2 text-center">
-          <img src={flagUrl(match.homeCode, "w160")} alt={match.homeCountry} className="h-14 w-20 rounded-md object-cover ring-1 ring-white/20" loading="lazy" />
+          <Flag code={match.homeCode} country={match.homeCountry} />
           <span className="font-heading text-lg tracking-wide text-white">{match.homeCountry}</span>
         </div>
 
         <div className="flex flex-col items-center px-2">
           {isDone || isLive ? (
             <div className="font-display text-4xl leading-none text-white">
-              {match.homeScore}<span className="mx-1 text-white/40">:</span>{match.awayScore}
+              {match.homeScore}
+              <span className="mx-1 text-white/40">:</span>
+              {match.awayScore}
             </div>
           ) : (
             <div className="font-display text-2xl text-electric">VS</div>
@@ -69,12 +86,16 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
         </div>
 
         <div className="flex flex-col items-center gap-2 text-center">
-          <img src={flagUrl(match.awayCode, "w160")} alt={match.awayCountry} className="h-14 w-20 rounded-md object-cover ring-1 ring-white/20" loading="lazy" />
+          <Flag code={match.awayCode} country={match.awayCountry} />
           <span className="font-heading text-lg tracking-wide text-white">{match.awayCountry}</span>
         </div>
       </div>
 
-      <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-white/55">
+      {match.note && (
+        <p className="mt-3 rounded-xl bg-white/5 px-3 py-2 text-center text-xs text-gold/90">{match.note}</p>
+      )}
+
+      <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-white/55">
         <span className="flex items-center gap-1.5">
           <MapPin className="h-3.5 w-3.5 text-electric" />
           {match.stadium}, {match.city}

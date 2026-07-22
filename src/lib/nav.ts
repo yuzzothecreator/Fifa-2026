@@ -1,21 +1,22 @@
-import { Home, Users, CalendarDays, Building2, User, Newspaper, MessageSquare, LayoutDashboard } from "lucide-react";
+import { Home, Users, CalendarDays, Building2, User, Newspaper, MessageSquare, LayoutDashboard, Grid3X3, Wand2 } from "lucide-react";
 
 export const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/teams", label: "Teams", icon: Users },
+  { href: "/groups", label: "Groups", icon: Grid3X3 },
   { href: "/fixtures", label: "Fixtures", icon: CalendarDays },
   { href: "/stadiums", label: "Stadiums", icon: Building2 },
   { href: "/players", label: "Players", icon: User },
+  { href: "/fantasy", label: "Fantasy", icon: Wand2 },
   { href: "/news", label: "News", icon: Newspaper },
   { href: "/fan-zone", label: "Fan Zone", icon: MessageSquare },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
 ] as const;
 
-// Compact set used on the mobile bottom navigation bar
 export const mobileNavLinks = [
   { href: "/", label: "Home", icon: Home },
-  { href: "/teams", label: "Teams", icon: Users },
+  { href: "/groups", label: "Groups", icon: Grid3X3 },
   { href: "/fixtures", label: "Fixtures", icon: CalendarDays },
-  { href: "/news", label: "News", icon: Newspaper },
+  { href: "/fantasy", label: "Fantasy", icon: Wand2 },
   { href: "/fan-zone", label: "Fans", icon: MessageSquare },
 ] as const;

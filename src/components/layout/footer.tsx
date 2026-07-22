@@ -10,8 +10,10 @@ const columns = [
   {
     title: "Tournament",
     links: [
+      { label: "Groups", href: "/groups" },
       { label: "Fixtures", href: "/fixtures" },
       { label: "Teams", href: "/teams" },
+      { label: "Fantasy", href: "/fantasy" },
       { label: "Stadiums", href: "/stadiums" },
       { label: "Dashboard", href: "/dashboard" },
     ],

@@ -88,10 +88,10 @@ export default function DashboardPage() {
                 <Footprints className="h-5 w-5 text-gold" /> Golden Boot Race
               </h3>
               <div className="mt-4 flex items-center gap-4">
-                <span className="font-display text-6xl gold-text">{tournamentStats.topScorer.goals}</span>
+                <p className="font-display text-4xl gold-text">{tournamentStats.topScorer.goals}</p>
                 <div>
-                  <p className="font-heading text-2xl tracking-wide text-white">{tournamentStats.topScorer.name}</p>
-                  <p className="text-sm text-white/50">Goals this tournament</p>
+                  <p className="font-heading text-xl tracking-wide text-white">{tournamentStats.topScorer.name}</p>
+                  <p className="text-sm text-white/50">Goals at WC 2026 (tied)</p>
                 </div>
               </div>
             </div>
