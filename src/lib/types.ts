@@ -30,6 +30,7 @@ export interface Player {
   club: string;
   number: number;
   photo: string;
+  photoFallback?: string;
   /** Career international goals */
   goals: number;
   /** Career international assists (approx.) */

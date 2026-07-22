@@ -46,35 +46,44 @@ export default function GroupsPage() {
               <h2 className="font-heading text-2xl tracking-wide text-white">Group {active}</h2>
               <Badge variant="default">{groupTeams.length} teams</Badge>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+            <div className="overflow-x-auto -mx-0">
+              <table className="w-full min-w-[560px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-white/10 text-[10px] uppercase tracking-wider text-white/40">
                     {["#", "Team", "P", "W", "D", "L", "GF", "GA", "GD", "Pts"].map((h) => (
-                      <th key={h} className="px-3 py-3 font-semibold first:pl-5 last:pr-5">{h}</th>
+                      <th
+                        key={h}
+                        className={cn(
+                          "px-2 py-3 font-semibold first:pl-4 last:pr-4 sm:px-3 sm:first:pl-5 sm:last:pr-5",
+                          ["GF", "GA", "GD"].includes(h) && "hidden xs:table-cell",
+                          ["W", "D", "L"].includes(h) && "hidden sm:table-cell"
+                        )}
+                      >
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {standings.map((row, i) => (
                     <tr key={row.code} className={cn(i < 2 && "bg-pitch/5", i === 2 && "bg-electric/5")}>
-                      <td className="px-3 py-3 pl-5 font-display text-lg text-white/40">{i + 1}</td>
-                      <td className="px-3 py-3">
+                      <td className="px-2 py-3 pl-4 font-display text-lg text-white/40 sm:px-3 sm:pl-5">{i + 1}</td>
+                      <td className="px-2 py-3 sm:px-3">
                         <span className="flex items-center gap-2 font-medium text-white">
-                          <img src={flagUrl(row.code, "w40")} alt="" className="h-4 w-6 rounded-sm object-cover" />
-                          {row.country}
+                          <img src={flagUrl(row.code, "w40")} alt="" className="h-4 w-6 shrink-0 rounded-sm object-cover" />
+                          <span className="truncate">{row.country}</span>
                           {i < 2 && <Badge variant="pitch" className="ml-1 !px-2 !py-0 text-[9px]">Q</Badge>}
                           {i === 2 && <Badge variant="default" className="ml-1 !px-2 !py-0 text-[9px]">3rd*</Badge>}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-white/70">{row.played}</td>
-                      <td className="px-3 py-3 text-white/70">{row.won}</td>
-                      <td className="px-3 py-3 text-white/70">{row.drawn}</td>
-                      <td className="px-3 py-3 text-white/70">{row.lost}</td>
-                      <td className="px-3 py-3 text-white/70">{row.gf}</td>
-                      <td className="px-3 py-3 text-white/70">{row.ga}</td>
-                      <td className="px-3 py-3 text-white/70">{row.gd > 0 ? `+${row.gd}` : row.gd}</td>
-                      <td className="px-3 py-3 pr-5 font-display text-xl text-electric">{row.points}</td>
+                      <td className="px-2 py-3 text-white/70 sm:px-3">{row.played}</td>
+                      <td className="hidden px-2 py-3 text-white/70 sm:table-cell sm:px-3">{row.won}</td>
+                      <td className="hidden px-2 py-3 text-white/70 sm:table-cell sm:px-3">{row.drawn}</td>
+                      <td className="hidden px-2 py-3 text-white/70 sm:table-cell sm:px-3">{row.lost}</td>
+                      <td className="hidden px-2 py-3 text-white/70 xs:table-cell sm:px-3">{row.gf}</td>
+                      <td className="hidden px-2 py-3 text-white/70 xs:table-cell sm:px-3">{row.ga}</td>
+                      <td className="hidden px-2 py-3 text-white/70 xs:table-cell sm:px-3">{row.gd > 0 ? `+${row.gd}` : row.gd}</td>
+                      <td className="px-2 py-3 pr-4 font-display text-xl text-electric sm:px-3 sm:pr-5">{row.points}</td>
                     </tr>
                   ))}
                 </tbody>

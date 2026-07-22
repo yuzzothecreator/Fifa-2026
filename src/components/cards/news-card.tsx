@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { Clock, ArrowUpRight } from "lucide-react";
 import type { NewsArticle } from "@/lib/types";
+import { STADIUM_FALLBACK } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
+import { SafeImage } from "@/components/shared/safe-image";
 import { cn } from "@/lib/utils";
 
 const catVariant: Record<NewsArticle["category"], "default" | "pitch" | "gold" | "live" | "muted"> = {
@@ -40,9 +42,10 @@ export function NewsCard({
         featured && "md:flex-row"
       )}
     >
-      <div className={cn("relative overflow-hidden", featured ? "h-64 md:h-auto md:w-1/2" : "h-48")}>
-        <img
+      <div className={cn("relative overflow-hidden", featured ? "h-52 sm:h-64 md:h-auto md:w-1/2" : "h-44 sm:h-48")}>
+        <SafeImage
           src={article.image}
+          fallback={STADIUM_FALLBACK}
           alt={article.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
@@ -53,11 +56,11 @@ export function NewsCard({
         </div>
       </div>
 
-      <div className={cn("flex flex-1 flex-col p-5", featured && "md:justify-center md:p-8")}>
+      <div className={cn("flex flex-1 flex-col p-4 sm:p-5", featured && "md:justify-center md:p-8")}>
         <h3
           className={cn(
             "font-heading leading-tight tracking-wide text-white transition-colors group-hover:text-electric",
-            featured ? "text-3xl" : "text-xl"
+            featured ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
           )}
         >
           {article.title}

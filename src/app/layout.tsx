@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
           <Navbar />
-          <main className="relative pb-20 md:pb-0">{children}</main>
+          <main className="relative safe-bottom md:pb-0">{children}</main>
           <Footer />
           <MobileNav />
         </ThemeProvider>

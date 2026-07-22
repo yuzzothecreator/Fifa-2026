@@ -10,7 +10,11 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: "1.5rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.25rem",
+        lg: "1.5rem",
+      },
       screens: { "2xl": "1400px" },
     },
     extend: {
@@ -40,11 +44,11 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Brand tokens
+        // Brand tokens — fully saturated WC26 palette
         navy: "#071426",
         midnight: "#020617",
-        electric: "#00A8FF",
-        pitch: "#00C853",
+        electric: "#00B4FF",
+        pitch: "#00E676",
         gold: "#FFD700",
       },
       fontFamily: {
@@ -58,13 +62,16 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        neon: "0 0 20px rgba(0,168,255,0.45), 0 0 40px rgba(0,168,255,0.2)",
-        "neon-green": "0 0 20px rgba(0,200,83,0.45), 0 0 40px rgba(0,200,83,0.2)",
-        gold: "0 0 20px rgba(255,215,0,0.4)",
+        neon: "0 0 22px rgba(0,180,255,0.55), 0 0 48px rgba(0,180,255,0.25)",
+        "neon-green": "0 0 22px rgba(0,230,118,0.55), 0 0 48px rgba(0,230,118,0.25)",
+        gold: "0 0 22px rgba(255,215,0,0.5)",
       },
       backgroundImage: {
         "grid-lines":
-          "linear-gradient(to right, rgba(0,168,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,168,255,0.08) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(0,180,255,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,180,255,0.1) 1px, transparent 1px)",
+      },
+      screens: {
+        xs: "390px",
       },
       keyframes: {
         "accordion-down": {

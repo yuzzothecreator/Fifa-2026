@@ -1,54 +1,38 @@
 import type { Team, Player, Stadium, Match, NewsArticle, GroupStanding } from "./types";
+import {
+  STADIUM_IMAGES,
+  STADIUM_FALLBACK,
+  PLAYER_PHOTOS,
+  PLAYER_FALLBACK,
+  HERO_IMAGE,
+  LOGIN_IMAGE,
+} from "./images";
+
+export { STADIUM_FALLBACK, PLAYER_FALLBACK, HERO_IMAGE, LOGIN_IMAGE };
 
 // ── Real FIFA World Cup 2026 tournament facts ──────────────────────────────
-// Hosts: Canada · Mexico · USA | 48 teams | 12 groups | 104 matches | 16 cities
-// Opening: 11 June 2026 — Mexico vs South Africa @ Mexico City Stadium (Azteca)
-// Final:   19 July 2026 — New York New Jersey Stadium (MetLife)
-// Groups & results sourced from FIFA.com match schedule / official draw.
-
 export const TOURNAMENT_START = "2026-06-11T19:00:00-06:00";
 export const TOURNAMENT_FINAL = "2026-07-19T15:00:00-04:00";
 
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`;
-
-// Curated stadium photography (reliable CDN). Capacities / names are FIFA-official.
-const STADIUM_PHOTOS = [
-  unsplash("photo-1522778119026-d647f0596c20"),
-  unsplash("photo-1459865264687-595d652de67e"),
-  unsplash("photo-1508098682722-e99c43a406b2"),
-  unsplash("photo-1577223625816-7546f13df25d"),
-  unsplash("photo-1540552965541-2b6b307f9b6a"),
-  unsplash("photo-1551958219-acbc608c6377"),
-  unsplash("photo-1489944440615-453fc2b6a9a9"),
-  unsplash("photo-1493924191462-3e1bab2f4b56"),
-];
-
-// ── Stadiums — FIFA confirmed tournament capacities (Inside FIFA, 2026) ────
+// ── Stadiums — FIFA confirmed tournament capacities + real photography ────
 export const stadiums: Stadium[] = [
-  { id: "s-azteca", name: "Mexico City Stadium", localName: "Estadio Azteca", city: "Mexico City", country: "Mexico", capacity: 80824, opened: 1966, matchesHosted: 5, image: STADIUM_PHOTOS[2] },
-  { id: "s-metlife", name: "New York New Jersey Stadium", localName: "MetLife Stadium", city: "East Rutherford, NJ", country: "USA", capacity: 80663, opened: 2010, matchesHosted: 8, image: STADIUM_PHOTOS[0] },
-  { id: "s-att", name: "Dallas Stadium", localName: "AT&T Stadium", city: "Arlington, TX", country: "USA", capacity: 70649, opened: 2009, matchesHosted: 7, image: STADIUM_PHOTOS[3] },
-  { id: "s-sofi", name: "Los Angeles Stadium", localName: "SoFi Stadium", city: "Inglewood, CA", country: "USA", capacity: 70492, opened: 2020, matchesHosted: 7, image: STADIUM_PHOTOS[1] },
-  { id: "s-arrowhead", name: "Kansas City Stadium", localName: "Arrowhead Stadium", city: "Kansas City, MO", country: "USA", capacity: 69045, opened: 1972, matchesHosted: 6, image: STADIUM_PHOTOS[6] },
-  { id: "s-levis", name: "San Francisco Bay Area Stadium", localName: "Levi's Stadium", city: "Santa Clara, CA", country: "USA", capacity: 68827, opened: 2014, matchesHosted: 6, image: STADIUM_PHOTOS[5] },
-  { id: "s-nrg", name: "Houston Stadium", localName: "NRG Stadium", city: "Houston, TX", country: "USA", capacity: 68777, opened: 2002, matchesHosted: 7, image: STADIUM_PHOTOS[4] },
-  { id: "s-linc", name: "Philadelphia Stadium", localName: "Lincoln Financial Field", city: "Philadelphia, PA", country: "USA", capacity: 68324, opened: 2003, matchesHosted: 6, image: STADIUM_PHOTOS[7] },
-  { id: "s-mercedes", name: "Atlanta Stadium", localName: "Mercedes-Benz Stadium", city: "Atlanta, GA", country: "USA", capacity: 68239, opened: 2017, matchesHosted: 7, image: STADIUM_PHOTOS[0] },
-  { id: "s-lumen", name: "Seattle Stadium", localName: "Lumen Field", city: "Seattle, WA", country: "USA", capacity: 66925, opened: 2002, matchesHosted: 6, image: STADIUM_PHOTOS[1] },
-  { id: "s-hardrock", name: "Miami Stadium", localName: "Hard Rock Stadium", city: "Miami Gardens, FL", country: "USA", capacity: 64478, opened: 1987, matchesHosted: 6, image: STADIUM_PHOTOS[5] },
-  { id: "s-gillette", name: "Boston Stadium", localName: "Gillette Stadium", city: "Foxborough, MA", country: "USA", capacity: 64146, opened: 2002, matchesHosted: 6, image: STADIUM_PHOTOS[3] },
-  { id: "s-bcplace", name: "BC Place Vancouver", localName: "BC Place", city: "Vancouver, BC", country: "Canada", capacity: 52497, opened: 1983, matchesHosted: 5, image: STADIUM_PHOTOS[6] },
-  { id: "s-bbva", name: "Monterrey Stadium", localName: "Estadio BBVA", city: "Guadalupe, NL", country: "Mexico", capacity: 51243, opened: 2015, matchesHosted: 4, image: STADIUM_PHOTOS[2] },
-  { id: "s-akron", name: "Guadalajara Stadium", localName: "Estadio Akron", city: "Zapopan, Jalisco", country: "Mexico", capacity: 45664, opened: 2010, matchesHosted: 4, image: STADIUM_PHOTOS[4] },
-  { id: "s-bmo", name: "Toronto Stadium", localName: "BMO Field", city: "Toronto, ON", country: "Canada", capacity: 43036, opened: 2007, matchesHosted: 5, image: STADIUM_PHOTOS[7] },
+  { id: "s-azteca", name: "Mexico City Stadium", localName: "Estadio Azteca", city: "Mexico City", country: "Mexico", capacity: 80824, opened: 1966, matchesHosted: 5, image: STADIUM_IMAGES.azteca },
+  { id: "s-metlife", name: "New York New Jersey Stadium", localName: "MetLife Stadium", city: "East Rutherford, NJ", country: "USA", capacity: 80663, opened: 2010, matchesHosted: 8, image: STADIUM_IMAGES.metlife },
+  { id: "s-att", name: "Dallas Stadium", localName: "AT&T Stadium", city: "Arlington, TX", country: "USA", capacity: 70649, opened: 2009, matchesHosted: 7, image: STADIUM_IMAGES.att },
+  { id: "s-sofi", name: "Los Angeles Stadium", localName: "SoFi Stadium", city: "Inglewood, CA", country: "USA", capacity: 70492, opened: 2020, matchesHosted: 7, image: STADIUM_IMAGES.sofi },
+  { id: "s-arrowhead", name: "Kansas City Stadium", localName: "Arrowhead Stadium", city: "Kansas City, MO", country: "USA", capacity: 69045, opened: 1972, matchesHosted: 6, image: STADIUM_IMAGES.arrowhead },
+  { id: "s-levis", name: "San Francisco Bay Area Stadium", localName: "Levi's Stadium", city: "Santa Clara, CA", country: "USA", capacity: 68827, opened: 2014, matchesHosted: 6, image: STADIUM_IMAGES.levis },
+  { id: "s-nrg", name: "Houston Stadium", localName: "NRG Stadium", city: "Houston, TX", country: "USA", capacity: 68777, opened: 2002, matchesHosted: 7, image: STADIUM_IMAGES.nrg },
+  { id: "s-linc", name: "Philadelphia Stadium", localName: "Lincoln Financial Field", city: "Philadelphia, PA", country: "USA", capacity: 68324, opened: 2003, matchesHosted: 6, image: STADIUM_IMAGES.linc },
+  { id: "s-mercedes", name: "Atlanta Stadium", localName: "Mercedes-Benz Stadium", city: "Atlanta, GA", country: "USA", capacity: 68239, opened: 2017, matchesHosted: 7, image: STADIUM_IMAGES.mercedes },
+  { id: "s-lumen", name: "Seattle Stadium", localName: "Lumen Field", city: "Seattle, WA", country: "USA", capacity: 66925, opened: 2002, matchesHosted: 6, image: STADIUM_IMAGES.lumen },
+  { id: "s-hardrock", name: "Miami Stadium", localName: "Hard Rock Stadium", city: "Miami Gardens, FL", country: "USA", capacity: 64478, opened: 1987, matchesHosted: 6, image: STADIUM_IMAGES.hardrock },
+  { id: "s-gillette", name: "Boston Stadium", localName: "Gillette Stadium", city: "Foxborough, MA", country: "USA", capacity: 64146, opened: 2002, matchesHosted: 6, image: STADIUM_IMAGES.gillette },
+  { id: "s-bcplace", name: "BC Place Vancouver", localName: "BC Place", city: "Vancouver, BC", country: "Canada", capacity: 52497, opened: 1983, matchesHosted: 5, image: STADIUM_IMAGES.bcplace },
+  { id: "s-bbva", name: "Monterrey Stadium", localName: "Estadio BBVA", city: "Guadalupe, NL", country: "Mexico", capacity: 51243, opened: 2015, matchesHosted: 4, image: STADIUM_IMAGES.bbva },
+  { id: "s-akron", name: "Guadalajara Stadium", localName: "Estadio Akron", city: "Zapopan, Jalisco", country: "Mexico", capacity: 45664, opened: 2010, matchesHosted: 4, image: STADIUM_IMAGES.akron },
+  { id: "s-bmo", name: "Toronto Stadium", localName: "BMO Field", city: "Toronto, ON", country: "Canada", capacity: 43036, opened: 2007, matchesHosted: 5, image: STADIUM_IMAGES.bmo },
 ];
-
-// Fallback stadium photo
-export const STADIUM_FALLBACK = STADIUM_PHOTOS[0];
-
-const wiki = (path: string) =>
-  `https://upload.wikimedia.org/wikipedia/commons/${path}`;
 
 // ── All 48 teams — official Final Draw groups ──────────────────────────────
 function t(
@@ -139,7 +123,7 @@ const p = (
   position: Player["position"],
   club: string,
   number: number,
-  photo: string,
+  photos: { primary: string; fallback: string },
   goals: number,
   assists: number,
   appearances: number,
@@ -149,79 +133,62 @@ const p = (
   age: number,
   bio: string
 ): Player => ({
-  id, name, country, code, position, club, number, photo,
+  id, name, country, code, position, club, number,
+  photo: photos.primary,
+  photoFallback: photos.fallback,
   goals, assists, appearances, rating, worldCupGoals, tournamentGoals, age, bio,
 });
 
 export const players: Player[] = [
-  p("p-messi", "Lionel Messi", "Argentina", "ar", "FWD", "Inter Miami", 10,
-    wiki("thumb/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg/440px-Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg"),
+  p("p-messi", "Lionel Messi", "Argentina", "ar", "FWD", "Inter Miami", 10, PLAYER_PHOTOS.messi,
     123, 58, 202, 9.4, 21, 8, 39,
     "Eight-time Ballon d'Or winner and 2022 World Cup champion. All-time World Cup top scorer (21). Led Argentina with 8 goals at WC 2026."),
-  p("p-ronaldo", "Cristiano Ronaldo", "Portugal", "pt", "FWD", "Al Nassr", 7,
-    wiki("thumb/8/8c/Cristiano_Ronaldo_2018.jpg/440px-Cristiano_Ronaldo_2018.jpg"),
+  p("p-ronaldo", "Cristiano Ronaldo", "Portugal", "pt", "FWD", "Al Nassr", 7, PLAYER_PHOTOS.ronaldo,
     146, 45, 230, 8.8, 11, 3, 41,
     "Men's all-time international top scorer (146) and most-capped active player (230). First player to score at six World Cups (2026)."),
-  p("p-mbappe", "Kylian Mbappé", "France", "fr", "FWD", "Real Madrid", 10,
-    wiki("thumb/5/57/2019-07-17_SG_Dynamo_Dresden_vs._Paris_Saint-Germain_by_Sandro_Halank%E2%80%93129_%28cropped%29.jpg/440px-2019-07-17_SG_Dynamo_Dresden_vs._Paris_Saint-Germain_by_Sandro_Halank%E2%80%93129_%28cropped%29.jpg"),
+  p("p-mbappe", "Kylian Mbappé", "France", "fr", "FWD", "Real Madrid", 10, PLAYER_PHOTOS.mbappe,
     60, 40, 100, 9.3, 20, 8, 27,
     "2022 Golden Boot winner. Fastest to 20 World Cup goals. Tied Messi on 8 goals at WC 2026; 60 goals in first 100 France caps."),
-  p("p-haaland", "Erling Haaland", "Norway", "no", "FWD", "Manchester City", 9,
-    wiki("thumb/6/6e/Erling_Haaland_2023_%28cropped%29.jpg/440px-Erling_Haaland_2023_%28cropped%29.jpg"),
+  p("p-haaland", "Erling Haaland", "Norway", "no", "FWD", "Manchester City", 9, PLAYER_PHOTOS.haaland,
     42, 8, 42, 9.1, 7, 7, 25,
     "Premier League scoring machine making his World Cup debut for Norway. 7 tournament goals put him 3rd in the Golden Boot race."),
-  p("p-kane", "Harry Kane", "England", "gb-eng", "FWD", "Bayern Munich", 9,
-    wiki("thumb/2/2e/Harry_Kane_2023.jpg/440px-Harry_Kane_2023.jpg"),
+  p("p-kane", "Harry Kane", "England", "gb-eng", "FWD", "Bayern Munich", 9, PLAYER_PHOTOS.kane,
     71, 20, 105, 8.9, 13, 6, 32,
     "England's all-time top scorer. 6 goals at WC 2026 (incl. penalties). Third on all-time World Cup goals list among active players."),
-  p("p-bellingham", "Jude Bellingham", "England", "gb-eng", "MID", "Real Madrid", 10,
-    wiki("thumb/8/8a/Jude_Bellingham_2024.jpg/440px-Jude_Bellingham_2024.jpg"),
+  p("p-bellingham", "Jude Bellingham", "England", "gb-eng", "MID", "Real Madrid", 10, PLAYER_PHOTOS.bellingham,
     8, 9, 42, 9.0, 4, 4, 22,
     "Box-to-box midfielder and Real Madrid star. 4 goals at WC 2026 — England's creative heartbeat under Tuchel."),
-  p("p-vini", "Vinícius Júnior", "Brazil", "br", "FWD", "Real Madrid", 7,
-    wiki("thumb/f/f5/Vinicius_Junior_2024.jpg/440px-Vinicius_Junior_2024.jpg"),
+  p("p-vini", "Vinícius Júnior", "Brazil", "br", "FWD", "Real Madrid", 7, PLAYER_PHOTOS.vini,
     6, 8, 42, 9.0, 4, 4, 25,
     "Brazil's primary attacking threat under Ancelotti. 4 goals in the tournament including the Round of 32 winner vs Japan."),
-  p("p-yamal", "Lamine Yamal", "Spain", "es", "FWD", "FC Barcelona", 19,
-    wiki("thumb/9/9e/Lamine_Yamal_%28cropped%29.jpg/440px-Lamine_Yamal_%28cropped%29.jpg"),
+  p("p-yamal", "Lamine Yamal", "Spain", "es", "FWD", "FC Barcelona", 19, PLAYER_PHOTOS.yamal,
     7, 11, 21, 8.9, 2, 2, 18,
     "Euro 2024 breakout star. Spain's youngest World Cup starter — elite dribbling and chance creation from the right."),
-  p("p-kdb", "Kevin De Bruyne", "Belgium", "be", "MID", "Napoli", 7,
-    wiki("thumb/4/40/Kevin_De_Bruyne_201807071.jpg/440px-Kevin_De_Bruyne_201807071.jpg"),
+  p("p-kdb", "Kevin De Bruyne", "Belgium", "be", "MID", "Napoli", 7, PLAYER_PHOTOS.kdb,
     30, 55, 110, 8.8, 2, 1, 34,
     "Elite playmaker still driving Belgium's attack. Career 55+ international assists; key in Belgium's Round of 32 win over Senegal."),
-  p("p-salah", "Mohamed Salah", "Egypt", "eg", "FWD", "Liverpool", 10,
-    wiki("thumb/c/c1/Mohamed_Salah_2018.jpg/440px-Mohamed_Salah_2018.jpg"),
+  p("p-salah", "Mohamed Salah", "Egypt", "eg", "FWD", "Liverpool", 10, PLAYER_PHOTOS.salah,
     57, 28, 105, 8.7, 3, 2, 33,
     "Egypt captain and Premier League icon. Led Egypt into the Round of 16 via penalties against Australia."),
-  p("p-pulisic", "Christian Pulisic", "United States", "us", "FWD", "AC Milan", 10,
-    wiki("thumb/6/6a/Christian_Pulisic_2019.jpg/440px-Christian_Pulisic_2019.jpg"),
+  p("p-pulisic", "Christian Pulisic", "United States", "us", "FWD", "AC Milan", 10, PLAYER_PHOTOS.pulisic,
     32, 21, 79, 8.4, 3, 2, 27,
     "USMNT captain. Scored in the hosts' 4-1 opener vs Paraguay and helped USA reach the knockout rounds on home soil."),
-  p("p-musiala", "Jamal Musiala", "Germany", "de", "MID", "Bayern Munich", 10,
-    wiki("thumb/9/93/Jamal_Musiala_2022.jpg/440px-Jamal_Musiala_2022.jpg"),
+  p("p-musiala", "Jamal Musiala", "Germany", "de", "MID", "Bayern Munich", 10, PLAYER_PHOTOS.musiala,
     7, 6, 41, 8.7, 2, 2, 23,
     "Germany's technical midfielder. Part of the 7-1 demolition of Curaçao — Germany's biggest World Cup win since 2002."),
-  p("p-hakimi", "Achraf Hakimi", "Morocco", "ma", "DEF", "Paris Saint-Germain", 2,
-    wiki("thumb/5/5c/Achraf_Hakimi.jpg/440px-Achraf_Hakimi.jpg"),
+  p("p-hakimi", "Achraf Hakimi", "Morocco", "ma", "DEF", "Paris Saint-Germain", 2, PLAYER_PHOTOS.hakimi,
     11, 18, 82, 8.5, 1, 1, 27,
     "Attacking full-back and Morocco vice-captain. Morocco beat Canada 3-0 in the Round of 16 after topping Group C with Brazil."),
-  p("p-valverde", "Federico Valverde", "Uruguay", "uy", "MID", "Real Madrid", 15,
-    wiki("thumb/8/8f/Federico_Valverde_2022.jpg/440px-Federico_Valverde_2022.jpg"),
+  p("p-valverde", "Federico Valverde", "Uruguay", "uy", "MID", "Real Madrid", 15, PLAYER_PHOTOS.valverde,
     7, 10, 70, 8.6, 1, 1, 27,
     "Uruguay's midfield engine. Relentless box-to-box presence as La Celeste pushed Spain in Group H."),
-  p("p-davies", "Alphonso Davies", "Canada", "ca", "DEF", "Bayern Munich", 19,
-    wiki("thumb/8/85/Alphonso_Davies_2021.jpg/440px-Alphonso_Davies_2021.jpg"),
+  p("p-davies", "Alphonso Davies", "Canada", "ca", "DEF", "Bayern Munich", 19, PLAYER_PHOTOS.davies,
     15, 14, 55, 8.3, 1, 1, 25,
     "Canada's world-class left-back. Set the tone for Canada's historic 6-0 win over Qatar in Vancouver."),
-  p("p-son", "Son Heung-min", "Korea Republic", "kr", "FWD", "Tottenham Hotspur", 7,
-    wiki("thumb/c/c0/Son_Heung-min_2023.jpg/440px-Son_Heung-min_2023.jpg"),
+  p("p-son", "Son Heung-min", "Korea Republic", "kr", "FWD", "Tottenham Hotspur", 7, PLAYER_PHOTOS.son,
     48, 20, 130, 8.4, 3, 1, 33,
     "Korea captain and Asian football icon. Scored in the 2-1 opening win over Czechia in Guadalajara."),
 ];
-
-const PLAYER_FALLBACK =
-  "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80";
 
 export const playerPhotoFallback = PLAYER_FALLBACK;
 

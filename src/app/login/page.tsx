@@ -7,16 +7,17 @@ import { Mail, Lock, User, Chrome, Github, Apple } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/layout/logo";
+import { LOGIN_IMAGE } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
   const [mode, setMode] = React.useState<"login" | "register">("login");
 
   return (
-    <section className="force-dark relative flex min-h-[100svh] items-center justify-center overflow-hidden py-28">
+    <section className="force-dark relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 py-28">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=2000&q=80"
+          src={LOGIN_IMAGE}
           alt=""
           className="h-full w-full object-cover opacity-40"
         />
@@ -27,7 +28,7 @@ export default function LoginPage() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-strong relative z-10 w-full max-w-md rounded-3xl p-8 shadow-neon"
+        className="glass-strong relative z-10 w-full max-w-md rounded-3xl p-6 shadow-neon sm:p-8"
       >
         <div className="flex justify-center"><Logo /></div>
         <h1 className="mt-6 text-center font-display text-4xl uppercase tracking-tight text-white">

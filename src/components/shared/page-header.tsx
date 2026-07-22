@@ -25,7 +25,7 @@ export function PageHeader({ label, title, description }: Props) {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="mt-4 font-display text-5xl uppercase leading-[0.9] tracking-tight text-foreground sm:text-6xl md:text-7xl"
+          className="mt-4 font-display text-4xl uppercase leading-[0.9] tracking-tight text-foreground xs:text-5xl sm:text-6xl md:text-7xl"
         >
           {title}
         </motion.h1>
@@ -34,7 +34,7 @@ export function PageHeader({ label, title, description }: Props) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mt-4 max-w-2xl text-lg text-muted-foreground"
+            className="mt-3 max-w-2xl text-base text-muted-foreground sm:mt-4 sm:text-lg"
           >
             {description}
           </motion.p>

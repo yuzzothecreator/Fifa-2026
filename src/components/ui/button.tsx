@@ -9,9 +9,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-electric text-black shadow-neon hover:shadow-[0_0_30px_rgba(0,168,255,0.7)] hover:brightness-110",
+          "bg-electric text-black shadow-neon hover:shadow-[0_0_32px_rgba(0,180,255,0.75)] hover:brightness-110",
         pitch:
-          "bg-pitch text-black shadow-neon-green hover:brightness-110",
+          "bg-pitch text-black shadow-neon-green hover:shadow-[0_0_32px_rgba(0,230,118,0.7)] hover:brightness-110",
         gold: "bg-gold text-black shadow-gold hover:brightness-110",
         outline:
           "border border-foreground/25 bg-foreground/5 text-foreground backdrop-blur hover:border-electric hover:text-electric",

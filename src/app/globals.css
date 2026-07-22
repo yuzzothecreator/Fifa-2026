@@ -3,103 +3,111 @@
 @tailwind utilities;
 
 @layer base {
+  /* Brand hex kept fully saturated:
+     Electric #00B4FF · Pitch #00E676 · Gold #FFD700 · Navy #071426 · Midnight #020617 */
   :root {
-    --background: 222 60% 4%;
+    --background: 222 70% 4%;
     --foreground: 210 40% 98%;
-    --card: 213 55% 9%;
+    --card: 213 60% 8%;
     --card-foreground: 210 40% 98%;
-    --primary: 201 100% 50%;
-    --primary-foreground: 222 60% 6%;
-    --secondary: 145 100% 39%;
+    --primary: 199 100% 50%;
+    --primary-foreground: 222 70% 6%;
+    --secondary: 145 100% 45%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 215 30% 16%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 215 35% 14%;
+    --muted-foreground: 215 20% 68%;
     --accent: 51 100% 50%;
-    --accent-foreground: 222 60% 6%;
-    --border: 214 32% 20%;
-    --input: 214 32% 18%;
-    --ring: 201 100% 50%;
+    --accent-foreground: 222 70% 6%;
+    --border: 214 40% 22%;
+    --input: 214 40% 18%;
+    --ring: 199 100% 50%;
     --radius: 1rem;
+    --electric: #00b4ff;
+    --pitch: #00e676;
+    --gold: #ffd700;
   }
 
   .light {
-    --background: 200 60% 97%;
-    --foreground: 217 60% 12%;
+    --background: 200 55% 97%;
+    --foreground: 217 65% 12%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
-    --primary: 201 100% 40%;
+    --primary: 199 100% 42%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 145 80% 30%;
+    --secondary: 145 100% 36%;
     --secondary-foreground: 0 0% 100%;
     --muted: 210 30% 92%;
     --muted-foreground: 215 25% 35%;
-    --accent: 45 100% 42%;
+    --accent: 48 100% 45%;
     --accent-foreground: 222 47% 11%;
-    --border: 214 20% 82%;
-    --input: 214 20% 88%;
-    --ring: 201 100% 40%;
+    --border: 214 25% 82%;
+    --input: 214 25% 88%;
+    --ring: 199 100% 42%;
   }
 
   * {
     @apply border-border;
   }
-  /* Force a dark token context for sections that always sit on dark imagery
-     (hero, CTA banners, auth) so adaptive text stays white in light mode too. */
+
   .force-dark {
     --foreground: 210 40% 98%;
     --muted-foreground: 215 20% 65%;
-    --border: 214 32% 20%;
+    --border: 214 40% 22%;
     color: hsl(var(--foreground));
   }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     background-image:
-      radial-gradient(60% 45% at 15% 0%, rgba(0, 168, 255, 0.12), transparent 60%),
-      radial-gradient(55% 45% at 90% 10%, rgba(0, 200, 83, 0.1), transparent 60%),
-      radial-gradient(60% 60% at 50% 100%, rgba(255, 215, 0, 0.06), transparent 60%);
+      radial-gradient(60% 45% at 15% 0%, rgba(0, 180, 255, 0.18), transparent 60%),
+      radial-gradient(55% 45% at 90% 10%, rgba(0, 230, 118, 0.14), transparent 60%),
+      radial-gradient(60% 60% at 50% 100%, rgba(255, 215, 0, 0.1), transparent 60%);
     background-attachment: fixed;
   }
-  /* Light theme: bright arena backdrop. Glass cards stay deep-navy so the
-     cinematic white-on-glass typography remains fully legible in both modes. */
+
   .light body {
     background-image:
-      radial-gradient(60% 45% at 15% 0%, rgba(0, 168, 255, 0.16), transparent 60%),
-      radial-gradient(55% 45% at 90% 10%, rgba(0, 200, 83, 0.14), transparent 60%),
-      radial-gradient(70% 60% at 50% 100%, rgba(255, 215, 0, 0.12), transparent 60%);
+      radial-gradient(60% 45% at 15% 0%, rgba(0, 180, 255, 0.2), transparent 60%),
+      radial-gradient(55% 45% at 90% 10%, rgba(0, 230, 118, 0.16), transparent 60%),
+      radial-gradient(70% 60% at 50% 100%, rgba(255, 215, 0, 0.14), transparent 60%);
   }
+
   html {
     scroll-behavior: smooth;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 }
 
 @layer components {
   .glass {
-    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+    @apply border border-white/10 bg-white/[0.05] backdrop-blur-xl;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
   }
   .glass-strong {
-    @apply border border-white/10 bg-[#0a1a30]/70 backdrop-blur-2xl;
+    @apply border border-white/10 bg-[#071426]/80 backdrop-blur-2xl;
   }
-  /* Keep glass surfaces deep-navy in light mode (white text stays readable).
-     Re-declare dark tokens inside them so adaptive children (inputs, buttons,
-     muted text) render for a dark surface rather than the light page. */
   .light .glass,
   .light .glass-strong {
     @apply border-white/10;
     --foreground: 210 40% 98%;
     --muted-foreground: 215 20% 65%;
-    --border: 214 32% 20%;
-    --input: 214 32% 18%;
+    --border: 214 40% 22%;
+    --input: 214 40% 18%;
   }
   .light .glass {
-    background-color: rgba(7, 20, 38, 0.9);
+    background-color: rgba(7, 20, 38, 0.92);
     box-shadow: 0 10px 40px -20px rgba(7, 20, 38, 0.55);
   }
   .light .glass-strong {
-    background-color: rgba(2, 6, 23, 0.94);
+    background-color: rgba(2, 6, 23, 0.95);
   }
+
   .neon-text {
-    text-shadow: 0 0 18px rgba(0, 168, 255, 0.65), 0 0 42px rgba(0, 168, 255, 0.35);
+    text-shadow: 0 0 18px rgba(0, 180, 255, 0.85), 0 0 42px rgba(0, 180, 255, 0.45);
   }
   .gold-text {
     background: linear-gradient(180deg, #fff6c9 0%, #ffd700 45%, #d4a017 100%);
@@ -108,25 +116,23 @@
     color: transparent;
   }
   .brand-gradient-text {
-    background: linear-gradient(100deg, #00a8ff 0%, #7ee0ff 40%, #00c853 100%);
+    background: linear-gradient(100deg, #00b4ff 0%, #5ce1ff 40%, #00e676 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  /* Official 2026 identity — full spectrum ("everyone's welcome") */
   .spectrum-text {
-    background: linear-gradient(100deg, #00a8ff 0%, #00c853 28%, #ffd700 52%, #ff5a5f 76%, #b14cff 100%);
+    background: linear-gradient(100deg, #00b4ff 0%, #00e676 28%, #ffd700 52%, #ff4d6d 76%, #c44dff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .spectrum-bar {
-    background: linear-gradient(90deg, #00a8ff, #00c853, #ffd700, #ff5a5f, #b14cff);
+    background: linear-gradient(90deg, #00b4ff, #00e676, #ffd700, #ff4d6d, #c44dff);
   }
   .section-label {
-    @apply inline-flex items-center gap-2 rounded-full border border-electric/30 bg-electric/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-electric;
+    @apply inline-flex items-center gap-2 rounded-full border border-electric/60 bg-electric/25 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-electric sm:px-4 sm:text-xs sm:tracking-[0.25em];
   }
-  /* Stadium floodlight sweep */
   .stadium-lights::before,
   .stadium-lights::after {
     content: "";
@@ -134,7 +140,7 @@
     top: -30%;
     width: 45%;
     height: 160%;
-    background: linear-gradient(180deg, rgba(0, 168, 255, 0.16), transparent 70%);
+    background: linear-gradient(180deg, rgba(0, 180, 255, 0.22), transparent 70%);
     filter: blur(40px);
     pointer-events: none;
   }
@@ -146,7 +152,7 @@
   .stadium-lights::after {
     right: 5%;
     transform: rotate(-14deg);
-    background: linear-gradient(180deg, rgba(0, 200, 83, 0.14), transparent 70%);
+    background: linear-gradient(180deg, rgba(0, 230, 118, 0.18), transparent 70%);
     animation: spot-sweep 13s ease-in-out infinite reverse;
   }
   .card-glow {
@@ -154,11 +160,11 @@
   }
   .card-glow:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 50px -12px rgba(0, 168, 255, 0.4);
+    box-shadow: 0 18px 50px -12px rgba(0, 180, 255, 0.55);
   }
   .pitch-panel {
     background:
-      linear-gradient(180deg, rgba(6, 40, 22, 0.92), rgba(3, 22, 12, 0.96)),
+      linear-gradient(180deg, rgba(6, 50, 28, 0.94), rgba(3, 28, 14, 0.97)),
       repeating-linear-gradient(
         90deg,
         transparent,
@@ -168,10 +174,15 @@
       );
   }
   .host-chip {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-white/80 backdrop-blur;
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/90 backdrop-blur sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs;
   }
-  .prose-sport p {
-    @apply text-sm leading-relaxed text-white/65;
+
+  /* Responsive helpers */
+  .page-pad {
+    @apply px-4 sm:px-6;
+  }
+  .safe-bottom {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -185,16 +196,20 @@
 .ticker-track:hover {
   animation-play-state: paused;
 }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #020617;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#00a8ff, #00c853);
+  background: linear-gradient(#00b4ff, #00e676);
   border-radius: 999px;
 }

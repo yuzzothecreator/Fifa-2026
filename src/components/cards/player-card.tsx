@@ -64,7 +64,7 @@ export function PlayerCard({
         <div className="relative h-56 overflow-hidden">
           <SafeImage
             src={player.photo}
-            fallback={playerPhotoFallback}
+            fallback={player.photoFallback ?? playerPhotoFallback}
             alt={player.name}
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             loading="lazy"

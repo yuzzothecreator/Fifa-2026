@@ -7,8 +7,9 @@ import { PageHeader } from "@/components/shared/page-header";
 import { PlayerCard } from "@/components/cards/player-card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { players, flagUrl } from "@/lib/data";
+import { players, flagUrl, playerPhotoFallback } from "@/lib/data";
 import type { Player } from "@/lib/types";
+import { SafeImage } from "@/components/shared/safe-image";
 import { cn } from "@/lib/utils";
 
 const positions = ["All", "GK", "DEF", "MID", "FWD"] as const;
@@ -149,13 +150,18 @@ function ComparePanel({ a, b, onClose }: { a: Player; b: Player; onClose: () => 
 
 function PlayerHead({ player, align = "left" }: { player: Player; align?: "left" | "right" }) {
   return (
-    <div className={cn("flex items-center gap-3", align === "right" && "flex-row-reverse text-right")}>
-      <img src={player.photo} alt={player.name} className="h-14 w-14 rounded-full object-cover ring-2 ring-white/20" />
-      <div>
-        <p className="font-heading text-lg leading-none tracking-wide text-white">{player.name}</p>
-        <p className="flex items-center gap-1.5 text-xs text-white/50">
+    <div className={cn("flex min-w-0 items-center gap-2 sm:gap-3", align === "right" && "flex-row-reverse text-right")}>
+      <SafeImage
+        src={player.photo}
+        fallback={player.photoFallback ?? playerPhotoFallback}
+        alt={player.name}
+        className="h-12 w-12 shrink-0 rounded-full object-cover ring-2 ring-white/20 sm:h-14 sm:w-14"
+      />
+      <div className="min-w-0">
+        <p className="truncate font-heading text-base leading-none tracking-wide text-white sm:text-lg">{player.name}</p>
+        <p className="mt-1 flex items-center gap-1.5 text-xs text-white/50">
           <img src={flagUrl(player.code, "w40")} alt="" className="h-3 w-4 rounded-sm object-cover" />
-          {player.country}
+          <span className="truncate">{player.country}</span>
         </p>
       </div>
     </div>

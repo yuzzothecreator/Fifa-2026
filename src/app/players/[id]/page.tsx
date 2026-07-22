@@ -39,21 +39,21 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
         <div className="absolute inset-0">
           <SafeImage
             src={player.photo}
-            fallback={playerPhotoFallback}
+            fallback={player.photoFallback ?? playerPhotoFallback}
             alt=""
             className="h-full w-full scale-110 object-cover opacity-30 blur-sm"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-navy/90 to-midnight" />
         </div>
-        <div className="container relative py-12">
+        <div className="container relative py-8 sm:py-12">
           <Button asChild variant="ghost" size="sm" className="mb-6">
             <Link href="/players"><ArrowLeft className="h-4 w-4" /> All players</Link>
           </Button>
-          <div className="grid items-end gap-8 lg:grid-cols-[280px_1fr]">
-            <div className="relative overflow-hidden rounded-3xl ring-1 ring-white/20 shadow-neon">
+          <div className="grid items-end gap-6 sm:gap-8 lg:grid-cols-[280px_1fr]">
+            <div className="relative mx-auto w-full max-w-xs overflow-hidden rounded-3xl ring-1 ring-white/20 shadow-neon lg:mx-0 lg:max-w-none">
               <SafeImage
                 src={player.photo}
-                fallback={playerPhotoFallback}
+                fallback={player.photoFallback ?? playerPhotoFallback}
                 alt={player.name}
                 className="aspect-[3/4] w-full object-cover object-top"
               />
@@ -65,7 +65,7 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
                 <Badge variant="gold">WC26 · {player.tournamentGoals} goals</Badge>
                 <Badge variant="muted">Age {player.age}</Badge>
               </div>
-              <h1 className="mt-4 font-display text-5xl uppercase leading-none tracking-tight text-white sm:text-7xl">
+              <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-tight text-white sm:text-5xl lg:text-7xl">
                 {player.name}
               </h1>
               <div className="mt-4 flex flex-wrap items-center gap-3 text-white/70">
