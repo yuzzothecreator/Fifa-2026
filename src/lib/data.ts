@@ -9,32 +9,46 @@ import type { Team, Player, Stadium, Match, NewsArticle, GroupStanding } from ".
 export const TOURNAMENT_START = "2026-06-11T19:00:00-06:00";
 export const TOURNAMENT_FINAL = "2026-07-19T15:00:00-04:00";
 
-const wiki = (path: string) =>
-  `https://upload.wikimedia.org/wikipedia/commons/${path}`;
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`;
+
+// Curated stadium photography (reliable CDN). Capacities / names are FIFA-official.
+const STADIUM_PHOTOS = [
+  unsplash("photo-1522778119026-d647f0596c20"),
+  unsplash("photo-1459865264687-595d652de67e"),
+  unsplash("photo-1508098682722-e99c43a406b2"),
+  unsplash("photo-1577223625816-7546f13df25d"),
+  unsplash("photo-1540552965541-2b6b307f9b6a"),
+  unsplash("photo-1551958219-acbc608c6377"),
+  unsplash("photo-1489944440615-453fc2b6a9a9"),
+  unsplash("photo-1493924191462-3e1bab2f4b56"),
+];
 
 // ── Stadiums — FIFA confirmed tournament capacities (Inside FIFA, 2026) ────
 export const stadiums: Stadium[] = [
-  { id: "s-azteca", name: "Mexico City Stadium", localName: "Estadio Azteca", city: "Mexico City", country: "Mexico", capacity: 80824, opened: 1966, matchesHosted: 5, image: wiki("thumb/1/1d/Estadio_Azteca_01.jpg/1280px-Estadio_Azteca_01.jpg") },
-  { id: "s-metlife", name: "New York New Jersey Stadium", localName: "MetLife Stadium", city: "East Rutherford, NJ", country: "USA", capacity: 80663, opened: 2010, matchesHosted: 8, image: wiki("thumb/0/04/MetLife_Stadium_panorama.jpg/1280px-MetLife_Stadium_panorama.jpg") },
-  { id: "s-att", name: "Dallas Stadium", localName: "AT&T Stadium", city: "Arlington, TX", country: "USA", capacity: 70649, opened: 2009, matchesHosted: 7, image: wiki("thumb/1/10/Cowboys_Stadium_Exterior.jpg/1280px-Cowboys_Stadium_Exterior.jpg") },
-  { id: "s-sofi", name: "Los Angeles Stadium", localName: "SoFi Stadium", city: "Inglewood, CA", country: "USA", capacity: 70492, opened: 2020, matchesHosted: 7, image: wiki("thumb/2/20/SoFi_Stadium_2021.jpg/1280px-SoFi_Stadium_2021.jpg") },
-  { id: "s-arrowhead", name: "Kansas City Stadium", localName: "Arrowhead Stadium", city: "Kansas City, MO", country: "USA", capacity: 69045, opened: 1972, matchesHosted: 6, image: wiki("thumb/0/0c/Arrowhead_Stadium_2010.jpg/1280px-Arrowhead_Stadium_2010.jpg") },
-  { id: "s-levis", name: "San Francisco Bay Area Stadium", localName: "Levi's Stadium", city: "Santa Clara, CA", country: "USA", capacity: 68827, opened: 2014, matchesHosted: 6, image: wiki("thumb/5/5c/Levi%27s_Stadium_aerial_view.jpg/1280px-Levi%27s_Stadium_aerial_view.jpg") },
-  { id: "s-nrg", name: "Houston Stadium", localName: "NRG Stadium", city: "Houston, TX", country: "USA", capacity: 68777, opened: 2002, matchesHosted: 7, image: wiki("thumb/5/5a/Reliant_Stadium.jpg/1280px-Reliant_Stadium.jpg") },
-  { id: "s-linc", name: "Philadelphia Stadium", localName: "Lincoln Financial Field", city: "Philadelphia, PA", country: "USA", capacity: 68324, opened: 2003, matchesHosted: 6, image: wiki("thumb/9/9e/Lincoln_Financial_Field_2013.jpg/1280px-Lincoln_Financial_Field_2013.jpg") },
-  { id: "s-mercedes", name: "Atlanta Stadium", localName: "Mercedes-Benz Stadium", city: "Atlanta, GA", country: "USA", capacity: 68239, opened: 2017, matchesHosted: 7, image: wiki("thumb/0/03/Mercedes-Benz_Stadium_%28cropped%29.jpg/1280px-Mercedes-Benz_Stadium_%28cropped%29.jpg") },
-  { id: "s-lumen", name: "Seattle Stadium", localName: "Lumen Field", city: "Seattle, WA", country: "USA", capacity: 66925, opened: 2002, matchesHosted: 6, image: wiki("thumb/7/70/CenturyLink_Field_%28formerly_Qwest_Field%29.jpg/1280px-CenturyLink_Field_%28formerly_Qwest_Field%29.jpg") },
-  { id: "s-hardrock", name: "Miami Stadium", localName: "Hard Rock Stadium", city: "Miami Gardens, FL", country: "USA", capacity: 64478, opened: 1987, matchesHosted: 6, image: wiki("thumb/8/8c/Hard_Rock_Stadium.jpg/1280px-Hard_Rock_Stadium.jpg") },
-  { id: "s-gillette", name: "Boston Stadium", localName: "Gillette Stadium", city: "Foxborough, MA", country: "USA", capacity: 64146, opened: 2002, matchesHosted: 6, image: wiki("thumb/d/d5/Gillette_Stadium02.jpg/1280px-Gillette_Stadium02.jpg") },
-  { id: "s-bcplace", name: "BC Place Vancouver", localName: "BC Place", city: "Vancouver, BC", country: "Canada", capacity: 52497, opened: 1983, matchesHosted: 5, image: wiki("thumb/8/8a/BC_Place_2015_Canada_vs_Jamaica.jpg/1280px-BC_Place_2015_Canada_vs_Jamaica.jpg") },
-  { id: "s-bbva", name: "Monterrey Stadium", localName: "Estadio BBVA", city: "Guadalupe, NL", country: "Mexico", capacity: 51243, opened: 2015, matchesHosted: 4, image: wiki("thumb/9/95/Estadio_BBVA_Bancomer.jpg/1280px-Estadio_BBVA_Bancomer.jpg") },
-  { id: "s-akron", name: "Guadalajara Stadium", localName: "Estadio Akron", city: "Zapopan, Jalisco", country: "Mexico", capacity: 45664, opened: 2010, matchesHosted: 4, image: wiki("thumb/4/4e/Estadio_Omnilife.jpg/1280px-Estadio_Omnilife.jpg") },
-  { id: "s-bmo", name: "Toronto Stadium", localName: "BMO Field", city: "Toronto, ON", country: "Canada", capacity: 43036, opened: 2007, matchesHosted: 5, image: wiki("thumb/7/74/BMO_Field_2016.jpg/1280px-BMO_Field_2016.jpg") },
+  { id: "s-azteca", name: "Mexico City Stadium", localName: "Estadio Azteca", city: "Mexico City", country: "Mexico", capacity: 80824, opened: 1966, matchesHosted: 5, image: STADIUM_PHOTOS[2] },
+  { id: "s-metlife", name: "New York New Jersey Stadium", localName: "MetLife Stadium", city: "East Rutherford, NJ", country: "USA", capacity: 80663, opened: 2010, matchesHosted: 8, image: STADIUM_PHOTOS[0] },
+  { id: "s-att", name: "Dallas Stadium", localName: "AT&T Stadium", city: "Arlington, TX", country: "USA", capacity: 70649, opened: 2009, matchesHosted: 7, image: STADIUM_PHOTOS[3] },
+  { id: "s-sofi", name: "Los Angeles Stadium", localName: "SoFi Stadium", city: "Inglewood, CA", country: "USA", capacity: 70492, opened: 2020, matchesHosted: 7, image: STADIUM_PHOTOS[1] },
+  { id: "s-arrowhead", name: "Kansas City Stadium", localName: "Arrowhead Stadium", city: "Kansas City, MO", country: "USA", capacity: 69045, opened: 1972, matchesHosted: 6, image: STADIUM_PHOTOS[6] },
+  { id: "s-levis", name: "San Francisco Bay Area Stadium", localName: "Levi's Stadium", city: "Santa Clara, CA", country: "USA", capacity: 68827, opened: 2014, matchesHosted: 6, image: STADIUM_PHOTOS[5] },
+  { id: "s-nrg", name: "Houston Stadium", localName: "NRG Stadium", city: "Houston, TX", country: "USA", capacity: 68777, opened: 2002, matchesHosted: 7, image: STADIUM_PHOTOS[4] },
+  { id: "s-linc", name: "Philadelphia Stadium", localName: "Lincoln Financial Field", city: "Philadelphia, PA", country: "USA", capacity: 68324, opened: 2003, matchesHosted: 6, image: STADIUM_PHOTOS[7] },
+  { id: "s-mercedes", name: "Atlanta Stadium", localName: "Mercedes-Benz Stadium", city: "Atlanta, GA", country: "USA", capacity: 68239, opened: 2017, matchesHosted: 7, image: STADIUM_PHOTOS[0] },
+  { id: "s-lumen", name: "Seattle Stadium", localName: "Lumen Field", city: "Seattle, WA", country: "USA", capacity: 66925, opened: 2002, matchesHosted: 6, image: STADIUM_PHOTOS[1] },
+  { id: "s-hardrock", name: "Miami Stadium", localName: "Hard Rock Stadium", city: "Miami Gardens, FL", country: "USA", capacity: 64478, opened: 1987, matchesHosted: 6, image: STADIUM_PHOTOS[5] },
+  { id: "s-gillette", name: "Boston Stadium", localName: "Gillette Stadium", city: "Foxborough, MA", country: "USA", capacity: 64146, opened: 2002, matchesHosted: 6, image: STADIUM_PHOTOS[3] },
+  { id: "s-bcplace", name: "BC Place Vancouver", localName: "BC Place", city: "Vancouver, BC", country: "Canada", capacity: 52497, opened: 1983, matchesHosted: 5, image: STADIUM_PHOTOS[6] },
+  { id: "s-bbva", name: "Monterrey Stadium", localName: "Estadio BBVA", city: "Guadalupe, NL", country: "Mexico", capacity: 51243, opened: 2015, matchesHosted: 4, image: STADIUM_PHOTOS[2] },
+  { id: "s-akron", name: "Guadalajara Stadium", localName: "Estadio Akron", city: "Zapopan, Jalisco", country: "Mexico", capacity: 45664, opened: 2010, matchesHosted: 4, image: STADIUM_PHOTOS[4] },
+  { id: "s-bmo", name: "Toronto Stadium", localName: "BMO Field", city: "Toronto, ON", country: "Canada", capacity: 43036, opened: 2007, matchesHosted: 5, image: STADIUM_PHOTOS[7] },
 ];
 
-// Fallback stadium photo if a Wikimedia file 404s
-export const STADIUM_FALLBACK =
-  "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1600&q=80";
+// Fallback stadium photo
+export const STADIUM_FALLBACK = STADIUM_PHOTOS[0];
+
+const wiki = (path: string) =>
+  `https://upload.wikimedia.org/wikipedia/commons/${path}`;
 
 // ── All 48 teams — official Final Draw groups ──────────────────────────────
 function t(
@@ -458,3 +472,30 @@ export function getGroupStandings(group: string): GroupStanding[] {
 }
 
 export const GROUP_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"] as const;
+
+export const getPlayerById = (id: string) => players.find((p) => p.id === id);
+export const getStadiumById = (id: string) => stadiums.find((s) => s.id === id);
+export const getMatchById = (id: string) => matches.find((m) => m.id === id);
+export const getStadiumByName = (name: string) =>
+  stadiums.find((s) => s.name === name || s.localName === name);
+
+export const getTeamMatches = (code: string) =>
+  matches.filter((m) => m.homeCode === code || m.awayCode === code)
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+export const getPlayersByCountry = (code: string) =>
+  players.filter((p) => p.code === code).sort((a, b) => b.rating - a.rating);
+
+export const goldenBoot = [...players]
+  .sort((a, b) => b.tournamentGoals - a.tournamentGoals || b.worldCupGoals - a.worldCupGoals)
+  .slice(0, 8);
+
+export const HOST_NATIONS = [
+  { code: "mx", country: "Mexico", role: "Opening Match · Azteca", matches: 5 },
+  { code: "us", country: "United States", role: "11 host cities · Final", matches: 78 },
+  { code: "ca", country: "Canada", role: "Toronto · Vancouver", matches: 10 },
+] as const;
+
+export const knockoutMatches = matches.filter((m) =>
+  ["Round of 32", "Round of 16", "Quarter-final", "Semi-final", "Final"].some((s) => m.stage.includes(s))
+);

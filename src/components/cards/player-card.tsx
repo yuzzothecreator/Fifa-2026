@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { flagUrl, playerPhotoFallback } from "@/lib/data";
 import type { Player } from "@/lib/types";
@@ -85,13 +86,29 @@ export function PlayerCard({
         </div>
 
         <div className="p-5">
-          <div className="flex items-start justify-between gap-2">
-            <div>
-              <h3 className="font-heading text-2xl leading-none tracking-wide text-white">{player.name}</h3>
-              <p className="mt-1 text-sm text-white/50">{player.club} · Age {player.age}</p>
-            </div>
-          </div>
-          <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-white/55">{player.bio}</p>
+          {selectable ? (
+            <>
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="font-heading text-2xl leading-none tracking-wide text-white">{player.name}</h3>
+                  <p className="mt-1 text-sm text-white/50">{player.club} · Age {player.age}</p>
+                </div>
+              </div>
+              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-white/55">{player.bio}</p>
+            </>
+          ) : (
+            <Link href={`/players/${player.id}`}>
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="font-heading text-2xl leading-none tracking-wide text-white transition-colors hover:text-electric">
+                    {player.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-white/50">{player.club} · Age {player.age}</p>
+                </div>
+              </div>
+              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-white/55">{player.bio}</p>
+            </Link>
+          )}
 
           <div className="mt-4 grid grid-cols-4 gap-2 border-t border-white/10 pt-4 text-center">
             <Stat label="Caps" value={player.appearances} />

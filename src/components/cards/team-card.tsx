@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Heart, Trophy } from "lucide-react";
 import type { Team } from "@/lib/types";
@@ -27,7 +28,7 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
         style={{ background: team.color }}
       />
       <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
+        <Link href={`/teams/${team.code}`} className="flex items-center gap-3">
           <img
             src={flagUrl(team.code, "w160")}
             alt={`${team.country} flag`}
@@ -35,12 +36,18 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
             loading="lazy"
           />
           <div>
-            <h3 className="font-heading text-2xl leading-none tracking-wide text-white">{team.country}</h3>
+            <h3 className="font-heading text-2xl leading-none tracking-wide text-white transition-colors group-hover:text-electric">
+              {team.country}
+            </h3>
             <p className="text-xs uppercase tracking-widest text-white/50">Group {team.group}</p>
           </div>
-        </div>
+        </Link>
         <button
-          onClick={() => toggle(team.id)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle(team.id);
+          }}
           aria-label="Favorite team"
           className={cn(
             "flex h-9 w-9 items-center justify-center rounded-full border transition-all",
@@ -51,29 +58,31 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
         </button>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Badge variant="gold">
-          <Trophy className="h-3 w-3" /> FIFA #{team.ranking}
-        </Badge>
-        <Badge variant="muted">{team.continent}</Badge>
-        {(team.titles ?? 0) > 0 && <Badge variant="pitch">{team.titles}× champions</Badge>}
-      </div>
-
-      <div className="mt-4 space-y-1 border-t border-white/10 pt-4">
-        <p className="text-xs uppercase tracking-widest text-white/40">Head Coach</p>
-        <p className="text-sm font-medium text-white">{team.coach}</p>
-      </div>
-
-      <div className="mt-3">
-        <p className="text-xs uppercase tracking-widest text-white/40">Squad Preview</p>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          {team.squadPreview.map((p) => (
-            <span key={p} className="rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70">
-              {p}
-            </span>
-          ))}
+      <Link href={`/teams/${team.code}`} className="mt-4 block">
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge variant="gold">
+            <Trophy className="h-3 w-3" /> FIFA #{team.ranking}
+          </Badge>
+          <Badge variant="muted">{team.continent}</Badge>
+          {(team.titles ?? 0) > 0 && <Badge variant="pitch">{team.titles}× champions</Badge>}
         </div>
-      </div>
+
+        <div className="mt-4 space-y-1 border-t border-white/10 pt-4">
+          <p className="text-xs uppercase tracking-widest text-white/40">Head Coach</p>
+          <p className="text-sm font-medium text-white">{team.coach}</p>
+        </div>
+
+        <div className="mt-3">
+          <p className="text-xs uppercase tracking-widest text-white/40">Squad Preview</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {team.squadPreview.map((p) => (
+              <span key={p} className="rounded-full bg-white/5 px-2.5 py-1 text-xs text-white/70">
+                {p}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
     </motion.article>
   );
 }
