@@ -17,14 +17,14 @@ export function TrophyMark({ className }: { className?: string }) {
 export function Logo({ className, withText = true }: { className?: string; withText?: boolean }) {
   return (
     <Link href="/" className={cn("group flex items-center gap-2.5", className)}>
-      <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black ring-1 ring-white/15">
-        <span className="spectrum-bar absolute inset-0 rounded-xl opacity-30 blur-md transition-opacity group-hover:opacity-55" />
+      <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black ring-1 ring-gold/30">
+        <span className="spectrum-bar absolute inset-0 rounded-xl opacity-40 blur-md transition-opacity group-hover:opacity-70" />
         <Image
           src="/fifa-logo.png"
           alt="FIFA"
           width={40}
           height={40}
-          className="relative h-9 w-9 object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.35)]"
+          className="relative h-9 w-9 object-contain drop-shadow-[0_0_10px_rgba(255,199,44,0.45)]"
           priority
         />
       </span>

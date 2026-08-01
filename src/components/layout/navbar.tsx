@@ -55,7 +55,7 @@ export function Navbar() {
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-electric/40 bg-electric/10"
+                      className="absolute inset-0 rounded-full border border-gold/40 bg-gold/10"
                       transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
                   )}
@@ -98,7 +98,7 @@ export function Navbar() {
                     onClick={() => setOpen(false)}
                     className={cn(
                       "flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                      active ? "bg-electric/10 text-electric" : "text-white/70 hover:bg-white/5"
+                      active ? "bg-gold/10 text-gold" : "text-white/70 hover:bg-white/5"
                     )}
                   >
                     <link.icon className="h-4 w-4" />

@@ -3,49 +3,57 @@
 @tailwind utilities;
 
 @layer base {
-  /* Brand hex kept fully saturated:
-     Electric #00B4FF · Pitch #00E676 · Gold #FFD700 · Navy #071426 · Midnight #020617 */
-  /* Theme: pure black canvas + vivid WC26 spectrum (refs: Golden Glove / Results / Goals) */
+  /*
+    FIFA World Cup 2026™ inspired system
+    Core: Black · White · Gold (#FFC72C)
+    FIFA Blue #0033A0 · Coastal Teal #00A099 · Maple Red #C8102E · Sunset #FF7300
+    + multicolor “We Are 26” spectrum for promotional accents
+  */
   :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 4%;
+    --card: 0 0% 5%;
     --card-foreground: 0 0% 100%;
-    --primary: 199 100% 50%;
+    /* Primary = WC26 gold */
+    --primary: 44 100% 59%;
     --primary-foreground: 0 0% 0%;
-    --secondary: 145 100% 45%;
-    --secondary-foreground: 0 0% 0%;
+    /* Secondary = coastal teal */
+    --secondary: 177 100% 31%;
+    --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 51 100% 50%;
+    --muted-foreground: 0 0% 68%;
+    --accent: 44 100% 59%;
     --accent-foreground: 0 0% 0%;
     --border: 0 0% 18%;
     --input: 0 0% 12%;
-    --ring: 199 100% 50%;
+    --ring: 44 100% 59%;
     --radius: 1rem;
-    --electric: #00b4ff;
-    --pitch: #00e676;
-    --gold: #ffd700;
-    --spectrum-mint: #a8f5c8;
-    --spectrum-lime: #b8ff3c;
+    --fifa-blue: #0033a0;
+    --electric: #2f6bff;
+    --pitch: #00a099;
+    --gold: #ffc72c;
+    --maple: #c8102e;
+    --sunset: #ff7300;
+    --spectrum-mint: #7dffc8;
+    --spectrum-lime: #c8ff3c;
   }
 
   .light {
-    --background: 200 55% 97%;
-    --foreground: 217 65% 12%;
+    --background: 40 30% 97%;
+    --foreground: 222 60% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --primary: 199 100% 42%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 145 100% 36%;
+    --card-foreground: 222 60% 10%;
+    --primary: 44 100% 45%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 177 100% 28%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 30% 92%;
-    --muted-foreground: 215 25% 35%;
-    --accent: 48 100% 45%;
-    --accent-foreground: 222 47% 11%;
-    --border: 214 25% 82%;
-    --input: 214 25% 88%;
-    --ring: 199 100% 42%;
+    --muted: 40 20% 92%;
+    --muted-foreground: 220 15% 35%;
+    --accent: 44 100% 45%;
+    --accent-foreground: 0 0% 0%;
+    --border: 40 15% 82%;
+    --input: 40 15% 88%;
+    --ring: 44 100% 45%;
   }
 
   * {
@@ -62,17 +70,18 @@
   body {
     @apply bg-black text-foreground font-sans antialiased;
     background-image:
-      radial-gradient(55% 40% at 10% 0%, rgba(0, 180, 255, 0.16), transparent 55%),
-      radial-gradient(50% 40% at 90% 5%, rgba(0, 230, 118, 0.12), transparent 55%),
-      radial-gradient(55% 50% at 50% 100%, rgba(196, 77, 255, 0.1), transparent 55%);
+      radial-gradient(50% 40% at 8% 0%, rgba(0, 51, 160, 0.35), transparent 55%),
+      radial-gradient(45% 35% at 92% 8%, rgba(0, 160, 153, 0.22), transparent 55%),
+      radial-gradient(50% 40% at 50% 100%, rgba(255, 199, 44, 0.14), transparent 55%),
+      radial-gradient(40% 30% at 80% 70%, rgba(200, 16, 46, 0.1), transparent 55%);
     background-attachment: fixed;
   }
 
   .light body {
     background-image:
-      radial-gradient(60% 45% at 15% 0%, rgba(0, 180, 255, 0.2), transparent 60%),
-      radial-gradient(55% 45% at 90% 10%, rgba(0, 230, 118, 0.16), transparent 60%),
-      radial-gradient(70% 60% at 50% 100%, rgba(255, 215, 0, 0.14), transparent 60%);
+      radial-gradient(55% 40% at 10% 0%, rgba(0, 51, 160, 0.12), transparent 60%),
+      radial-gradient(50% 40% at 90% 10%, rgba(0, 160, 153, 0.1), transparent 60%),
+      radial-gradient(60% 50% at 50% 100%, rgba(255, 199, 44, 0.16), transparent 60%);
   }
 
   html {
@@ -91,7 +100,7 @@
     box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
   }
   .glass-strong {
-    @apply border border-white/10 bg-[#071426]/80 backdrop-blur-2xl;
+    @apply border border-white/10 bg-black/85 backdrop-blur-2xl;
   }
   .light .glass,
   .light .glass-strong {
@@ -110,43 +119,61 @@
   }
 
   .neon-text {
-    text-shadow: 0 0 18px rgba(0, 180, 255, 0.85), 0 0 42px rgba(0, 180, 255, 0.45);
+    text-shadow: 0 0 18px rgba(255, 199, 44, 0.55), 0 0 36px rgba(47, 107, 255, 0.35);
   }
   .gold-text {
-    background: linear-gradient(180deg, #fff6c9 0%, #ffd700 45%, #d4a017 100%);
+    background: linear-gradient(180deg, #fff4c2 0%, #ffc72c 48%, #c99212 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .brand-gradient-text {
-    background: linear-gradient(100deg, #00b4ff 0%, #5ce1ff 40%, #00e676 100%);
+    background: linear-gradient(100deg, #0033a0 0%, #2f6bff 35%, #00a099 70%, #ffc72c 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
+  /* Official-feel WC26 multicolor spectrum */
   .spectrum-text {
-    background: linear-gradient(100deg, #00b4ff 0%, #00e676 28%, #ffd700 52%, #ff4d6d 76%, #c44dff 100%);
+    background: linear-gradient(
+      100deg,
+      #0033a0 0%,
+      #2f6bff 14%,
+      #00a099 28%,
+      #ffc72c 44%,
+      #ff7300 60%,
+      #c8102e 76%,
+      #9b2cff 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .spectrum-bar {
-    background: linear-gradient(90deg, #00b4ff, #00e676, #ffd700, #ff4d6d, #c44dff);
+    background: linear-gradient(
+      90deg,
+      #0033a0,
+      #2f6bff,
+      #00a099,
+      #ffc72c,
+      #ff7300,
+      #c8102e,
+      #9b2cff
+    );
   }
-  /* Thick multi-color frame used on award / chart cards */
   .spectrum-frame {
     position: relative;
     border-radius: 1.25rem;
     padding: 3px;
     background: linear-gradient(
       135deg,
-      #00b4ff 0%,
-      #00e676 18%,
-      #ffd700 36%,
-      #ff8a00 52%,
-      #ff4d6d 68%,
-      #c44dff 84%,
-      #00b4ff 100%
+      #0033a0 0%,
+      #2f6bff 16%,
+      #00a099 32%,
+      #ffc72c 48%,
+      #ff7300 64%,
+      #c8102e 80%,
+      #9b2cff 100%
     );
   }
   .spectrum-frame > .spectrum-frame-inner {
@@ -168,7 +195,7 @@
     @apply inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/80 px-2.5 py-1.5 text-sm font-semibold text-white transition-colors hover:border-white/50;
   }
   .result-pill-final {
-    @apply border-gold/70 text-gold shadow-[0_0_18px_rgba(255,215,0,0.25)];
+    @apply border-gold/80 text-gold shadow-[0_0_18px_rgba(255,199,44,0.35)];
   }
   .neon-lime {
     color: #b8ff3c;
@@ -178,7 +205,7 @@
     box-shadow: 0 0 18px rgba(184, 255, 60, 0.75), 0 0 36px rgba(0, 230, 118, 0.4);
   }
   .section-label {
-    @apply inline-flex items-center gap-2 rounded-full border border-electric/60 bg-electric/25 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-electric sm:px-4 sm:text-xs sm:tracking-[0.25em];
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/55 bg-gold/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:px-4 sm:text-xs sm:tracking-[0.25em];
   }
   .stadium-lights::before,
   .stadium-lights::after {
@@ -187,7 +214,7 @@
     top: -30%;
     width: 45%;
     height: 160%;
-    background: linear-gradient(180deg, rgba(0, 180, 255, 0.22), transparent 70%);
+    background: linear-gradient(180deg, rgba(47, 107, 255, 0.28), transparent 70%);
     filter: blur(40px);
     pointer-events: none;
   }
@@ -199,7 +226,7 @@
   .stadium-lights::after {
     right: 5%;
     transform: rotate(-14deg);
-    background: linear-gradient(180deg, rgba(0, 230, 118, 0.18), transparent 70%);
+    background: linear-gradient(180deg, rgba(255, 199, 44, 0.22), transparent 70%);
     animation: spot-sweep 13s ease-in-out infinite reverse;
   }
   .card-glow {
@@ -207,7 +234,7 @@
   }
   .card-glow:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 50px -12px rgba(0, 180, 255, 0.55);
+    box-shadow: 0 18px 50px -12px rgba(255, 199, 44, 0.35);
   }
   .pitch-panel {
     background:
@@ -257,6 +284,6 @@
   background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#00b4ff, #00e676);
+  background: linear-gradient(180deg, #0033a0, #ffc72c, #c8102e);
   border-radius: 999px;
 }

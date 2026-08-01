@@ -42,18 +42,22 @@ export function Hero() {
       <div className="spectrum-bar absolute inset-x-0 top-0 z-[1] h-[3px]" />
       <div className="stadium-lights pointer-events-none absolute inset-0 opacity-60" />
 
-      {/* Soft spectrum atmosphere */}
+      {/* Soft WC26 atmosphere — blue · teal · gold · maple */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[-10%] top-[15%] h-[50%] w-[45%] rounded-full bg-electric/15 blur-[100px]"
+        className="pointer-events-none absolute left-[-10%] top-[15%] h-[50%] w-[45%] rounded-full bg-fifa-blue/30 blur-[100px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[10%] right-[-5%] h-[40%] w-[40%] rounded-full bg-pitch/12 blur-[100px]"
+        className="pointer-events-none absolute bottom-[10%] right-[-5%] h-[40%] w-[40%] rounded-full bg-pitch/20 blur-[100px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[20%] left-[40%] h-[30%] w-[30%] rounded-full bg-gold/10 blur-[90px]"
+        className="pointer-events-none absolute bottom-[20%] left-[40%] h-[30%] w-[30%] rounded-full bg-gold/20 blur-[90px]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-[20%] top-[30%] h-[25%] w-[25%] rounded-full bg-maple/15 blur-[80px]"
       />
 
       <div className="container relative z-10 w-full pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-20">
