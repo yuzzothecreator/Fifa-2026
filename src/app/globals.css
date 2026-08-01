@@ -228,6 +228,26 @@
     flex-shrink: 0;
   }
 
+  .bracket-scroll {
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+  .bracket-scroll::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .bracket-scroll::-webkit-scrollbar-track {
+    background: #eaedff;
+    border-radius: 999px;
+  }
+  .bracket-scroll::-webkit-scrollbar-thumb {
+    background: #10164f;
+    border-radius: 999px;
+  }
+  .bracket-scroll::-webkit-scrollbar-thumb:hover {
+    background: #304ffe;
+  }
+
   .page-pad {
     @apply px-4 sm:px-6;
   }
