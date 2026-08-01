@@ -173,10 +173,14 @@
   }
 
   .marquee-track {
-    animation: marquee-scroll 28s linear infinite;
+    animation: marquee-scroll 32s linear infinite;
   }
-  .marquee-track:hover {
+  .marquee-track:hover,
+  .ticker-track:hover {
     animation-play-state: paused;
+  }
+  .marquee-group {
+    flex-shrink: 0;
   }
 
   .page-pad {
@@ -196,15 +200,20 @@
   100% { transform: translateX(-50%); }
 }
 .ticker-track {
-  animation: ticker-scroll 40s linear infinite;
+  animation: ticker-scroll 45s linear infinite;
 }
-.ticker-track:hover {
-  animation-play-state: paused;
+.ticker-group {
+  flex-shrink: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   .ticker-track,
   .marquee-track {
     animation: none;
+  }
+  /* Hide the loop clone so items are not shown twice when motion is off */
+  .ticker-group[aria-hidden="true"],
+  .marquee-group[aria-hidden="true"] {
+    display: none;
   }
 }
 

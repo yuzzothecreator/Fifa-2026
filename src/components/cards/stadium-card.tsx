@@ -11,10 +11,10 @@ export function StadiumCard({ stadium, index = 0 }: { stadium: Stadium; index?: 
   return (
     <Link href={`/stadiums/${stadium.id}`} className="block">
       <motion.article
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 1, y: 0 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5, delay: (index % 6) * 0.06 }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
         whileHover={{ rotateX: 6, rotateY: -6, y: -8 }}
         style={{ perspective: 1000, transformStyle: "preserve-3d" }}
         className="group relative overflow-hidden rounded-2xl glass transition-shadow hover:shadow-neon"

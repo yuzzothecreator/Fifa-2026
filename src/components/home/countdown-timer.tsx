@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { TOURNAMENT_START } from "@/lib/data";
 
@@ -19,15 +18,14 @@ function getRemaining(target: number) {
 export function CountdownTimer({ large = false }: { large?: boolean }) {
   const target = React.useMemo(() => new Date(TOURNAMENT_START).getTime(), []);
   const [time, setTime] = React.useState(() => getRemaining(target));
-  const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
-    setMounted(true);
+    setTime(getRemaining(target));
     const id = setInterval(() => setTime(getRemaining(target)), 1000);
     return () => clearInterval(id);
   }, [target]);
 
-  if (mounted && time.over) {
+  if (time.over) {
     return (
       <p className="font-display text-3xl uppercase tracking-tight text-white sm:text-5xl">
         The tournament is underway
@@ -43,31 +41,38 @@ export function CountdownTimer({ large = false }: { large?: boolean }) {
   ];
 
   return (
-    <div className={cn("flex items-stretch justify-center gap-2 sm:gap-4", large && "gap-3 sm:gap-6")}>
+    <div
+      className={cn(
+        "mx-auto flex w-full max-w-4xl flex-wrap items-end justify-center gap-x-3 gap-y-6 sm:gap-x-5",
+        large && "gap-x-4 sm:gap-x-6"
+      )}
+      suppressHydrationWarning
+    >
       {units.map((u, i) => (
         <React.Fragment key={u.label}>
-          <div className="min-w-[4.5rem] text-center sm:min-w-[6rem]">
-            <motion.p
-              key={u.value}
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
+          <div className="min-w-[4.25rem] flex-1 basis-[4.25rem] text-center sm:min-w-[5.5rem] sm:flex-none">
+            <p
               className={cn(
-                "font-display leading-none text-white",
-                large ? "text-5xl sm:text-7xl md:text-8xl" : "text-3xl sm:text-5xl"
+                "font-display tabular-nums leading-none text-white",
+                large
+                  ? "text-[clamp(2.25rem,8vw,5.5rem)]"
+                  : "text-[clamp(1.75rem,6vw,3rem)]"
               )}
+              suppressHydrationWarning
             >
-              {mounted ? String(u.value).padStart(2, "0") : "--"}
-            </motion.p>
-            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/65 sm:text-xs">
+              {String(u.value).padStart(2, "0")}
+            </p>
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white/65 sm:text-xs">
               {u.label}
             </p>
           </div>
           {i < units.length - 1 && (
             <span
               className={cn(
-                "self-start pt-1 font-display text-white/40",
-                large ? "text-4xl sm:text-6xl" : "text-2xl sm:text-4xl"
+                "hidden self-center pb-6 font-display text-white/35 sm:inline",
+                large ? "text-4xl md:text-5xl" : "text-2xl"
               )}
+              aria-hidden
             >
               :
             </span>

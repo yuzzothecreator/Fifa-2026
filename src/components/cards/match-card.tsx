@@ -32,10 +32,10 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 1, y: 0 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.4, delay: (index % 6) * 0.05 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
       whileHover={{ y: -6 }}
       className={cn(
         "relative overflow-hidden rounded-2xl glass p-4 transition-shadow hover:shadow-neon sm:p-5",

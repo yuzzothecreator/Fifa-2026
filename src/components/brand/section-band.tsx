@@ -82,21 +82,42 @@ export function SectionBand({
 }
 
 export function BrandMarquee({
-  text = "HOME OF THE FIFA WORLD CUP 26™",
+  items = ["HOME OF THE FIFA WORLD CUP 26™", "#WEARE26", "#FIFAWORLDCUP", "#SOMOS26"],
   tone = "navy",
 }: {
-  text?: string;
+  items?: string[];
   tone?: BrandTone;
+  /** @deprecated use items */
+  text?: string;
 }) {
-  const items = Array.from({ length: 8 }, () => `${text} · `);
+  const unique = Array.from(new Set(items.filter(Boolean)));
+  const color = tone === "soft" || tone === "white" ? NYNJ.navy : NYNJ.white;
+
   return (
     <div className="overflow-hidden border-y border-white/10 py-4" style={toneStyle[tone]}>
-      <div className="marquee-track flex w-max whitespace-nowrap font-display text-2xl uppercase tracking-tight sm:text-4xl md:text-5xl">
-        {[...items, ...items].map((t, i) => (
-          <span key={i} className="px-2" style={{ color: tone === "soft" || tone === "white" ? NYNJ.navy : NYNJ.white }}>
-            {t}
-          </span>
-        ))}
+      <div className="marquee-track flex w-max">
+        <div className="marquee-group flex items-center whitespace-nowrap font-display text-2xl uppercase tracking-tight sm:text-4xl md:text-5xl">
+          {unique.map((t) => (
+            <span key={t} className="px-4 sm:px-6" style={{ color }}>
+              {t}
+              <span className="mx-4 opacity-40 sm:mx-6" aria-hidden>
+                ·
+              </span>
+            </span>
+          ))}
+        </div>
+        {/* Clone for seamless loop only — hidden from a11y / reduced-motion */}
+        <div
+          className="marquee-group flex items-center whitespace-nowrap font-display text-2xl uppercase tracking-tight sm:text-4xl md:text-5xl"
+          aria-hidden
+        >
+          {unique.map((t) => (
+            <span key={`dup-${t}`} className="px-4 sm:px-6" style={{ color }}>
+              {t}
+              <span className="mx-4 opacity-40 sm:mx-6">·</span>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

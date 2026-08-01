@@ -47,8 +47,10 @@ export default function HomePage() {
     <>
       <Hero />
 
-      <BrandMarquee text="HOME OF THE FIFA WORLD CUP 26™" tone="navy" />
-      <BrandMarquee text="#WEARE26  #FIFAWORLDCUP  #SOMOS26" tone="blue" />
+      <BrandMarquee
+        tone="navy"
+        items={["HOME OF THE FIFA WORLD CUP 26™", "#WEARE26", "#FIFAWORLDCUP", "#SOMOS26"]}
+      />
 
       <LiveScoreTicker />
 
@@ -90,17 +92,20 @@ export default function HomePage() {
       <HostNations />
 
       {/* navy countdown — always filled */}
-      <SectionBand tone="navy" className="chapter-pad text-center">
-        <div className="container space-y-10">
+      <SectionBand tone="navy" className="chapter-pad overflow-visible text-center">
+        <div className="container space-y-8 sm:space-y-10">
           <SectionHeading
             light
             align="center"
+            className="max-w-4xl"
             label="Tournament clock"
             title="Until FIFA World Cup 26™ kickoff"
             description="Mark the date — the world’s greatest football show opens across USA, Canada and Mexico."
           />
-          <CountdownTimer large />
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="overflow-visible px-1">
+            <CountdownTimer large />
+          </div>
+          <div className="flex flex-wrap justify-center gap-3 pb-2">
             <Button asChild className="bg-white text-[#10164F] hover:bg-[#EAEDFF]">
               <Link href="/fixtures">Browse fixtures</Link>
             </Button>

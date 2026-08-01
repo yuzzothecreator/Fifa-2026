@@ -43,7 +43,10 @@ const socials = [Twitter, Instagram, Youtube, Facebook, Github];
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden text-white" style={{ backgroundColor: NYNJ.navy }}>
+    <footer
+      className="relative overflow-hidden text-white safe-bottom md:pb-0"
+      style={{ backgroundColor: NYNJ.navy }}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full opacity-40 blur-3xl"

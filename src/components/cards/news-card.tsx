@@ -32,10 +32,10 @@ export function NewsCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 1, y: 0 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: (index % 6) * 0.05 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
       whileHover={{ y: -6 }}
       className={cn(
         "group relative flex flex-col overflow-hidden rounded-2xl glass transition-shadow hover:shadow-neon",
