@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { NYNJ } from "@/components/brand/section-band";
 
 interface Props {
   label: string;
@@ -10,34 +11,18 @@ interface Props {
 
 export function PageHeader({ label, title, description }: Props) {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 pb-10 pt-32">
-      <div className="stadium-lights pointer-events-none absolute inset-0 opacity-50" />
-      <div className="pointer-events-none absolute inset-0 bg-grid-lines bg-[size:56px_56px] opacity-10 [mask-image:radial-gradient(60%_60%_at_50%_0%,black,transparent)]" />
+    <section
+      className="relative overflow-hidden border-b border-[#10164F]/10 pb-10 pt-28 sm:pt-32"
+      style={{ backgroundColor: NYNJ.soft }}
+    >
+      <div className="pointer-events-none absolute inset-0 bg-grid-lines bg-[size:56px_56px] opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_0%,black,transparent)]" />
       <div className="container relative">
-        <motion.span
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="section-label"
-        >
-          {label}
-        </motion.span>
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className="mt-4 font-display text-4xl uppercase leading-[0.9] tracking-tight text-foreground xs:text-5xl sm:text-6xl md:text-7xl"
-        >
+        <span className="text-[11px] font-bold uppercase tracking-[0.4em] text-[#304FFE]">{label}</span>
+        <h1 className="mt-4 font-display text-4xl uppercase leading-[0.9] tracking-tight text-[#10164F] xs:text-5xl sm:text-6xl md:text-7xl">
           {title}
-        </motion.h1>
+        </h1>
         {description && (
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-3 max-w-2xl text-base text-muted-foreground sm:mt-4 sm:text-lg"
-          >
-            {description}
-          </motion.p>
+          <p className={cn("mt-3 max-w-2xl text-base text-[#10164F]/70 sm:mt-4 sm:text-lg")}>{description}</p>
         )}
       </div>
     </section>

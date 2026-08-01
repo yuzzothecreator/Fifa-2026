@@ -399,7 +399,7 @@ export const tournamentStats = {
   groups: 12,
 };
 
-export const flagUrl = (code: string, size: "w40" | "w80" | "w160" | "w320" = "w160") =>
+export const flagUrl = (code: string, size: "w40" | "w80" | "w160" | "w320" | "w640" = "w160") =>
   `https://flagcdn.com/${size}/${code}.png`;
 
 export const getTeamByCode = (code: string) => teams.find((t) => t.code === code);

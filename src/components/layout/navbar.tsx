@@ -13,30 +13,15 @@ import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        className={cn(
-          "transition-all duration-300",
-          scrolled
-            ? "bg-white/95 py-2 shadow-[0_12px_40px_-20px_rgba(16,22,79,0.35)] backdrop-blur-md"
-            : "bg-transparent py-4"
-        )}
-      >
+      <div className="border-b-2 border-[#10164F]/15 bg-white py-3 shadow-[0_12px_40px_-20px_rgba(16,22,79,0.35)]">
         <div className="container flex items-center justify-between gap-4">
           <Logo />
 
-          <nav className="hidden items-center gap-1 lg:flex">
+          <nav className="hidden items-center gap-0.5 lg:flex">
             {navLinks.slice(0, 7).map((link) => {
               const active = pathname === link.href;
               return (
@@ -44,14 +29,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-3 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition-colors",
-                    scrolled
-                      ? active
-                        ? "text-[#304FFE]"
-                        : "text-[#10164F]/55 hover:text-[#10164F]"
-                      : active
-                        ? "text-white"
-                        : "text-white/70 hover:text-white"
+                    "px-3 py-2 text-xs font-black uppercase tracking-[0.16em] transition-colors",
+                    active
+                      ? "text-[#304FFE]"
+                      : "text-[#10164F] hover:text-[#304FFE]"
                   )}
                 >
                   {link.label}
@@ -60,31 +41,22 @@ export function Navbar() {
             })}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <div className={cn(!scrolled && "[&_button]:border-white/40 [&_button]:text-white")}>
-              <LanguageSwitcher />
-            </div>
+          <div className="flex items-center gap-2.5">
+            <LanguageSwitcher />
             <Button
               asChild
               size="sm"
-              className={cn(
-                "hidden md:inline-flex",
-                scrolled ? "bg-[#304FFE] text-white" : "bg-white text-[#10164F] hover:bg-[#EAEDFF]"
-              )}
+              className="h-10 bg-[#304FFE] px-5 text-xs font-black uppercase tracking-wide text-white shadow-md hover:bg-[#1a3af0]"
             >
               <Link href="/login">Sign In</Link>
             </Button>
             <button
+              type="button"
               onClick={() => setOpen((o) => !o)}
-              className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full border-2 lg:hidden",
-                scrolled
-                  ? "border-[#10164F]/20 text-[#10164F]"
-                  : "border-white/40 text-white"
-              )}
+              className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#10164F] bg-[#EAEDFF] text-[#10164F] lg:hidden"
               aria-label="Menu"
             >
-              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {open ? <X className="h-5 w-5 stroke-[2.5]" /> : <Menu className="h-5 w-5 stroke-[2.5]" />}
             </button>
           </div>
         </div>
@@ -95,7 +67,7 @@ export function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="container mt-2 grid grid-cols-2 gap-1 rounded-2xl border border-[#10164F]/10 bg-white p-3 lg:hidden"
+              className="container mt-2 grid grid-cols-2 gap-1 rounded-2xl border-2 border-[#10164F]/15 bg-white p-3 lg:hidden"
             >
               {navLinks.map((link) => (
                 <Link
@@ -103,8 +75,8 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-[#10164F]",
-                    pathname === link.href && "bg-[#EAEDFF]"
+                    "flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-black uppercase tracking-wide text-[#10164F]",
+                    pathname === link.href && "bg-[#304FFE] text-white"
                   )}
                 >
                   <link.icon className="h-4 w-4" />

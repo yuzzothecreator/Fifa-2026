@@ -23,35 +23,40 @@ export function LanguageSwitcher() {
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
+  const activeLabel = languages.find((l) => l.code === active)?.code ?? "en";
+
   return (
     <div ref={ref} className="relative">
       <button
+        type="button"
         onClick={() => setOpen((o) => !o)}
         aria-label="Change language"
-        className="flex h-10 items-center gap-2 rounded-full border border-[#10164F]/20 bg-[#EAEDFF] px-3 text-sm font-bold uppercase text-[#10164F] transition-colors hover:border-[#304FFE]"
+        aria-expanded={open}
+        className="flex h-10 items-center gap-2 rounded-full border-2 border-[#10164F] bg-[#EAEDFF] px-3.5 text-sm font-black uppercase tracking-wide text-[#10164F] shadow-sm transition-colors hover:border-[#304FFE] hover:bg-[#304FFE] hover:text-white"
       >
-        <Globe className="h-4 w-4" />
-        <span className="hidden sm:inline">{active}</span>
+        <Globe className="h-4 w-4 shrink-0 stroke-[2.5]" />
+        <span>{activeLabel}</span>
       </button>
       {open && (
-        <div className="glass-strong absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl p-1.5 shadow-neon">
+        <div className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-2xl border-2 border-[#10164F]/15 bg-white p-1.5 shadow-[0_18px_48px_-16px_rgba(16,22,79,0.45)]">
           {languages.map((l) => (
             <button
               key={l.code}
+              type="button"
               onClick={() => {
                 setActive(l.code);
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm text-[#10164F]/70 transition-colors hover:bg-[#EAEDFF]",
-                active === l.code && "text-[#304FFE]"
+                "flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-bold text-[#10164F] transition-colors hover:bg-[#EAEDFF]",
+                active === l.code && "bg-[#304FFE] text-white hover:bg-[#304FFE]"
               )}
             >
               <span className="flex items-center gap-2">
                 <span>{l.flag}</span>
                 {l.label}
               </span>
-              {active === l.code && <Check className="h-4 w-4" />}
+              {active === l.code && <Check className="h-4 w-4 stroke-[2.5]" />}
             </button>
           ))}
         </div>

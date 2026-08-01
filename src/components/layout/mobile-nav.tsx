@@ -9,7 +9,7 @@ export function MobileNav() {
   const pathname = usePathname();
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-[#10164F]/10 bg-white md:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-[#10164F]/15 bg-white md:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
       <div className="flex items-center justify-around px-1 py-2">
@@ -20,11 +20,11 @@ export function MobileNav() {
               key={link.href}
               href={link.href}
               className={cn(
-                "flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-1.5 text-[9px] font-bold uppercase tracking-wide",
-                active ? "text-[#304FFE]" : "text-[#10164F]/40"
+                "flex min-w-0 flex-1 flex-col items-center gap-0.5 px-0.5 py-1.5 text-[10px] font-black uppercase tracking-wide",
+                active ? "text-[#304FFE]" : "text-[#10164F]"
               )}
             >
-              <link.icon className="h-5 w-5 shrink-0" />
+              <link.icon className={cn("h-5 w-5 shrink-0", active ? "stroke-[2.5]" : "stroke-2")} />
               <span className="truncate">{link.label}</span>
             </Link>
           );

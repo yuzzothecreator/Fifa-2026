@@ -160,20 +160,17 @@ export default function HomePage() {
         </div>
       </SectionBand>
 
-      {/* blue goals */}
-      <SectionBand tone="blue" className="chapter-pad">
+      {/* soft goals chart */}
+      <SectionBand tone="soft" className="chapter-pad overflow-visible">
         <div className="container">
-          <div className="mb-12">
+          <div className="mb-10">
             <SectionHeading
-              light
               label="History"
               title="Total goals scored"
               description="Every FIFA World Cup™ edition — 1930 to 2026."
             />
           </div>
-          <Reveal>
-            <TotalGoalsChart />
-          </Reveal>
+          <TotalGoalsChart />
         </div>
       </SectionBand>
 

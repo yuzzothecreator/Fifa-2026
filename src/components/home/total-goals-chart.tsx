@@ -1,91 +1,95 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { worldCupGoalsHistory } from "@/lib/data";
 import { cn } from "@/lib/utils";
-
-const palette = [
-  "#10164F", "#304FFE", "#EAEDFF", "#10164F", "#304FFE",
-  "#EAEDFF", "#10164F", "#304FFE", "#EAEDFF", "#10164F",
-  "#304FFE", "#EAEDFF", "#10164F", "#304FFE", "#EAEDFF",
-  "#10164F", "#304FFE", "#EAEDFF", "#10164F", "#304FFE",
-  "#EAEDFF", "#10164F", "#304FFE",
-];
+import { NYNJ } from "@/components/brand/section-band";
 
 export function TotalGoalsChart() {
   const max = Math.max(...worldCupGoalsHistory.map((d) => d.goals));
+  const highlight = worldCupGoalsHistory.find((d) => d.highlight);
 
   return (
-    <section>
-      <div className="spectrum-frame">
-        <div className="spectrum-frame-inner bg-[#10164F] p-5 text-white sm:p-8">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <h2 className="font-display text-3xl uppercase leading-none tracking-tight text-white sm:text-5xl">
-                Total Goals Scored
-              </h2>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-                At Every FIFA World Cup™
-              </p>
-            </div>
-            <img
-              src="/wc26-logo.png"
-              alt="FIFA"
-              className="h-10 w-[4.5rem] object-contain sm:h-12 sm:w-24"
-            />
-          </div>
+    <div className="overflow-hidden rounded-3xl border border-[#10164F]/10 bg-white shadow-[0_24px_60px_-28px_rgba(16,22,79,0.35)]">
+      <div
+        className="flex flex-wrap items-center justify-between gap-4 border-b border-[#10164F]/10 px-5 py-5 sm:px-8"
+        style={{ backgroundColor: NYNJ.navy }}
+      >
+        <div>
+          <p className="text-[11px] font-black uppercase tracking-[0.35em] text-white/70">
+            At every FIFA World Cup™
+          </p>
+          <p className="mt-2 font-display text-2xl uppercase leading-none tracking-tight text-white sm:text-3xl">
+            1930 — 2026
+          </p>
+        </div>
+        <img
+          src="/wc26-logo.png"
+          alt="FIFA World Cup 2026"
+          className="h-12 w-auto object-contain sm:h-14"
+        />
+      </div>
 
-          <div className="mt-8 overflow-x-auto pb-2">
-            <div className="flex h-64 min-w-[720px] items-end gap-1.5 sm:h-72 sm:gap-2 md:min-w-0">
-              {worldCupGoalsHistory.map((d, i) => {
-                const h = Math.max(8, (d.goals / max) * 100);
-                return (
-                  <div key={d.year} className="flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-1">
-                    <span
+      <div className="p-5 sm:p-8">
+        <div className="overflow-x-auto pb-2">
+          <div className="flex h-72 min-w-[760px] items-end gap-1.5 sm:h-80 sm:gap-2 md:min-w-0">
+            {worldCupGoalsHistory.map((d) => {
+              const pct = Math.max(6, (d.goals / max) * 100);
+              return (
+                <div
+                  key={d.year}
+                  className="group flex h-full min-w-0 flex-1 flex-col items-center justify-end gap-2"
+                  title={`${d.year}: ${d.goals} goals`}
+                >
+                  <span
+                    className={cn(
+                      "text-[10px] font-black tabular-nums",
+                      d.highlight ? "text-[#304FFE]" : "text-[#10164F]"
+                    )}
+                  >
+                    {d.goals}
+                  </span>
+                  <div className="flex w-full flex-1 items-end justify-center">
+                    <div
                       className={cn(
-                        "text-[9px] font-bold tabular-nums sm:text-[10px]",
-                        d.highlight ? "text-white" : "text-white/70"
+                        "w-full max-w-[32px] rounded-t-md transition-transform duration-300 group-hover:brightness-110 sm:max-w-none",
+                        d.highlight
+                          ? "bg-[#304FFE] ring-2 ring-[#304FFE]/30 ring-offset-2"
+                          : "bg-[#10164F]"
                       )}
-                    >
-                      {d.goals}
-                    </span>
-                    <motion.div
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${h}%` }}
-                      viewport={{ once: true, margin: "-40px" }}
-                      transition={{ duration: 0.7, delay: i * 0.03, ease: "easeOut" }}
-                      className={cn(
-                        "w-full max-w-[28px] rounded-t-sm sm:max-w-none",
-                        d.highlight && "goals-bar-glow"
-                      )}
-                      style={{
-                        background: d.highlight ? "#304FFE" : palette[i % palette.length],
-                        border: palette[i % palette.length] === "#EAEDFF" ? "1px solid rgba(255,255,255,0.35)" : "none",
-                        boxSizing: "border-box" as const,
-                        minHeight: 8,
-                      }}
-                      title={`${d.year}: ${d.goals} goals`}
+                      style={{ height: `${pct}%`, minHeight: 12 }}
                     />
-                    <span
-                      className={cn(
-                        "mt-1 origin-center -rotate-90 text-[8px] font-semibold tabular-nums sm:rotate-0 sm:text-[10px]",
-                        d.highlight ? "text-white" : "text-white/45"
-                      )}
-                    >
-                      {d.year}
-                    </span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-white/15 pt-4 text-xs text-white/55">
-            <span>FIFA World Cup™ editions · 1930–2026</span>
-            <span className="font-semibold text-white">2026 · 48 teams · 308 goals (projected)</span>
+                  <span
+                    className={cn(
+                      "text-[9px] font-bold tabular-nums sm:text-[11px]",
+                      d.highlight ? "text-[#304FFE]" : "text-[#10164F]/55"
+                    )}
+                  >
+                    {d.year}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#10164F]/10 pt-5">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider text-[#10164F]/60">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-3 w-3 rounded-sm bg-[#10164F]" /> Past editions
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-3 w-3 rounded-sm bg-[#304FFE]" /> 2026 projected
+            </span>
+          </div>
+          {highlight && (
+            <p className="text-sm font-black text-[#10164F]">
+              2026 · 48 teams ·{" "}
+              <span className="text-[#304FFE]">{highlight.goals} goals</span> projected
+            </p>
+          )}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
