@@ -450,8 +450,14 @@ function BracketNode({
         winner={win === "home"}
         dim={Boolean(done && win === "away")}
         compact={flexible && !expanded}
+        onDark={highlight}
       />
-      <div className="my-0.5 h-px shrink-0 bg-[#10164F]/15 sm:my-1" />
+      <div
+        className={cn(
+          "my-0.5 h-px shrink-0 sm:my-1",
+          highlight ? "bg-white/25" : "bg-[#10164F]/15"
+        )}
+      />
       <TeamRow
         code={match.awayCode}
         country={match.awayCountry}
@@ -459,9 +465,15 @@ function BracketNode({
         winner={win === "away"}
         dim={Boolean(done && win === "home")}
         compact={flexible && !expanded}
+        onDark={highlight}
       />
       {match.note && (
-        <p className="mt-1 truncate text-[10px] font-black text-[#B71D1C] sm:mt-1.5 sm:text-xs">
+        <p
+          className={cn(
+            "mt-1 truncate text-[10px] font-black sm:mt-1.5 sm:text-xs",
+            highlight ? "text-[#F1BF00]" : "text-[#B71D1C]"
+          )}
+        >
           {match.note}
         </p>
       )}
@@ -476,6 +488,7 @@ function TeamRow({
   winner,
   dim,
   compact,
+  onDark,
 }: {
   code: string;
   country: string;
@@ -483,13 +496,18 @@ function TeamRow({
   winner?: boolean;
   dim?: boolean;
   compact?: boolean;
+  /** Final champion card uses dark red/navy — keep loser text light */
+  onDark?: boolean;
 }) {
+  const mutedOnDark = onDark && !winner;
+
   return (
     <div
       className={cn(
         "flex min-w-0 items-center rounded-xl",
         compact ? "gap-1.5 px-1.5 py-0.5" : "gap-2.5 px-2.5 py-1.5",
         winner && "bg-[#304FFE] text-white",
+        mutedOnDark && "bg-white/10",
         dim && "opacity-55"
       )}
     >
@@ -514,7 +532,7 @@ function TeamRow({
         className={cn(
           "min-w-0 flex-1 truncate font-black leading-tight",
           compact ? "text-xs sm:text-sm" : "text-[15px]",
-          winner ? "text-white" : "text-[#10164F]"
+          winner ? "text-white" : mutedOnDark ? "text-white/85" : "text-[#10164F]"
         )}
       >
         {country}
@@ -524,7 +542,7 @@ function TeamRow({
           className={cn(
             "shrink-0 font-display leading-none tabular-nums",
             compact ? "text-lg sm:text-xl" : "text-2xl",
-            winner ? "text-white" : "text-[#10164F]"
+            winner ? "text-white" : mutedOnDark ? "text-white/90" : "text-[#10164F]"
           )}
         >
           {score}
