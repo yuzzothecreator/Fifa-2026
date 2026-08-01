@@ -114,8 +114,8 @@ export function BracketTree({ className }: { className?: string }) {
       : focus === "full"
         ? BRACKET_SLOTS.r32.length
         : BRACKET_SLOTS.r32.length / 2;
-  // Larger row height when fewer matches — easier to read
-  const rowUnit = focus === "full" ? 6.1 : focus === "late" ? 7.25 : 6.75;
+  // Roomier rows so match cards don’t look collapsed
+  const rowUnit = focus === "full" ? 7.6 : focus === "late" ? 8.75 : 8.1;
 
   const toggleRound = (key: string) =>
     setOpenRounds((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -153,8 +153,8 @@ export function BracketTree({ className }: { className?: string }) {
             <span className="block text-xs font-black uppercase tracking-wide">{opt.label}</span>
             <span
               className={cn(
-                "block text-[10px] font-semibold",
-                focus === opt.id ? "text-white/85" : "text-[#10164F]/65"
+                "block text-[10px] font-bold",
+                focus === opt.id ? "text-white/90" : "text-[#10164F]/80"
               )}
             >
               {opt.hint}
@@ -164,11 +164,11 @@ export function BracketTree({ className }: { className?: string }) {
       </div>
 
       {/* Pan / zoom canvas — drag like a map or Supabase schema viewer */}
-      <PanZoomCanvas key={focus} initialScale={focus === "full" ? 0.55 : 0.8}>
+      <PanZoomCanvas key={focus} initialScale={focus === "full" ? 0.62 : 0.88}>
         <div
-          className="flex gap-0 p-6"
+          className="flex gap-0 p-8"
           style={{
-            minWidth: `${visibleColumns.length * 240 + (visibleColumns.length - 1) * 44}px`,
+            minWidth: `${visibleColumns.length * 280 + (visibleColumns.length - 1) * 56}px`,
           }}
         >
           {visibleColumns.map((col, colIndex) => {
@@ -181,25 +181,25 @@ export function BracketTree({ className }: { className?: string }) {
 
             return (
               <div key={col.key} className="flex items-start">
-                <div className="flex w-[220px] shrink-0 flex-col sm:w-[236px]">
-                  <div className="mb-3 flex h-14 shrink-0 flex-col items-center justify-center rounded-2xl bg-[#10164F] px-2 text-center shadow-md">
-                    <span className="text-[11px] font-black uppercase tracking-[0.22em] text-white">
+                <div className="flex w-[260px] shrink-0 flex-col sm:w-[272px]">
+                  <div className="mb-4 flex h-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-[#10164F] px-3 text-center shadow-lg ring-2 ring-[#304FFE]/40">
+                    <span className="text-xs font-black uppercase tracking-[0.22em] text-white">
                       {col.short}
                     </span>
-                    <p className="mt-0.5 text-[11px] font-semibold text-white/85">{col.title}</p>
+                    <p className="mt-1 text-xs font-bold text-[#EAEDFF]">{col.title}</p>
                   </div>
 
                   <div className="relative" style={{ height: `${treeHeight}rem` }}>
                     {slots.map((id, i) => (
                       <div
                         key={`${col.key}-${i}`}
-                        className="absolute left-0 right-0 flex items-center px-0.5"
+                        className="absolute left-0 right-0 flex items-center px-1"
                         style={{
                           top: `${i * span * rowUnit}rem`,
                           height: `${span * rowUnit}rem`,
                         }}
                       >
-                        <BracketNode match={getMatch(id)} highlight={col.key === "final"} large />
+                        <BracketNode match={getMatch(id)} highlight={col.key === "final"} />
                       </div>
                     ))}
                   </div>
@@ -261,7 +261,6 @@ export function BracketTree({ className }: { className?: string }) {
                         key={id}
                         match={getMatch(id)}
                         highlight={col.key === "final"}
-                        large
                       />
                     ))}
                   </div>
@@ -288,8 +287,8 @@ function ConnectorColumn({
 }) {
   const span = fromCount / toCount;
   return (
-    <div className="w-9 shrink-0 sm:w-12">
-      <div className="mb-3 h-14" />
+    <div className="w-11 shrink-0 sm:w-14">
+      <div className="mb-4 h-16" />
       <div className="relative" style={{ height: `${treeHeight}rem` }}>
         {Array.from({ length: toCount }).map((_, i) => {
           const top = i * span * rowUnit;
@@ -301,10 +300,10 @@ function ConnectorColumn({
               style={{ top: `${top}rem`, height: `${height}rem` }}
             >
               <div
-                className="absolute left-0 w-[55%] rounded-r-md border-y-[3px] border-r-[3px] border-[#10164F]/40"
-                style={{ top: "18%", bottom: "18%" }}
+                className="absolute left-0 w-[55%] rounded-r-md border-y-[3px] border-r-[3px] border-[#304FFE]"
+                style={{ top: "16%", bottom: "16%" }}
               />
-              <div className="absolute left-[55%] top-1/2 h-[3px] w-[45%] -translate-y-1/2 bg-[#10164F]/40" />
+              <div className="absolute left-[55%] top-1/2 h-[3px] w-[45%] -translate-y-1/2 bg-[#304FFE]" />
             </div>
           );
         })}
@@ -316,18 +315,15 @@ function ConnectorColumn({
 function BracketNode({
   match,
   highlight,
-  large,
 }: {
   match: Match | null;
   highlight?: boolean;
-  large?: boolean;
 }) {
   if (!match) {
     return (
-      <div className="w-full rounded-2xl border-2 border-dashed border-[#10164F]/25 bg-white px-3 py-3">
-        <p className="text-center text-[10px] font-black uppercase tracking-wider text-[#10164F]/55">
-          TBD
-        </p>
+      <div className="flex min-h-[6.5rem] w-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[#10164F]/30 bg-white px-4 py-4">
+        <p className="text-xs font-black uppercase tracking-wider text-[#10164F]/70">TBD</p>
+        <p className="mt-1 text-sm font-semibold text-[#10164F]">Awaiting fixture</p>
       </div>
     );
   }
@@ -340,25 +336,26 @@ function BracketNode({
     <Link
       href={`/matches/${match.id}`}
       className={cn(
-        "block w-full rounded-2xl border-2 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#304FFE] hover:shadow-md",
-        large ? "px-3 py-2.5" : "px-2.5 py-1.5",
-        highlight ? "border-[#304FFE] ring-2 ring-[#304FFE]/25" : "border-[#10164F]/18",
-        live && "border-[#B71D1C] ring-2 ring-[#B71D1C]/20"
+        "block min-h-[6.5rem] w-full rounded-2xl border-[3px] bg-white px-3.5 py-3 shadow-[0_10px_28px_-14px_rgba(16,22,79,0.45)] transition-shadow hover:shadow-[0_16px_36px_-12px_rgba(48,79,254,0.45)]",
+        highlight
+          ? "border-[#304FFE] bg-[#EAEDFF] ring-4 ring-[#304FFE]/25"
+          : "border-[#10164F]/25 hover:border-[#304FFE]",
+        live && "border-[#B71D1C] ring-4 ring-[#B71D1C]/25"
       )}
     >
-      <div className="mb-1.5 flex items-center justify-between gap-1">
+      <div className="mb-2 flex items-center justify-between gap-2">
         {highlight ? (
-          <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-[#304FFE]">
-            <Trophy className="h-3.5 w-3.5" /> Final
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-[#304FFE]">
+            <Trophy className="h-4 w-4" /> Final
           </span>
         ) : (
-          <span className="truncate text-[10px] font-bold uppercase tracking-wider text-[#10164F]/70">
+          <span className="truncate text-[11px] font-black uppercase tracking-wider text-[#10164F]">
             {match.city}
           </span>
         )}
         <Badge
           variant={live ? "live" : done ? "pitch" : "muted"}
-          className="px-2 py-0.5 text-[10px]"
+          className="px-2.5 py-1 text-[10px]"
         >
           {live ? "LIVE" : done ? "FT" : "VS"}
         </Badge>
@@ -369,18 +366,17 @@ function BracketNode({
         score={match.homeScore}
         winner={win === "home"}
         dim={Boolean(done && win === "away")}
-        large={large}
       />
+      <div className="my-1 h-px bg-[#10164F]/12" />
       <TeamRow
         code={match.awayCode}
         country={match.awayCountry}
         score={match.awayScore}
         winner={win === "away"}
         dim={Boolean(done && win === "home")}
-        large={large}
       />
       {match.note && (
-        <p className="mt-1 truncate text-[10px] font-bold text-[#B71D1C]">{match.note}</p>
+        <p className="mt-2 truncate text-[11px] font-black text-[#B71D1C]">{match.note}</p>
       )}
     </Link>
   );
@@ -392,41 +388,34 @@ function TeamRow({
   score,
   winner,
   dim,
-  large,
 }: {
   code: string;
   country: string;
   score?: number;
   winner?: boolean;
   dim?: boolean;
-  large?: boolean;
 }) {
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-lg px-1.5",
-        large ? "py-1" : "py-0.5",
-        winner && "bg-[#EAEDFF]",
-        dim && "opacity-50"
+        "flex items-center gap-2.5 rounded-xl px-2 py-1.5",
+        winner && "bg-[#304FFE] text-white",
+        dim && "opacity-55"
       )}
     >
       {code === "tbd" ? (
-        <span className={cn("rounded-sm bg-[#EAEDFF]", large ? "h-5 w-7" : "h-4 w-6")} />
+        <span className="h-7 w-10 rounded-md bg-[#EAEDFF]" />
       ) : (
         <img
-          src={flagUrl(code, large ? "w80" : "w40")}
+          src={flagUrl(code, "w80")}
           alt=""
-          className={cn(
-            "rounded-sm object-cover ring-1 ring-[#10164F]/20",
-            large ? "h-5 w-7" : "h-4 w-6"
-          )}
+          className="h-7 w-10 rounded-md object-cover ring-2 ring-white shadow-sm"
         />
       )}
       <span
         className={cn(
-          "min-w-0 flex-1 truncate font-black text-[#10164F]",
-          large ? "text-sm" : "text-xs",
-          winner && "text-[#304FFE]"
+          "min-w-0 flex-1 truncate text-[15px] font-black leading-tight",
+          winner ? "text-white" : "text-[#10164F]"
         )}
       >
         {country}
@@ -434,9 +423,8 @@ function TeamRow({
       {score != null && (
         <span
           className={cn(
-            "font-display tabular-nums text-[#10164F]",
-            large ? "text-xl" : "text-sm",
-            winner && "text-[#304FFE]"
+            "font-display text-2xl leading-none tabular-nums",
+            winner ? "text-white" : "text-[#10164F]"
           )}
         >
           {score}

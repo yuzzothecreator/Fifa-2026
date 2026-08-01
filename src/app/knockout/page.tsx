@@ -92,32 +92,44 @@ export default function KnockoutPage() {
 
 function BracketCard({ match }: { match: Match }) {
   const done = match.status === "FINISHED";
+  const homeWin = done && (match.homeScore ?? 0) > (match.awayScore ?? 0);
+  const awayWin = done && (match.awayScore ?? 0) > (match.homeScore ?? 0);
+  // Penalty winners from note when scores tied
+  const noteWinHome =
+    done &&
+    Boolean(match.note?.toLowerCase().startsWith(match.homeCountry.toLowerCase()));
+  const noteWinAway =
+    done &&
+    Boolean(match.note?.toLowerCase().startsWith(match.awayCountry.toLowerCase()));
+
   return (
     <Link
       href={`/matches/${match.id}`}
       className={cn(
-        "glass block rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-neon",
-        done && "border-[#304FFE]/25"
+        "block rounded-2xl border-[3px] border-[#10164F]/20 bg-white p-5 shadow-[0_12px_32px_-16px_rgba(16,22,79,0.4)] transition-all hover:-translate-y-1 hover:border-[#304FFE] hover:shadow-[0_18px_40px_-14px_rgba(48,79,254,0.4)]",
+        done && "border-[#304FFE]/35"
       )}
     >
-      <div className="mb-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-[#10164F]/70">
-        <span>{match.stadium}</span>
+      <div className="mb-4 flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-[#10164F]">
+        <span className="truncate">{match.stadium}</span>
         <Badge variant={done ? "pitch" : "muted"}>{done ? "FT" : match.status}</Badge>
       </div>
       <Side
         code={match.homeCode}
         country={match.homeCountry}
         score={match.homeScore}
-        highlight={done && (match.homeScore ?? 0) > (match.awayScore ?? 0)}
+        highlight={homeWin || noteWinHome}
       />
-      <div className="my-2 text-center font-display text-sm text-[#10164F]/40">vs</div>
+      <div className="my-2 text-center font-display text-sm font-black text-[#304FFE]">vs</div>
       <Side
         code={match.awayCode}
         country={match.awayCountry}
         score={match.awayScore}
-        highlight={done && (match.awayScore ?? 0) > (match.homeScore ?? 0)}
+        highlight={awayWin || noteWinAway}
       />
-      {match.note && <p className="mt-3 text-center text-[11px] font-semibold text-[#B71D1C]">{match.note}</p>}
+      {match.note && (
+        <p className="mt-3 text-center text-xs font-black text-[#B71D1C]">{match.note}</p>
+      )}
     </Link>
   );
 }
@@ -134,14 +146,29 @@ function Side({
   highlight?: boolean;
 }) {
   return (
-    <div className={cn("flex items-center gap-3 rounded-xl px-2 py-2", highlight && "bg-[#EAEDFF]")}>
-      {code === "tbd" ? (
-        <div className="h-6 w-9 rounded bg-[#EAEDFF]" />
-      ) : (
-        <img src={flagUrl(code, "w40")} alt="" className="h-6 w-9 rounded object-cover" />
+    <div
+      className={cn(
+        "flex items-center gap-3 rounded-xl px-3 py-2.5",
+        highlight ? "bg-[#304FFE] text-white" : "bg-[#EAEDFF]"
       )}
-      <span className={cn("flex-1 font-medium text-[#10164F]", highlight && "text-[#304FFE]")}>{country}</span>
-      {score != null && <span className="font-display text-2xl text-[#10164F]">{score}</span>}
+    >
+      {code === "tbd" ? (
+        <div className="h-8 w-11 rounded-md bg-white/30" />
+      ) : (
+        <img
+          src={flagUrl(code, "w80")}
+          alt=""
+          className="h-8 w-11 rounded-md object-cover ring-2 ring-white"
+        />
+      )}
+      <span className={cn("flex-1 text-base font-black", highlight ? "text-white" : "text-[#10164F]")}>
+        {country}
+      </span>
+      {score != null && (
+        <span className={cn("font-display text-3xl leading-none", highlight ? "text-white" : "text-[#10164F]")}>
+          {score}
+        </span>
+      )}
     </div>
   );
 }
