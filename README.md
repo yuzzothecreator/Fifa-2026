@@ -1,6 +1,6 @@
 # World Cup 2026 Hub ⚽
 
-A premium, full-stack **FIFA World Cup 2026** experience — cinematic dark UI, glassmorphism, neon glow, stadium lighting, 3D cards and smooth Framer Motion animations.
+A premium, full-stack **FIFA World Cup 2026** experience — white canvas, `#304FFD` brand typography, stadium lighting, and smooth Framer Motion animations.
 
 Built to feel like an official global football platform (ESPN × FIFA × UCL × modern SaaS dashboard).
 
