@@ -22,48 +22,25 @@ export function TrophyMark({
 
 export function Logo({
   className,
-  withText = true,
   inverted = false,
 }: {
   className?: string;
-  withText?: boolean;
   inverted?: boolean;
 }) {
   return (
-    <Link href="/" className={cn("group flex items-center gap-3", className)}>
-      <span className="relative flex h-10 w-[4.5rem] shrink-0 items-center justify-center sm:h-11 sm:w-20">
-        <Image
-          src="/wc26-logo.png"
-          alt="FIFA World Cup 2026"
-          width={160}
-          height={90}
-          className={cn(
-            "h-full w-full object-contain",
-            inverted && "brightness-0 invert"
-          )}
-          priority
-        />
-      </span>
-      {withText && (
-        <span className="leading-none">
-          <span
-            className={cn(
-              "block font-display text-2xl tracking-tight",
-              inverted ? "text-white" : "text-[#10164F]"
-            )}
-          >
-            WC<span className={inverted ? "text-white" : "text-[#304FFE]"}>26</span>
-          </span>
-          <span
-            className={cn(
-              "block text-[9px] font-bold uppercase tracking-[0.28em]",
-              inverted ? "text-white/70" : "text-[#10164F]/55"
-            )}
-          >
-            World Cup 2026
-          </span>
-        </span>
-      )}
+    <Link
+      href="/"
+      className={cn("group relative flex h-10 w-[4.75rem] items-center sm:h-11 sm:w-[5.5rem]", className)}
+      aria-label="FIFA World Cup 2026 home"
+    >
+      <Image
+        src="/wc26-logo.png"
+        alt="FIFA World Cup 2026"
+        width={160}
+        height={90}
+        className={cn("h-full w-full object-contain", inverted && "brightness-0 invert")}
+        priority
+      />
     </Link>
   );
 }

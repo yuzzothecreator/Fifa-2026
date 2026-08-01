@@ -15,7 +15,6 @@ import { StadiumCard } from "@/components/cards/stadium-card";
 import { NewsCard } from "@/components/cards/news-card";
 import { Button } from "@/components/ui/button";
 import { BrandMarquee, SectionBand } from "@/components/brand/section-band";
-import { CountdownTimer } from "@/components/home/countdown-timer";
 import { matches, teams, stadiums, news, tournamentStats } from "@/lib/data";
 
 export default function HomePage() {
@@ -75,16 +74,6 @@ export default function HomePage() {
       </SectionBand>
 
       <HostNations />
-
-      {/* navy countdown */}
-      <SectionBand tone="navy" className="chapter-pad text-center">
-        <div className="container">
-          <p className="mb-10 text-[11px] font-bold uppercase tracking-[0.4em] text-white/60">
-            Until FIFA World Cup 26™ kickoff
-          </p>
-          <CountdownTimer large />
-        </div>
-      </SectionBand>
 
       {/* white matches */}
       <SectionBand tone="white" className="chapter-pad">
