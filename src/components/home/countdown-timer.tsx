@@ -62,14 +62,14 @@ export function CountdownTimer({ large = false }: { large?: boolean }) {
             >
               {String(u.value).padStart(2, "0")}
             </p>
-            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white/65 sm:text-xs">
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white sm:text-xs">
               {u.label}
             </p>
           </div>
           {i < units.length - 1 && (
             <span
               className={cn(
-                "hidden self-center pb-6 font-display text-white/35 sm:inline",
+                "hidden self-center pb-6 font-display text-white/70 sm:inline",
                 large ? "text-4xl md:text-5xl" : "text-2xl"
               )}
               aria-hidden

@@ -25,10 +25,10 @@
     --secondary: 231 100% 96%;
     --secondary-foreground: 234 66% 20%;
     --muted: 231 100% 96%;
-    --muted-foreground: 234 30% 40%;
+    --muted-foreground: 234 66% 20%;
     --accent: 231 99% 59%;
     --accent-foreground: 0 0% 100%;
-    --border: 231 40% 88%;
+    --border: 231 45% 78%;
     --input: 231 40% 94%;
     --ring: 231 99% 59%;
     --radius: 0.75rem;
@@ -83,10 +83,55 @@
   /* NYNJ editorial cards — always white + navy (readable on soft/navy/blue bands) */
   .glass,
   .glass-strong {
-    border: 1px solid rgba(16, 22, 79, 0.1);
+    border: 1px solid rgba(16, 22, 79, 0.14);
     background: #ffffff;
     color: #10164f;
     box-shadow: 0 18px 48px -24px rgba(16, 22, 79, 0.28);
+  }
+
+  /*
+    Legacy pages still use text-white on glass.
+    Remap those utilities to navy so content stays readable.
+    Keep white on solid brand fills (buttons/badges) and .on-media overlays.
+  */
+  .glass [class*="text-white"]:not([class*="bg-[#304FFE]"]):not([class*="bg-[#10164F]"]):not([class*="bg-[#B71D1C]"]):not([class*="bg-electric"]):not([class*="bg-pitch"]):not([class*="bg-maple"]),
+  .glass-strong [class*="text-white"]:not([class*="bg-[#304FFE]"]):not([class*="bg-[#10164F]"]):not([class*="bg-[#B71D1C]"]):not([class*="bg-electric"]):not([class*="bg-pitch"]):not([class*="bg-maple"]) {
+    color: #10164f !important;
+  }
+  .glass [class*="border-white"],
+  .glass-strong [class*="border-white"] {
+    border-color: rgba(16, 22, 79, 0.18) !important;
+  }
+  .glass [class*="bg-white/"],
+  .glass-strong [class*="bg-white/"] {
+    background-color: rgba(16, 22, 79, 0.07) !important;
+  }
+  .glass [class*="bg-[#304FFE]"][class*="text-white"],
+  .glass [class*="bg-[#10164F]"][class*="text-white"],
+  .glass [class*="bg-[#B71D1C]"][class*="text-white"],
+  .glass [class*="bg-electric"][class*="text-white"],
+  .glass [class*="bg-pitch"][class*="text-white"],
+  .glass-strong [class*="bg-[#304FFE]"][class*="text-white"],
+  .glass-strong [class*="bg-[#10164F]"][class*="text-white"],
+  .glass-strong [class*="bg-[#B71D1C]"][class*="text-white"],
+  .glass-strong [class*="bg-electric"][class*="text-white"],
+  .glass-strong [class*="bg-pitch"][class*="text-white"] {
+    color: #ffffff !important;
+  }
+  .on-media,
+  .on-media[class*="text-white"],
+  .on-media [class*="text-white"],
+  .glass .on-media [class*="text-white"],
+  .glass-strong .on-media [class*="text-white"] {
+    color: #ffffff !important;
+  }
+  .on-media [class*="border-white"],
+  .glass .on-media [class*="border-white"] {
+    border-color: rgba(255, 255, 255, 0.45) !important;
+  }
+  .on-media [class*="bg-white/"],
+  .glass .on-media [class*="bg-white/"] {
+    background-color: rgba(255, 255, 255, 0.16) !important;
   }
 
   .brand-gradient-text,
@@ -147,7 +192,7 @@
   }
   .force-dark .section-label,
   .section-band-dark .section-label {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.92);
   }
 
   .host-chip {

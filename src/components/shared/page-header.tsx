@@ -12,7 +12,7 @@ interface Props {
 export function PageHeader({ label, title, description }: Props) {
   return (
     <section
-      className="relative overflow-hidden border-b border-[#10164F]/10 pb-10 pt-28 sm:pt-32"
+      className="relative overflow-hidden border-b border-[#10164F]/18 pb-10 pt-28 sm:pt-32"
       style={{ backgroundColor: NYNJ.soft }}
     >
       <div className="pointer-events-none absolute inset-0 bg-grid-lines bg-[size:56px_56px] opacity-40 [mask-image:radial-gradient(60%_60%_at_50%_0%,black,transparent)]" />
@@ -22,7 +22,7 @@ export function PageHeader({ label, title, description }: Props) {
           {title}
         </h1>
         {description && (
-          <p className={cn("mt-3 max-w-2xl text-base text-[#10164F]/70 sm:mt-4 sm:text-lg")}>{description}</p>
+          <p className={cn("mt-3 max-w-2xl text-base text-[#10164F]/90 sm:mt-4 sm:text-lg")}>{description}</p>
         )}
       </div>
     </section>

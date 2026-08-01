@@ -69,8 +69,8 @@ export function PlayerCard({
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#10164F] via-transparent to-transparent" />
-          <span className="absolute right-4 top-4 font-display text-6xl leading-none text-white/20">
+          <div className="on-media absolute inset-0 bg-gradient-to-t from-[#10164F] via-transparent to-transparent" />
+          <span className="on-media absolute right-4 top-4 font-display text-6xl leading-none text-white/25">
             {player.number}
           </span>
           <img
@@ -79,7 +79,7 @@ export function PlayerCard({
             className="absolute left-4 top-4 h-6 w-9 rounded-sm object-cover ring-1 ring-white/30"
             loading="lazy"
           />
-          <div className="absolute bottom-3 left-4 flex gap-2" style={{ transform: "translateZ(30px)" }}>
+          <div className="on-media absolute bottom-3 left-4 flex gap-2" style={{ transform: "translateZ(30px)" }}>
             <Badge variant={posColor[player.position]}>{player.position}</Badge>
             <Badge variant="gold">WC26: {player.tournamentGoals}</Badge>
           </div>
@@ -91,10 +91,10 @@ export function PlayerCard({
               <div className="flex items-start justify-between gap-2">
                 <div>
                   <h3 className="font-heading text-2xl leading-none tracking-wide text-[#10164F]">{player.name}</h3>
-                  <p className="mt-1 text-sm text-[#10164F]/50">{player.club} · Age {player.age}</p>
+                  <p className="mt-1 text-sm text-[#10164F]/80">{player.club} · Age {player.age}</p>
                 </div>
               </div>
-              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#10164F]/60">{player.bio}</p>
+              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#10164F]/85">{player.bio}</p>
             </>
           ) : (
             <Link href={`/players/${player.id}`}>
@@ -103,14 +103,14 @@ export function PlayerCard({
                   <h3 className="font-heading text-2xl leading-none tracking-wide text-[#10164F] transition-colors hover:text-[#304FFE]">
                     {player.name}
                   </h3>
-                  <p className="mt-1 text-sm text-[#10164F]/50">{player.club} · Age {player.age}</p>
+                  <p className="mt-1 text-sm text-[#10164F]/80">{player.club} · Age {player.age}</p>
                 </div>
               </div>
-              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#10164F]/60">{player.bio}</p>
+              <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-[#10164F]/85">{player.bio}</p>
             </Link>
           )}
 
-          <div className="mt-4 grid grid-cols-4 gap-2 border-t border-[#10164F]/10 pt-4 text-center">
+          <div className="mt-4 grid grid-cols-4 gap-2 border-t border-[#10164F]/18 pt-4 text-center">
             <Stat label="Caps" value={player.appearances} />
             <Stat label="Int. G" value={player.goals} />
             <Stat label="WC G" value={player.worldCupGoals} />
@@ -126,7 +126,7 @@ function Stat({ label, value, accent }: { label: string; value: number; accent?:
   return (
     <div>
       <p className={`font-display text-xl leading-none ${accent ? "text-[#304FFE]" : "text-[#10164F]"}`}>{value}</p>
-      <p className="mt-1 text-[9px] uppercase tracking-widest text-[#10164F]/40">{label}</p>
+      <p className="mt-1 text-[9px] uppercase tracking-widest text-[#10164F]/90">{label}</p>
     </div>
   );
 }

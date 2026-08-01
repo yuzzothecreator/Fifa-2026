@@ -50,14 +50,14 @@ export function HostNations() {
               </div>
 
               <div className="relative z-10 mt-8">
-                <p className="text-[11px] font-black uppercase tracking-[0.35em] opacity-80">
+                <p className="text-[11px] font-black uppercase tracking-[0.35em]">
                   Host nation
                 </p>
                 <h3 className="mt-3 font-display text-5xl uppercase leading-none tracking-tight sm:text-6xl">
                   {h.country}
                 </h3>
-                <p className="mt-3 text-sm font-semibold opacity-80">{h.role}</p>
-                <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] opacity-90 transition-transform group-hover:translate-x-1">
+                <p className="mt-3 text-sm font-bold">{h.role}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] transition-transform group-hover:translate-x-1">
                   View team <ArrowRight className="h-3.5 w-3.5" />
                 </span>
               </div>

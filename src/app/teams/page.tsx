@@ -30,7 +30,7 @@ export default function TeamsPage() {
       <section className="container py-10">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
           <div className="relative w-full max-w-md">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#10164F]/75" />
             <Input
               placeholder="Search teams..."
               value={query}
@@ -46,8 +46,8 @@ export default function TeamsPage() {
                 className={cn(
                   "rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors",
                   continent === c
-                    ? "border-electric bg-electric/15 text-electric"
-                    : "border-border bg-foreground/5 text-foreground/70 hover:text-foreground"
+                    ? "border-[#304FFE] bg-[#304FFE] text-white"
+                    : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
                 )}
               >
                 {c}
@@ -56,7 +56,7 @@ export default function TeamsPage() {
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-muted-foreground">{filtered.length} teams</p>
+        <p className="mt-6 text-sm text-[#10164F]/75">{filtered.length} teams</p>
 
         {filtered.length === 0 ? (
           <div className="glass mt-6 rounded-2xl p-12 text-center text-white/60">No teams match your search.</div>

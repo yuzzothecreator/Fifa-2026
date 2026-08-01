@@ -65,8 +65,8 @@ export function NewsCard({
         >
           {article.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm text-[#10164F]/60">{article.description}</p>
-        <div className="mt-4 flex items-center justify-between text-xs text-[#10164F]/45">
+        <p className="mt-2 line-clamp-2 text-sm text-[#10164F]/85">{article.description}</p>
+        <div className="mt-4 flex items-center justify-between text-xs text-[#10164F]/75">
           <span className="flex items-center gap-3">
             <span>{date}</span>
             <span className="flex items-center gap-1">

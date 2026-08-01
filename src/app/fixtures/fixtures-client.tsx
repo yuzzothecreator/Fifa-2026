@@ -64,22 +64,24 @@ export default function FixturesClient() {
                 className={cn(
                   "rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition-colors",
                   status === f.key
-                    ? "border-electric bg-electric/15 text-electric"
-                    : "border-border bg-foreground/5 text-foreground/70 hover:text-foreground"
+                    ? "border-[#304FFE] bg-[#304FFE] text-white"
+                    : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
                 )}
               >
                 {f.label}
               </button>
             ))}
           </div>
-          <div className="flex gap-1 rounded-full border border-white/15 p-1">
+          <div className="flex gap-1 rounded-full border-2 border-[#10164F]/20 bg-[#EAEDFF] p-1">
             {viewModes.map((v) => (
               <button
                 key={v}
                 onClick={() => setView(v)}
                 className={cn(
-                  "rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider",
-                  view === v ? "bg-white text-black" : "text-white/55 hover:text-white"
+                  "rounded-full px-4 py-1.5 text-[11px] font-black uppercase tracking-wider transition-colors",
+                  view === v
+                    ? "bg-[#304FFE] text-white shadow-sm"
+                    : "text-[#10164F] hover:bg-white hover:text-[#304FFE]"
                 )}
               >
                 {v === "wall" ? "Results wall" : "Cards"}
@@ -96,8 +98,8 @@ export default function FixturesClient() {
               className={cn(
                 "rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-colors",
                 stage === s
-                  ? "border-pitch bg-pitch/15 text-pitch"
-                  : "border-border bg-foreground/5 text-foreground/60 hover:text-foreground"
+                  ? "border-[#10164F] bg-[#10164F] text-white"
+                  : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
               )}
             >
               {s}
@@ -110,7 +112,7 @@ export default function FixturesClient() {
             onClick={() => setGroup("All")}
             className={cn(
               "rounded-lg border px-3 py-1 text-xs font-semibold",
-              group === "All" ? "border-gold bg-gold/15 text-gold" : "border-border text-foreground/60"
+              group === "All" ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
             )}
           >
             All groups
@@ -121,7 +123,7 @@ export default function FixturesClient() {
               onClick={() => setGroup(g)}
               className={cn(
                 "h-8 w-8 rounded-lg border font-display text-sm",
-                group === g ? "border-gold bg-gold/15 text-gold" : "border-border text-foreground/60"
+                group === g ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
               )}
             >
               {g}
@@ -139,7 +141,7 @@ export default function FixturesClient() {
                   <div className="mb-4 flex items-center gap-4">
                     <h2 className="font-heading text-2xl tracking-wide text-foreground">{day}</h2>
                     <span className="h-px flex-1 bg-gradient-to-r from-electric/40 to-transparent" />
-                    <span className="text-sm text-muted-foreground">{dayMatches.length} matches</span>
+                    <span className="text-sm text-[#10164F]/75">{dayMatches.length} matches</span>
                   </div>
                   <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                     {dayMatches.map((m, i) => (

@@ -9,13 +9,13 @@ export function TotalGoalsChart() {
   const highlight = worldCupGoalsHistory.find((d) => d.highlight);
 
   return (
-    <div className="overflow-hidden rounded-3xl border border-[#10164F]/10 bg-white shadow-[0_24px_60px_-28px_rgba(16,22,79,0.35)]">
+    <div className="overflow-hidden rounded-3xl border border-[#10164F]/18 bg-white shadow-[0_24px_60px_-28px_rgba(16,22,79,0.35)]">
       <div
-        className="flex flex-wrap items-center justify-between gap-4 border-b border-[#10164F]/10 px-5 py-5 sm:px-8"
+        className="flex flex-wrap items-center justify-between gap-4 border-b border-[#10164F]/18 px-5 py-5 sm:px-8"
         style={{ backgroundColor: NYNJ.navy }}
       >
         <div>
-          <p className="text-[11px] font-black uppercase tracking-[0.35em] text-white/70">
+          <p className="text-[11px] font-black uppercase tracking-[0.35em] text-white">
             At every FIFA World Cup™
           </p>
           <p className="mt-2 font-display text-2xl uppercase leading-none tracking-tight text-white sm:text-3xl">
@@ -62,7 +62,7 @@ export function TotalGoalsChart() {
                   <span
                     className={cn(
                       "text-[9px] font-bold tabular-nums sm:text-[11px]",
-                      d.highlight ? "text-[#304FFE]" : "text-[#10164F]/55"
+                      d.highlight ? "text-[#304FFE]" : "text-[#10164F]/75"
                     )}
                   >
                     {d.year}
@@ -73,8 +73,8 @@ export function TotalGoalsChart() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#10164F]/10 pt-5">
-          <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-wider text-[#10164F]/60">
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#10164F]/18 pt-5">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-black uppercase tracking-wider text-[#10164F]/80">
             <span className="inline-flex items-center gap-2">
               <span className="h-3 w-3 rounded-sm bg-[#10164F]" /> Past editions
             </span>

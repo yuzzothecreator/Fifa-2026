@@ -36,7 +36,7 @@ export function SectionHeading({
         <span
           className={cn(
             "text-[11px] font-bold uppercase tracking-[0.4em]",
-            light ? "text-white/70" : "text-[#304FFE]"
+            light ? "text-white" : "text-[#304FFE]"
           )}
         >
           {label}
@@ -53,8 +53,8 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            "max-w-xl text-base leading-relaxed sm:text-lg",
-            light ? "text-white/70" : "text-[#10164F]/70",
+            "max-w-xl text-base font-medium leading-relaxed sm:text-lg",
+            light ? "text-white/90" : "text-[#10164F]/80",
             align === "center" && "mx-auto"
           )}
         >

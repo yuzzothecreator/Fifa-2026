@@ -44,16 +44,16 @@ export default function KnockoutPage() {
           );
         })}
 
-        <div className="pitch-panel relative overflow-hidden rounded-3xl border border-pitch/30 p-8 md:p-12">
+        <div className="pitch-panel relative overflow-hidden rounded-3xl border border-[#304FFE] p-8 md:p-12">
           <div className="spectrum-bar absolute inset-x-0 top-0 h-1" />
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-pitch">The Final</p>
+          <p className="text-xs font-black uppercase tracking-[0.3em] text-white">The Final</p>
           <h3 className="mt-3 font-display text-4xl uppercase leading-none text-white md:text-6xl">
             New York New Jersey Stadium
           </h3>
-          <p className="mt-3 max-w-xl text-white/60">
+          <p className="mt-3 max-w-xl text-base font-medium text-white/95">
             MetLife Stadium · East Rutherford · 19 July 2026 — confirmed by FIFA as the showpiece venue of the biggest World Cup in history.
           </p>
-          <Link href="/matches/m104" className="mt-6 inline-flex text-sm font-semibold text-electric hover:underline">
+          <Link href="/matches/m104" className="mt-6 inline-flex text-sm font-black text-white underline-offset-4 hover:underline">
             View final fixture →
           </Link>
         </div>

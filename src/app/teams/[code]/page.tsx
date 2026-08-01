@@ -41,14 +41,13 @@ export default function TeamDetailPage({ params }: { params: { code: string } })
 
   return (
     <div className="pb-16 pt-28">
-      <section className="force-dark relative overflow-hidden border-b border-white/10">
+      <section className="relative overflow-hidden border-b border-[#10164F]/15 bg-[#EAEDFF]">
         <div
-          className="absolute inset-0 opacity-40"
+          className="pointer-events-none absolute inset-0 opacity-50"
           style={{
-            background: `radial-gradient(60% 80% at 20% 0%, rgba(48,79,253,0.25), transparent 60%), linear-gradient(180deg,#FFFFFF,#FFFFFF)`,
+            background: `radial-gradient(60% 80% at 20% 0%, rgba(48,79,254,0.22), transparent 60%)`,
           }}
         />
-        <div className="stadium-lights pointer-events-none absolute inset-0 opacity-50" />
         <div className="container relative py-12">
           <Button asChild variant="ghost" size="sm" className="mb-6">
             <Link href="/teams"><ArrowLeft className="h-4 w-4" /> All teams</Link>
@@ -57,11 +56,11 @@ export default function TeamDetailPage({ params }: { params: { code: string } })
             <img
               src={flagUrl(team.code, "w320")}
               alt={`${team.country} flag`}
-              className="h-24 w-36 rounded-2xl object-cover ring-2 ring-white/20 shadow-neon"
+              className="h-24 w-36 rounded-2xl object-cover ring-2 ring-[#10164F]/20 shadow-neon"
             />
             <div className="flex-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-electric">Group {team.group}</p>
-              <h1 className="mt-2 font-display text-5xl uppercase leading-none tracking-tight text-white sm:text-7xl">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#304FFE]">Group {team.group}</p>
+              <h1 className="mt-2 font-display text-5xl uppercase leading-none tracking-tight text-[#10164F] sm:text-7xl">
                 {team.country}
               </h1>
               <div className="mt-4 flex flex-wrap gap-2">
@@ -72,8 +71,8 @@ export default function TeamDetailPage({ params }: { params: { code: string } })
               </div>
             </div>
             <div className="glass rounded-2xl p-5 text-center">
-              <p className="text-xs uppercase tracking-widest text-white/45">Head Coach</p>
-              <p className="mt-1 font-heading text-2xl tracking-wide text-white">{team.coach}</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#10164F]/80">Head Coach</p>
+              <p className="mt-1 font-heading text-2xl tracking-wide text-[#10164F]">{team.coach}</p>
             </div>
           </div>
         </div>
@@ -143,10 +142,10 @@ export default function TeamDetailPage({ params }: { params: { code: string } })
                 <li
                   key={s.code}
                   className={`flex items-center gap-2 rounded-xl px-2 py-2 text-sm ${
-                    s.code === team.code ? "bg-electric/15 text-electric" : "text-white/70"
+                    s.code === team.code ? "bg-[#304FFE] text-white" : "text-[#10164F]"
                   }`}
                 >
-                  <span className="w-5 text-white/30">{i + 1}</span>
+                  <span className={`w-5 ${s.code === team.code ? "text-white/80" : "text-[#10164F]/70"}`}>{i + 1}</span>
                   <img src={flagUrl(s.code, "w40")} alt="" className="h-3.5 w-5 rounded-sm object-cover" />
                   <span className="flex-1 truncate">{s.country}</span>
                   <span className="font-semibold">{s.points}</span>

@@ -233,8 +233,8 @@ export default function HomePage() {
               </Link>
             </Button>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-[#10164F]/10 bg-white lg:col-span-7">
-            <div className="grid grid-cols-[auto_1fr_repeat(4,minmax(0,2.5rem))] gap-2 border-b border-[#10164F]/10 bg-[#EAEDFF] px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-[#10164F]/55 sm:px-6">
+          <div className="overflow-hidden rounded-3xl border border-[#10164F]/18 bg-white lg:col-span-7">
+            <div className="grid grid-cols-[auto_1fr_repeat(4,minmax(0,2.5rem))] gap-2 border-b border-[#10164F]/18 bg-[#EAEDFF] px-4 py-3 text-[10px] font-bold uppercase tracking-wider text-[#10164F]/80 sm:px-6">
               <span>#</span>
               <span>Team</span>
               <span className="text-center">P</span>
@@ -248,7 +248,7 @@ export default function HomePage() {
                   key={row.code}
                   className="grid grid-cols-[auto_1fr_repeat(4,minmax(0,2.5rem))] items-center gap-2 border-b border-[#10164F]/08 px-4 py-3 last:border-0 sm:px-6"
                 >
-                  <span className="w-5 font-display text-lg text-[#10164F]/35">{i + 1}</span>
+                  <span className="w-5 font-display text-lg text-[#10164F]/80">{i + 1}</span>
                   <Link href={`/teams/${row.code}`} className="flex min-w-0 items-center gap-2.5">
                     <img
                       src={flagUrl(row.code, "w40")}
@@ -259,10 +259,10 @@ export default function HomePage() {
                       {row.country}
                     </span>
                   </Link>
-                  <span className="text-center text-sm text-[#10164F]/70">{row.played}</span>
-                  <span className="text-center text-sm text-[#10164F]/70">{row.gd}</span>
+                  <span className="text-center text-sm text-[#10164F]/90">{row.played}</span>
+                  <span className="text-center text-sm text-[#10164F]/90">{row.gd}</span>
                   <span className="text-center font-display text-xl text-[#304FFE]">{row.points}</span>
-                  <span className="text-center text-sm text-[#10164F]/70">{row.gf}</span>
+                  <span className="text-center text-sm text-[#10164F]/90">{row.gf}</span>
                 </li>
               ))}
             </ul>
@@ -274,11 +274,11 @@ export default function HomePage() {
       <SectionBand tone="blue" waves className="chapter-pad">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/70">Fantasy</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-white">Fantasy</p>
             <h2 className="mt-4 font-display text-[clamp(2.5rem,8vw,5rem)] uppercase leading-[0.9] tracking-tight text-white">
               Build your Fantasy XI
             </h2>
-            <p className="mx-auto mt-6 max-w-lg text-white/75">
+            <p className="mx-auto mt-6 max-w-lg text-base font-medium text-white/95">
               Craft an 11-player squad with real WC 2026 form — Messi, Mbappé, Haaland and more.
             </p>
           </div>
@@ -353,7 +353,7 @@ export default function HomePage() {
           <h2 className="mx-auto mt-6 max-w-3xl font-display text-[clamp(2.5rem,8vw,5.5rem)] uppercase leading-[0.9] tracking-tight text-white">
             Never miss a World Cup moment
           </h2>
-          <p className="mx-auto mt-6 max-w-lg text-white/70">
+          <p className="mx-auto mt-6 max-w-lg text-base font-medium text-white/95">
             Favourite teams, set reminders, climb the fan leaderboard and build your Fantasy XI.
           </p>
           <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-3">
@@ -364,11 +364,11 @@ export default function HomePage() {
             ].map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-3xl border border-white/15 bg-white/10 px-5 py-6 text-left backdrop-blur-sm"
+                className="rounded-3xl border-2 border-white/35 bg-white/15 px-5 py-6 text-left backdrop-blur-sm"
               >
-                <Icon className="h-6 w-6 text-[#304FFE]" />
+                <Icon className="h-6 w-6 text-white" />
                 <h3 className="mt-4 font-heading text-xl tracking-wide text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/65">{body}</p>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-white/90">{body}</p>
               </div>
             ))}
           </div>

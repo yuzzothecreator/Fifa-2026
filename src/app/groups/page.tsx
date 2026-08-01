@@ -31,8 +31,8 @@ export default function GroupsPage() {
               className={cn(
                 "flex h-11 w-11 items-center justify-center rounded-xl border font-display text-xl transition-colors",
                 active === g
-                  ? "border-electric bg-electric/15 text-electric shadow-neon"
-                  : "border-border bg-foreground/5 text-foreground/70 hover:text-foreground"
+                  ? "border-[#304FFE] bg-[#304FFE] text-white shadow-neon"
+                  : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
               )}
             >
               {g}

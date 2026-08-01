@@ -40,13 +40,13 @@ export function ResultPill({ match }: { match: Match }) {
         {finished ? (
           <>
             <span className="font-display text-lg tracking-wide text-[#10164F]">
-              {pens && <span className="mr-1 text-[10px] text-[#10164F]/45">({pens.home})</span>}
+              {pens && <span className="mr-1 text-[10px] text-[#10164F]/75">({pens.home})</span>}
               {match.homeScore ?? 0}
               <span className="mx-1 text-[#10164F]/30">-</span>
               {match.awayScore ?? 0}
-              {pens && <span className="ml-1 text-[10px] text-[#10164F]/45">({pens.away})</span>}
+              {pens && <span className="ml-1 text-[10px] text-[#10164F]/75">({pens.away})</span>}
             </span>
-            {aet && <span className="mt-0.5 text-[8px] uppercase tracking-widest text-[#10164F]/45">AET</span>}
+            {aet && <span className="mt-0.5 text-[8px] uppercase tracking-widest text-[#10164F]/75">AET</span>}
           </>
         ) : scheduled ? (
           <span className="font-display text-sm text-[#304FFE]">vs</span>
@@ -70,7 +70,7 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
   const grid = finished.filter((m) => !finals.includes(m));
 
   return (
-    <div className="force-dark space-y-8">
+    <div className="space-y-8">
       <div className="text-center">
         <div className="spectrum-bar mx-auto mb-4 h-1 w-40 rounded-full" />
         <div className="flex items-center justify-center gap-3">
@@ -79,11 +79,11 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
             alt=""
             className="h-10 w-[4.5rem] object-contain"
           />
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
+          <p className="text-xs font-black uppercase tracking-[0.35em] text-[#304FFE]">
             FIFA World Cup 2026™
           </p>
         </div>
-        <h2 className="mt-3 font-display text-5xl uppercase leading-none tracking-tight text-white sm:text-7xl">
+        <h2 className="mt-3 font-display text-5xl uppercase leading-none tracking-tight text-[#10164F] sm:text-7xl">
           Results
         </h2>
       </div>
@@ -100,14 +100,16 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
             <div
               key={m.id}
               className={cn(
-                "rounded-2xl border px-4 py-3",
-                m.stage === "Final" ? "border-gold/60 bg-gold/5" : "border-white/25 bg-white/5"
+                "rounded-2xl border-2 px-4 py-3",
+                m.stage === "Final"
+                  ? "border-[#B71D1C]/40 bg-[#EAEDFF]"
+                  : "border-[#10164F]/20 bg-white"
               )}
             >
               <p
                 className={cn(
-                  "mb-2 text-center text-[10px] font-bold uppercase tracking-[0.3em]",
-                  m.stage === "Final" ? "text-gold" : "text-white/60"
+                  "mb-2 text-center text-[10px] font-black uppercase tracking-[0.3em]",
+                  m.stage === "Final" ? "text-[#B71D1C]" : "text-[#10164F]"
                 )}
               >
                 {m.stage === "Final" ? "The Final" : "Bronze Final"}
@@ -119,7 +121,9 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
       )}
 
       {finished.length === 0 && (
-        <p className="text-center text-white/50">No finished matches yet — switch filters or check Upcoming.</p>
+        <p className="text-center font-semibold text-[#10164F]/80">
+          No finished matches yet — switch filters or check Upcoming.
+        </p>
       )}
     </div>
   );

@@ -18,14 +18,14 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
 
   const Flag = ({ code, country }: { code: string; country: string }) =>
     code === "tbd" ? (
-      <div className="flex h-10 w-14 items-center justify-center rounded-md bg-[#EAEDFF] text-[10px] font-semibold text-[#10164F]/50 sm:h-14 sm:w-20 sm:text-xs">
+      <div className="flex h-10 w-14 items-center justify-center rounded-md bg-[#EAEDFF] text-[10px] font-semibold text-[#10164F]/80 sm:h-14 sm:w-20 sm:text-xs">
         TBD
       </div>
     ) : (
       <img
         src={flagUrl(code, "w160")}
         alt={country}
-        className="h-10 w-14 rounded-md object-cover ring-1 ring-[#10164F]/15 sm:h-14 sm:w-20"
+        className="h-10 w-14 rounded-md object-cover ring-1 ring-[#10164F]/25 sm:h-14 sm:w-20"
         loading="lazy"
       />
     );
@@ -62,7 +62,7 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
               "flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-colors",
               reminded
                 ? "border-[#304FFE] bg-[#EAEDFF] text-[#304FFE]"
-                : "border-[#10164F]/15 text-[#10164F]/55 hover:text-[#10164F]"
+                : "border-[#10164F]/22 text-[#10164F]/80 hover:text-[#10164F]"
             )}
           >
             <Bell className={cn("h-3 w-3", reminded && "fill-[#304FFE]")} />
@@ -89,7 +89,7 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
           ) : (
             <div className="font-display text-xl text-[#304FFE] sm:text-2xl">VS</div>
           )}
-          <span className="mt-1 text-[10px] uppercase tracking-widest text-[#10164F]/40">{d.time}</span>
+          <span className="mt-1 text-[10px] uppercase tracking-widest text-[#10164F]/90">{d.time}</span>
         </div>
 
         <div className="flex min-w-0 flex-col items-center gap-1.5 text-center sm:gap-2">
@@ -106,14 +106,14 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
         </p>
       )}
 
-      <div className="mt-4 flex flex-col gap-2 border-t border-[#10164F]/10 pt-4 text-xs text-[#10164F]/55 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-4 flex flex-col gap-2 border-t border-[#10164F]/18 pt-4 text-xs text-[#10164F]/80 sm:flex-row sm:items-center sm:justify-between">
         <span className="flex min-w-0 items-center gap-1.5">
           <MapPin className="h-3.5 w-3.5 shrink-0 text-[#304FFE]" />
           <span className="truncate">
             {match.stadium}, {match.city}
           </span>
         </span>
-        <span className="shrink-0 font-semibold text-[#10164F]/70">
+        <span className="shrink-0 font-semibold text-[#10164F]/90">
           {d.weekday} {d.day} {d.month}
         </span>
       </div>

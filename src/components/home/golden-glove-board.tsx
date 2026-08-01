@@ -24,7 +24,7 @@ export function GoldenGloveBoard() {
         <p className="section-label">
           <Hand className="h-3.5 w-3.5" /> Adidas Golden Glove
         </p>
-        <p className="font-mono text-sm tracking-widest text-[#10164F]/55">2010–2026</p>
+        <p className="font-mono text-sm tracking-widest text-[#10164F]/80">2010–2026</p>
       </div>
 
       <div className={cn("spectrum-frame mb-4")}>
@@ -48,10 +48,10 @@ export function GoldenGloveBoard() {
                 <img
                   src={flagUrl(hero.code, "w80")}
                   alt={hero.country}
-                  className="h-8 w-12 rounded-md object-cover ring-2 ring-[#10164F]/15"
+                  className="h-8 w-12 rounded-md object-cover ring-2 ring-[#10164F]/25"
                 />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#10164F]/55">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#10164F]/80">
                 Best Goalkeeper · {hero.country}
               </p>
             </div>

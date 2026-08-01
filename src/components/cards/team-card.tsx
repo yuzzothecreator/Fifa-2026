@@ -31,14 +31,14 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
           <img
             src={flagUrl(team.code, "w160")}
             alt={`${team.country} flag`}
-            className="h-12 w-16 rounded-md object-cover ring-1 ring-[#10164F]/15"
+            className="h-12 w-16 rounded-md object-cover ring-1 ring-[#10164F]/25"
             loading="lazy"
           />
           <div>
             <h3 className="font-heading text-2xl leading-none tracking-wide text-[#10164F] transition-colors group-hover:text-[#304FFE]">
               {team.country}
             </h3>
-            <p className="text-xs uppercase tracking-widest text-[#10164F]/45">Group {team.group}</p>
+            <p className="text-xs uppercase tracking-widest text-[#10164F]/75">Group {team.group}</p>
           </div>
         </Link>
         <button
@@ -52,7 +52,7 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
             "flex h-9 w-9 items-center justify-center rounded-full border transition-all",
             fav
               ? "border-[#B71D1C]/40 bg-[#B71D1C]/10 text-[#B71D1C]"
-              : "border-[#10164F]/15 bg-[#EAEDFF] text-[#10164F]/45 hover:text-[#10164F]"
+              : "border-[#10164F]/22 bg-[#EAEDFF] text-[#10164F]/75 hover:text-[#10164F]"
           )}
         >
           <Heart className={cn("h-4 w-4", fav && "fill-[#B71D1C]")} />
@@ -68,18 +68,18 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
           {(team.titles ?? 0) > 0 && <Badge variant="pitch">{team.titles}× champions</Badge>}
         </div>
 
-        <div className="mt-4 space-y-1 border-t border-[#10164F]/10 pt-4">
-          <p className="text-xs uppercase tracking-widest text-[#10164F]/40">Head Coach</p>
+        <div className="mt-4 space-y-1 border-t border-[#10164F]/18 pt-4">
+          <p className="text-xs uppercase tracking-widest text-[#10164F]/90">Head Coach</p>
           <p className="text-sm font-medium text-[#10164F]">{team.coach}</p>
         </div>
 
         <div className="mt-3">
-          <p className="text-xs uppercase tracking-widest text-[#10164F]/40">Squad Preview</p>
+          <p className="text-xs uppercase tracking-widest text-[#10164F]/90">Squad Preview</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {team.squadPreview.map((p) => (
               <span
                 key={p}
-                className="rounded-full bg-[#EAEDFF] px-2.5 py-1 text-xs text-[#10164F]/70"
+                className="rounded-full bg-[#EAEDFF] px-2.5 py-1 text-xs text-[#10164F]/90"
               >
                 {p}
               </span>

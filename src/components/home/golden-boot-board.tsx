@@ -26,27 +26,27 @@ export function GoldenBootBoard() {
           <li key={p.id}>
             <Link
               href={`/players/${p.id}`}
-              className="flex items-center gap-3 rounded-2xl border border-[#10164F]/10 px-3 py-3 transition-colors hover:border-[#304FFE]/40 hover:bg-[#EAEDFF]"
+              className="flex items-center gap-3 rounded-2xl border border-[#10164F]/18 px-3 py-3 transition-colors hover:border-[#304FFE]/40 hover:bg-[#EAEDFF]"
             >
               <span
-                className={`w-7 font-display text-2xl ${i === 0 ? "text-[#304FFE]" : "text-[#10164F]/25"}`}
+                className={`w-7 font-display text-2xl ${i === 0 ? "text-[#304FFE]" : "text-[#10164F]/80"}`}
               >
                 {i + 1}
               </span>
               <img
                 src={flagUrl(p.code, "w40")}
                 alt=""
-                className="h-5 w-7 rounded-sm object-cover ring-1 ring-[#10164F]/15"
+                className="h-5 w-7 rounded-sm object-cover ring-1 ring-[#10164F]/25"
               />
               <div className="min-w-0 flex-1">
                 <p className="truncate font-heading text-lg tracking-wide text-[#10164F]">{p.name}</p>
-                <p className="text-xs text-[#10164F]/45">
+                <p className="text-xs font-semibold text-[#10164F]/90">
                   {p.country} · {p.club}
                 </p>
               </div>
               <div className="text-right">
                 <p className="font-display text-3xl leading-none text-[#10164F]">{p.tournamentGoals}</p>
-                <p className="text-[10px] uppercase tracking-widest text-[#10164F]/40">goals</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-[#10164F]/85">goals</p>
               </div>
             </Link>
           </li>

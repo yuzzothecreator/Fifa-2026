@@ -28,8 +28,8 @@ export function StadiumCard({ stadium, index = 0 }: { stadium: Stadium; index?: 
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#10164F] via-[#10164F]/40 to-transparent" />
-          <div className="absolute bottom-4 left-5 right-5" style={{ transform: "translateZ(40px)" }}>
-            <p className="text-xs uppercase tracking-widest text-white/70">{stadium.localName}</p>
+          <div className="on-media absolute bottom-4 left-5 right-5" style={{ transform: "translateZ(40px)" }}>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/90">{stadium.localName}</p>
             <h3 className="font-display text-3xl uppercase leading-none tracking-tight text-white">
               {stadium.name}
             </h3>
@@ -37,16 +37,16 @@ export function StadiumCard({ stadium, index = 0 }: { stadium: Stadium; index?: 
         </div>
         <div className="space-y-2 p-5">
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm text-[#10164F]/70">
+            <span className="flex items-center gap-2 text-sm font-semibold text-[#10164F]">
               <MapPin className="h-4 w-4 text-[#304FFE]" />
               {stadium.city}, {stadium.country}
             </span>
-            <span className="flex items-center gap-2 text-sm font-semibold text-[#10164F]">
+            <span className="flex items-center gap-2 text-sm font-black text-[#10164F]">
               <Users className="h-4 w-4 text-[#B71D1C]" />
               {stadium.capacity.toLocaleString()}
             </span>
           </div>
-          <div className="flex items-center justify-between text-xs text-[#10164F]/45">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#10164F]/75">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" /> Opened {stadium.opened}
             </span>

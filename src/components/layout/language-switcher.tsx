@@ -38,7 +38,7 @@ export function LanguageSwitcher() {
         <span>{activeLabel}</span>
       </button>
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-2xl border-2 border-[#10164F]/15 bg-white p-1.5 shadow-[0_18px_48px_-16px_rgba(16,22,79,0.45)]">
+        <div className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-2xl border-2 border-[#10164F]/22 bg-white p-1.5 shadow-[0_18px_48px_-16px_rgba(16,22,79,0.45)]">
           {languages.map((l) => (
             <button
               key={l.code}

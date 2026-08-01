@@ -43,7 +43,7 @@ export default function MatchDetailPage({ params }: { params: { id: string } }) 
         )}
         <div className="stadium-lights pointer-events-none absolute inset-0" />
         <div className="container relative py-12">
-          <Button asChild variant="ghost" size="sm" className="mb-8">
+          <Button asChild variant="ghost" size="sm" className="mb-8 text-white hover:bg-white/15 hover:text-white">
             <Link href="/fixtures"><ArrowLeft className="h-4 w-4" /> Fixtures</Link>
           </Button>
 

@@ -13,8 +13,8 @@ const buttonVariants = cva(
         gold: "bg-white text-[#10164F] hover:bg-[#EAEDFF]",
         outline:
           "border-2 border-[#10164F] bg-transparent text-[#10164F] hover:bg-[#10164F] hover:text-white",
-        ghost: "text-[#10164F]/80 hover:bg-[#EAEDFF] hover:text-[#10164F]",
-        secondary: "bg-[#EAEDFF] text-[#10164F] hover:bg-[#304FFE] hover:text-white",
+        ghost: "font-bold text-[#10164F] hover:bg-[#EAEDFF] hover:text-[#10164F]",
+        secondary: "bg-[#EAEDFF] font-black text-[#10164F] hover:bg-[#304FFE] hover:text-white",
       },
       size: {
         default: "h-12 px-6 py-2",

@@ -17,7 +17,7 @@ export function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="border-b-2 border-[#10164F]/15 bg-white py-3 shadow-[0_12px_40px_-20px_rgba(16,22,79,0.35)]">
+      <div className="border-b-2 border-[#10164F]/22 bg-white py-3 shadow-[0_12px_40px_-20px_rgba(16,22,79,0.35)]">
         <div className="container flex items-center justify-between gap-4">
           <Logo />
 
@@ -67,7 +67,7 @@ export function Navbar() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
-              className="container mt-2 grid grid-cols-2 gap-1 rounded-2xl border-2 border-[#10164F]/15 bg-white p-3 lg:hidden"
+              className="container mt-2 grid grid-cols-2 gap-1 rounded-2xl border-2 border-[#10164F]/22 bg-white p-3 lg:hidden"
             >
               {navLinks.map((link) => (
                 <Link

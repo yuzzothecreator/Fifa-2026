@@ -26,7 +26,7 @@ interface Props {
 
 const accentMap = {
   electric: { text: "text-[#304FFE]", ring: "shadow-neon", bg: "bg-[#EAEDFF]", border: "border-[#304FFE]/20" },
-  pitch: { text: "text-[#10164F]", ring: "shadow-neon", bg: "bg-[#EAEDFF]", border: "border-[#10164F]/15" },
+  pitch: { text: "text-[#10164F]", ring: "shadow-neon", bg: "bg-[#EAEDFF]", border: "border-[#10164F]/22" },
   gold: { text: "text-white", ring: "shadow-gold", bg: "bg-[#10164F]", border: "border-[#10164F]/20" },
   maple: { text: "text-white", ring: "shadow-neon", bg: "bg-[#B71D1C]", border: "border-[#B71D1C]/30" },
 };
@@ -45,7 +45,7 @@ export function StatsCard({ icon, label, value, suffix, accent = "electric" }: P
       <div className="font-display text-5xl leading-none text-[#10164F]">
         <AnimatedCounter to={value} suffix={suffix} />
       </div>
-      <p className="mt-2 text-sm uppercase tracking-widest text-[#10164F]/50">{label}</p>
+      <p className="mt-2 text-sm uppercase tracking-widest text-[#10164F]/80">{label}</p>
       <div className={cn("pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full blur-2xl opacity-60", a.bg)} />
     </motion.div>
   );

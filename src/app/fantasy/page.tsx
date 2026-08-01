@@ -93,10 +93,10 @@ export default function FantasyPage() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="rounded-2xl border border-[#10164F]/10 bg-white p-5 text-center shadow-[0_18px_48px_-24px_rgba(16,22,79,0.28)]"
+              className="rounded-2xl border border-[#10164F]/18 bg-white p-5 text-center shadow-[0_18px_48px_-24px_rgba(16,22,79,0.28)]"
             >
               <p className="font-display text-4xl text-[#10164F]">{s.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-widest text-[#10164F]/50">{s.label}</p>
+              <p className="mt-1 text-xs uppercase tracking-widest text-[#10164F]/80">{s.label}</p>
             </div>
           ))}
         </div>
@@ -119,14 +119,14 @@ export default function FantasyPage() {
               style={{ backgroundColor: NYNJ.blue }}
             />
             <div className="relative space-y-6">
-              <p className="text-center text-[11px] font-bold uppercase tracking-[0.35em] text-white/70">
+              <p className="text-center text-[11px] font-black uppercase tracking-[0.35em] text-white">
                 Your pitch · 1–3–3–4
               </p>
               {SLOTS.map((slot) => {
                 const picked = squad.filter((p) => p.position === slot.key);
                 return (
                   <div key={slot.key}>
-                    <p className="mb-2 text-center text-[10px] uppercase tracking-[0.25em] text-white/60">
+                    <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.25em] text-white/90">
                       {slot.label} ({picked.length}/{slot.count})
                     </p>
                     <div className="flex flex-wrap justify-center gap-2">
@@ -140,8 +140,8 @@ export default function FantasyPage() {
                             className={cn(
                               "flex h-20 w-20 flex-col items-center justify-center rounded-2xl border text-center transition-colors",
                               player
-                                ? "border-white/40 bg-[#304FFE] text-white shadow-lg"
-                                : "border-dashed border-white/35 bg-white/10 text-white/50 hover:border-white/60 hover:bg-white/15"
+                                ? "border-white/50 bg-[#304FFE] text-white shadow-lg"
+                                : "border-dashed border-white/50 bg-white/15 text-white/80 hover:border-white hover:bg-white/25"
                             )}
                           >
                             {player ? (
@@ -208,7 +208,7 @@ export default function FantasyPage() {
                       "rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors",
                       filter === pos
                         ? "border-[#304FFE] bg-[#304FFE] text-white"
-                        : "border-[#10164F]/15 bg-white text-[#10164F]/70 hover:border-[#304FFE]/40"
+                        : "border-[#10164F]/22 bg-white text-[#10164F]/90 hover:border-[#304FFE]/40"
                     )}
                   >
                     {pos}

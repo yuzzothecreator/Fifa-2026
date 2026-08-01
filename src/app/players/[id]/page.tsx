@@ -46,7 +46,7 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
           <div className="absolute inset-0 bg-gradient-to-b from-midnight/80 via-navy/90 to-midnight" />
         </div>
         <div className="container relative py-8 sm:py-12">
-          <Button asChild variant="ghost" size="sm" className="mb-6">
+          <Button asChild variant="ghost" size="sm" className="mb-6 text-white hover:bg-white/15 hover:text-white">
             <Link href="/players"><ArrowLeft className="h-4 w-4" /> All players</Link>
           </Button>
           <div className="grid items-end gap-6 sm:gap-8 lg:grid-cols-[280px_1fr]">
@@ -68,13 +68,13 @@ export default function PlayerDetailPage({ params }: { params: { id: string } })
               <h1 className="mt-4 font-display text-4xl uppercase leading-none tracking-tight text-white sm:text-5xl lg:text-7xl">
                 {player.name}
               </h1>
-              <div className="mt-4 flex flex-wrap items-center gap-3 text-white/70">
+              <div className="mt-4 flex flex-wrap items-center gap-3 text-white/95">
                 <img src={flagUrl(player.code, "w80")} alt="" className="h-6 w-9 rounded object-cover" />
                 <span className="font-heading text-2xl tracking-wide text-white">{player.country}</span>
                 <span className="text-white/30">·</span>
                 <span className="flex items-center gap-1.5"><Shirt className="h-4 w-4 text-electric" /> {player.club}</span>
               </div>
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65">{player.bio}</p>
+              <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-white/95">{player.bio}</p>
               {team && (
                 <Button asChild variant="outline" className="mt-6">
                   <Link href={`/teams/${team.code}`}>View {team.country} squad</Link>

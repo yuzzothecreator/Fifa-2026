@@ -42,7 +42,7 @@ export default function AdminPage() {
                   onClick={() => setTab(t.key)}
                   className={cn(
                     "flex items-center gap-3 whitespace-nowrap rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                    tab === t.key ? "bg-electric/15 text-electric" : "text-white/60 hover:bg-white/5 hover:text-white"
+                    tab === t.key ? "bg-[#304FFE] text-white" : "text-white/60 hover:bg-white/5 hover:text-white"
                   )}
                 >
                   <t.icon className="h-4 w-4" /> {t.label}

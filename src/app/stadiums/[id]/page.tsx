@@ -38,18 +38,18 @@ export default function StadiumDetailPage({ params }: { params: { id: string } }
         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/60 to-midnight/30" />
         <div className="stadium-lights pointer-events-none absolute inset-0" />
         <div className="container relative flex h-full min-h-[60vh] flex-col justify-end py-12">
-          <Button asChild variant="ghost" size="sm" className="mb-auto w-fit">
+          <Button asChild variant="ghost" size="sm" className="mb-auto w-fit text-white hover:bg-white/15 hover:text-white">
             <Link href="/stadiums"><ArrowLeft className="h-4 w-4" /> All stadiums</Link>
           </Button>
           <Badge variant="gold" className="mb-3 w-fit">{stadium.country}</Badge>
-          <p className="text-sm uppercase tracking-[0.3em] text-white/60">{stadium.name}</p>
+          <p className="text-sm font-bold uppercase tracking-[0.3em] text-white/95">{stadium.name}</p>
           <h1 className="mt-2 font-display text-5xl uppercase leading-none tracking-tight text-white sm:text-7xl">
             {stadium.localName}
           </h1>
-          <div className="mt-6 flex flex-wrap gap-6 text-sm text-white/70">
-            <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-electric" /> {stadium.city}</span>
-            <span className="flex items-center gap-2"><Users className="h-4 w-4 text-pitch" /> {stadium.capacity.toLocaleString()} seats</span>
-            <span className="flex items-center gap-2"><Calendar className="h-4 w-4 text-gold" /> Opened {stadium.opened}</span>
+          <div className="mt-6 flex flex-wrap gap-6 text-sm font-semibold text-white">
+            <span className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#304FFE]" /> {stadium.city}</span>
+            <span className="flex items-center gap-2"><Users className="h-4 w-4 text-white" /> {stadium.capacity.toLocaleString()} seats</span>
+            <span className="flex items-center gap-2"><Calendar className="h-4 w-4 text-white" /> Opened {stadium.opened}</span>
           </div>
         </div>
       </section>
