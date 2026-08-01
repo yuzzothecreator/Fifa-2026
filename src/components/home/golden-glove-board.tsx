@@ -25,11 +25,11 @@ export function GoldenGloveBoard() {
           <p className="section-label">
             <Hand className="h-3.5 w-3.5" /> Adidas Golden Glove
           </p>
-          <h2 className="mt-3 font-display text-4xl uppercase leading-none tracking-tight text-[#304FFD] sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl uppercase leading-none tracking-tight text-white sm:text-5xl">
             Golden Glove Winners
           </h2>
         </div>
-        <p className="font-mono text-sm tracking-widest text-[#304FFD]">2010–2026</p>
+        <p className="font-mono text-sm tracking-widest text-white/80">2010–2026</p>
       </div>
 
       <div className={cn("spectrum-frame mb-4")}>
@@ -42,7 +42,7 @@ export function GoldenGloveBoard() {
                 alt={hero.name}
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent sm:bg-gradient-to-r" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-transparent to-transparent sm:bg-gradient-to-r" />
             </div>
             <div className="flex flex-col justify-end gap-3 bg-white px-5 py-6 text-[#304FFD] sm:px-8 sm:py-8">
               <p className="font-display text-5xl leading-none sm:text-6xl">{hero.year}</p>
@@ -75,16 +75,16 @@ export function GoldenGloveBoard() {
                   alt={g.name}
                   className="absolute inset-0 h-full w-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-[#304FFD]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-[#304FFD]/40 to-transparent" />
                 <img
                   src={flagUrl(g.code, "w40")}
                   alt=""
                   className="absolute bottom-3 left-3 h-5 w-7 rounded-sm object-cover ring-1 ring-white/40"
                 />
               </div>
-              <div className="bg-[#304FFD] px-3 py-3">
-                <p className="truncate text-[11px] font-bold uppercase tracking-wider text-white">{g.name}</p>
-                <p className="font-display text-3xl leading-none text-white">{g.year}</p>
+              <div className="bg-white px-3 py-3">
+                <p className="truncate text-[11px] font-bold uppercase tracking-wider text-[#304FFD]">{g.name}</p>
+                <p className="font-display text-3xl leading-none text-[#304FFD]">{g.year}</p>
               </div>
             </div>
           </div>

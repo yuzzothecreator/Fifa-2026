@@ -4,19 +4,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-black uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#304FFD] disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-black uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
+          "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
         pitch:
-          "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
-        gold: "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
+          "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
+        gold: "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
         outline:
-          "border border-[#304FFD]/30 bg-white text-[#304FFD] hover:border-[#304FFD] hover:bg-[#304FFD]/5",
-        ghost: "text-[#304FFD]/80 hover:bg-[#304FFD]/10 hover:text-[#304FFD]",
-        secondary: "bg-white text-[#304FFD] border border-[#304FFD]/20 hover:bg-[#304FFD]/5",
+          "border border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10",
+        ghost: "text-white/80 hover:bg-white/10 hover:text-white",
+        secondary: "bg-white/15 text-white border border-white/25 hover:bg-white/25",
       },
       size: {
         default: "h-11 px-6 py-2",

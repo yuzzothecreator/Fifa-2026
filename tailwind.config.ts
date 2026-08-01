@@ -44,17 +44,17 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Background #FFFFFF · Font/accent #304FFD
+        // Background #304FFD · Font #FFFFFF
         navy: "#304FFD",
         midnight: "#304FFD",
         "fifa-blue": "#304FFD",
-        electric: "#304FFD",
-        pitch: "#304FFD",
-        gold: "#304FFD",
-        maple: "#304FFD",
-        sunset: "#304FFD",
-        soft: "#FFFFFF",
-        mist: "#FFFFFF",
+        electric: "#FFFFFF",
+        pitch: "#FFFFFF",
+        gold: "#FFFFFF",
+        maple: "#FFFFFF",
+        sunset: "#FFFFFF",
+        soft: "#304FFD",
+        mist: "#304FFD",
       },
       fontFamily: {
         display: ["var(--font-anton)", "Impact", "sans-serif"],
@@ -67,14 +67,14 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        neon: "0 10px 28px rgba(48,79,253,0.18), 0 2px 8px rgba(48,79,253,0.08)",
-        "neon-green": "0 10px 28px rgba(48,79,253,0.18), 0 2px 8px rgba(48,79,253,0.08)",
-        gold: "0 12px 32px rgba(48,79,253,0.22), 0 2px 8px rgba(48,79,253,0.1)",
+        neon: "0 10px 28px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1)",
+        "neon-green": "0 10px 28px rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.1)",
+        gold: "0 12px 32px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.1)",
       },
       backgroundImage: {
         "grid-lines":
-          "linear-gradient(to right, rgba(48,79,253,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(48,79,253,0.08) 1px, transparent 1px)",
-        "wc26-spectrum": "linear-gradient(90deg, #304FFD, #FFFFFF, #304FFD)",
+          "linear-gradient(to right, rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.12) 1px, transparent 1px)",
+        "wc26-spectrum": "linear-gradient(90deg, #FFFFFF, #304FFD, #FFFFFF)",
       },
       screens: {
         xs: "390px",
