@@ -5,11 +5,11 @@ import { worldCupGoalsHistory } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const palette = [
-  "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD",
-  "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF",
-  "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD",
-  "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF",
-  "#304FFD", "#FFFFFF", "#304FFD",
+  "#10164F", "#304FFE", "#EAEDFF", "#10164F", "#304FFE",
+  "#EAEDFF", "#10164F", "#304FFE", "#EAEDFF", "#10164F",
+  "#304FFE", "#EAEDFF", "#10164F", "#304FFE", "#EAEDFF",
+  "#10164F", "#304FFE", "#EAEDFF", "#10164F", "#304FFE",
+  "#EAEDFF", "#10164F", "#304FFE",
 ];
 
 export function TotalGoalsChart() {
@@ -18,7 +18,7 @@ export function TotalGoalsChart() {
   return (
     <section>
       <div className="spectrum-frame">
-        <div className="spectrum-frame-inner bg-[#304FFD] p-5 text-white sm:p-8">
+        <div className="spectrum-frame-inner bg-[#10164F] p-5 text-white sm:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <h2 className="font-display text-3xl uppercase leading-none tracking-tight text-white sm:text-5xl">
@@ -55,8 +55,8 @@ export function TotalGoalsChart() {
                         d.highlight && "goals-bar-glow"
                       )}
                       style={{
-                        background: d.highlight ? "#FFFFFF" : palette[i % palette.length],
-                        border: palette[i % palette.length] === "#FFFFFF" ? "1px solid rgba(255,255,255,0.5)" : "none",
+                        background: d.highlight ? "#304FFE" : palette[i % palette.length],
+                        border: palette[i % palette.length] === "#EAEDFF" ? "1px solid rgba(255,255,255,0.35)" : "none",
                         boxSizing: "border-box" as const,
                         minHeight: 8,
                       }}

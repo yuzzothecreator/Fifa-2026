@@ -9,23 +9,57 @@ interface Props {
   description?: string;
   align?: "left" | "center";
   className?: string;
+  light?: boolean;
 }
 
-export function SectionHeading({ label, title, description, align = "left", className }: Props) {
+export function SectionHeading({
+  label,
+  title,
+  description,
+  align = "left",
+  className,
+  light,
+}: Props) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5 }}
-      className={cn("flex flex-col gap-3", align === "center" && "items-center text-center", className)}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        "flex max-w-3xl flex-col gap-4",
+        align === "center" && "mx-auto items-center text-center",
+        className
+      )}
     >
-      {label && <span className="section-label">{label}</span>}
-      <h2 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+      {label && (
+        <span
+          className={cn(
+            "text-[11px] font-bold uppercase tracking-[0.4em]",
+            light ? "text-white/70" : "text-[#304FFE]"
+          )}
+        >
+          {label}
+        </span>
+      )}
+      <h2
+        className={cn(
+          "font-display text-[clamp(2.25rem,6vw,4.5rem)] uppercase leading-[0.9] tracking-tight",
+          light ? "text-white" : "text-[#10164F]"
+        )}
+      >
         {title}
       </h2>
       {description && (
-        <p className={cn("max-w-2xl text-base text-muted-foreground", align === "center" && "mx-auto")}>{description}</p>
+        <p
+          className={cn(
+            "max-w-xl text-base leading-relaxed sm:text-lg",
+            light ? "text-white/70" : "text-[#10164F]/70",
+            align === "center" && "mx-auto"
+          )}
+        >
+          {description}
+        </p>
       )}
     </motion.div>
   );

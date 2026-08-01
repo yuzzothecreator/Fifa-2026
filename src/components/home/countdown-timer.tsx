@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { TOURNAMENT_START } from "@/lib/data";
 
 function getRemaining(target: number) {
@@ -15,7 +16,7 @@ function getRemaining(target: number) {
   };
 }
 
-export function CountdownTimer() {
+export function CountdownTimer({ large = false }: { large?: boolean }) {
   const target = React.useMemo(() => new Date(TOURNAMENT_START).getTime(), []);
   const [time, setTime] = React.useState(() => getRemaining(target));
   const [mounted, setMounted] = React.useState(false);
@@ -28,15 +29,9 @@ export function CountdownTimer() {
 
   if (mounted && time.over) {
     return (
-      <div className="inline-flex items-center gap-3 rounded-2xl border border-white/25 bg-white/10 px-5 py-4">
-        <span className="relative flex h-3 w-3">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
-          <span className="relative inline-flex h-3 w-3 rounded-full bg-white" />
-        </span>
-        <span className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
-          The tournament is underway
-        </span>
-      </div>
+      <p className="font-display text-3xl uppercase tracking-tight text-white sm:text-5xl">
+        The tournament is underway
+      </p>
     );
   }
 
@@ -48,24 +43,34 @@ export function CountdownTimer() {
   ];
 
   return (
-    <div className="flex w-full max-w-lg items-stretch gap-1.5 xs:gap-2 sm:gap-3">
+    <div className={cn("flex items-stretch justify-center gap-2 sm:gap-4", large && "gap-3 sm:gap-6")}>
       {units.map((u, i) => (
         <React.Fragment key={u.label}>
-          <div className="flex min-w-0 flex-1 flex-col items-center rounded-xl border border-white/20 bg-white/10 px-1.5 py-2.5 xs:rounded-2xl xs:px-3 sm:min-w-[84px] sm:flex-none sm:px-4 sm:py-3">
-            <motion.span
+          <div className="min-w-[4.5rem] text-center sm:min-w-[6rem]">
+            <motion.p
               key={u.value}
-              initial={{ y: -8, opacity: 0 }}
+              initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="font-display text-2xl leading-none text-white xs:text-3xl sm:text-5xl"
+              className={cn(
+                "font-display leading-none text-white",
+                large ? "text-5xl sm:text-7xl md:text-8xl" : "text-3xl sm:text-5xl"
+              )}
             >
               {mounted ? String(u.value).padStart(2, "0") : "--"}
-            </motion.span>
-            <span className="mt-1 text-[8px] uppercase tracking-[0.15em] text-white/55 xs:mt-1.5 xs:text-[10px] xs:tracking-[0.2em]">
+            </motion.p>
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/65 sm:text-xs">
               {u.label}
-            </span>
+            </p>
           </div>
           {i < units.length - 1 && (
-            <span className="self-center font-display text-xl text-white/40 xs:text-2xl sm:text-4xl">:</span>
+            <span
+              className={cn(
+                "self-start pt-1 font-display text-white/40",
+                large ? "text-4xl sm:text-6xl" : "text-2xl sm:text-4xl"
+              )}
+            >
+              :
+            </span>
           )}
         </React.Fragment>
       ))}

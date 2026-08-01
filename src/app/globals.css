@@ -4,75 +4,73 @@
 
 @layer base {
   /*
-    FIFA World Cup 2026 brand (from official banner)
-    Blue #304FFD · Green #00C853 · Red #E31C3D · White #FFFFFF
+    Official NYNJ / DD.NYC theme tokens
+    Source: nynjfwc26.com → fifa-dd.nyc/static/css/main.css
+    --c0 #FFFFFF · --c1 #10164F · --c2 #304FFE · --c4 #EAEDFF · --c12 #B71D1C
   */
   :root {
-    --background: 231 98% 59%;
-    --foreground: 0 0% 100%;
-    --card: 231 80% 52%;
-    --card-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 231 98% 59%;
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 231 98% 59%;
-    --muted: 231 70% 50%;
-    --muted-foreground: 0 0% 95%;
-    --accent: 0 0% 100%;
-    --accent-foreground: 231 98% 59%;
-    --border: 0 0% 100% / 0.25;
-    --input: 0 0% 100% / 0.15;
-    --ring: 0 0% 100%;
-    --radius: 0.85rem;
-    --blue: #304ffd;
-    --green: #00c853;
-    --red: #e31c3d;
-    --white: #ffffff;
+    --c0: #ffffff;
+    --c1: #10164f;
+    --c2: #304ffe;
+    --c3: #000000;
+    --c4: #eaedff;
+    --c12: #b71d1c;
+
+    --background: 0 0% 100%;
+    --foreground: 234 66% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 234 66% 20%;
+    --primary: 231 99% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 231 100% 96%;
+    --secondary-foreground: 234 66% 20%;
+    --muted: 231 100% 96%;
+    --muted-foreground: 234 30% 40%;
+    --accent: 231 99% 59%;
+    --accent-foreground: 0 0% 100%;
+    --border: 231 40% 88%;
+    --input: 231 40% 94%;
+    --ring: 231 99% 59%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 231 98% 59%;
+    --background: 234 66% 20%;
     --foreground: 0 0% 100%;
-    --card: 231 80% 52%;
+    --card: 234 55% 24%;
     --card-foreground: 0 0% 100%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 231 98% 59%;
-    --secondary: 0 0% 100%;
-    --secondary-foreground: 231 98% 59%;
-    --muted: 231 70% 50%;
-    --muted-foreground: 0 0% 95%;
-    --accent: 0 0% 100%;
-    --accent-foreground: 231 98% 59%;
-    --border: 0 0% 100% / 0.25;
-    --input: 0 0% 100% / 0.15;
-    --ring: 0 0% 100%;
+    --primary: 231 99% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 234 40% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 234 40% 28%;
+    --muted-foreground: 231 40% 80%;
+    --accent: 231 99% 59%;
+    --accent-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.15;
+    --input: 0 0% 100% / 0.1;
+    --ring: 231 99% 59%;
   }
 
   * {
     @apply border-border;
   }
 
-  .force-dark {
-    --foreground: 0 0% 100%;
-    --muted-foreground: 0 0% 90%;
-    --border: 0 0% 100% / 0.2;
-    color: #ffffff;
-  }
-
-  html,
-  body {
-    @apply text-white font-sans antialiased;
-    background-color: #304ffd !important;
-    background-image: none;
-    min-height: 100%;
-  }
-
-  .dark body {
-    @apply bg-[#304FFD] text-white;
-  }
-
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white font-sans antialiased;
+    background-color: var(--c0) !important;
+    color: var(--c1);
+  }
+
+  .force-dark {
+    --foreground: 0 0% 100%;
+    --muted-foreground: 0 0% 85%;
+    --border: 0 0% 100% / 0.2;
+    color: #ffffff;
   }
 
   img {
@@ -82,47 +80,21 @@
 }
 
 @layer components {
-  .glass {
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.25);
-  }
+  /* NYNJ editorial cards — always white + navy (readable on soft/navy/blue bands) */
+  .glass,
   .glass-strong {
-    border: 1px solid rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(16, 22, 79, 0.1);
     background: #ffffff;
-    color: #304ffd;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 14px 40px -16px rgba(0, 0, 0, 0.22);
-  }
-  .dark .glass {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
-  }
-  .dark .glass-strong {
-    border-color: rgba(255, 255, 255, 0.35);
-    background: #ffffff;
-    color: #304ffd;
-  }
-  .force-dark .glass,
-  .force-dark .glass-strong {
-    border-color: rgba(255, 255, 255, 0.25);
-    background-color: rgba(48, 79, 253, 0.85);
-    color: #ffffff;
-    box-shadow: 0 12px 32px -14px rgba(0, 0, 0, 0.3);
+    color: #10164f;
+    box-shadow: 0 18px 48px -24px rgba(16, 22, 79, 0.28);
   }
 
-  .neon-text {
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
-  }
-  .gold-text {
-    color: #ffffff;
-  }
   .brand-gradient-text,
-  .spectrum-text {
-    color: #ffffff;
+  .spectrum-text,
+  .gold-text,
+  .neon-lime,
+  .neon-text {
+    color: var(--c2);
   }
   .force-dark .brand-gradient-text,
   .force-dark .spectrum-text,
@@ -130,100 +102,81 @@
   .dark .spectrum-text {
     color: #ffffff;
   }
+
   .spectrum-bar {
-    background: linear-gradient(90deg, #00c853 0%, #304ffd 40%, #304ffd 60%, #e31c3d 100%);
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+    background: linear-gradient(90deg, var(--c1), var(--c2), var(--c12));
   }
-  .brand-bar-green {
-    background: #00c853;
-  }
-  .brand-bar-red {
-    background: #e31c3d;
-  }
-  .brand-bar-blue {
-    background: #304ffd;
-  }
+
   .spectrum-frame {
     position: relative;
-    border-radius: 1.1rem;
+    border-radius: var(--radius);
     padding: 2px;
-    background: #ffffff;
-    box-shadow: 0 16px 40px -18px rgba(0, 0, 0, 0.25);
+    background: var(--c2);
+    box-shadow: 0 16px 40px -20px rgba(16, 22, 79, 0.4);
   }
   .spectrum-frame > .spectrum-frame-inner {
-    @apply h-full w-full overflow-hidden rounded-[1.05rem] bg-[#304FFD];
+    @apply h-full w-full overflow-hidden rounded-[calc(var(--radius)-1px)] bg-[var(--c1)];
   }
-  .dark .spectrum-frame > .spectrum-frame-inner,
   .force-dark .spectrum-frame > .spectrum-frame-inner {
-    background: #304ffd;
+    background: var(--c1);
   }
   .spectrum-frame-blue,
   .spectrum-frame-fire,
   .spectrum-frame-cyan,
   .spectrum-frame-lime {
-    background: #ffffff;
+    background: var(--c2);
   }
+
   .result-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-2.5 py-1.5 text-sm font-semibold text-white transition-colors hover:border-white/60;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    @apply inline-flex items-center gap-2 rounded-full border border-[rgba(16,22,79,0.15)] bg-white px-3 py-1.5 text-sm font-semibold text-[var(--c1)] transition-colors hover:border-[var(--c2)];
   }
-  .dark .result-pill,
   .force-dark .result-pill {
-    @apply border-white/30 bg-white/15 text-white;
+    @apply border-white/30 bg-white/10 text-white;
   }
   .result-pill-final {
-    @apply border-white/50 text-white;
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+    border-color: var(--c12);
+    color: var(--c12);
   }
-  .neon-lime {
-    color: #ffffff;
-  }
-  .goals-bar-glow {
-    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.35);
-  }
+
   .section-label {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white sm:px-4 sm:text-xs sm:tracking-[0.25em];
+    @apply inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.35em];
+    color: var(--c2);
+    background: transparent;
+    border: none;
+    padding: 0;
   }
-  .force-dark .section-label {
-    @apply border-white/30 bg-white/15 text-white;
+  .force-dark .section-label,
+  .section-band-dark .section-label {
+    color: rgba(255, 255, 255, 0.75);
   }
-  .stadium-lights::before,
-  .stadium-lights::after {
-    content: "";
-    position: absolute;
-    top: -30%;
-    width: 45%;
-    height: 160%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 70%);
-    filter: blur(48px);
-    pointer-events: none;
+
+  .host-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur;
   }
-  .stadium-lights::before {
-    left: 5%;
-    transform: rotate(14deg);
-    animation: spot-sweep 11s ease-in-out infinite;
-  }
-  .stadium-lights::after {
-    right: 5%;
-    transform: rotate(-14deg);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 70%);
-    animation: spot-sweep 13s ease-in-out infinite reverse;
-  }
+
   .card-glow {
-    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .card-glow:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.28);
+    transform: translateY(-4px);
   }
+
   .pitch-panel {
-    background: #304ffd;
+    background: var(--c2);
   }
-  .host-chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-white/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white backdrop-blur sm:gap-2 sm:px-3 sm:py-1.5 sm:text-xs;
+
+  .chapter {
+    @apply relative w-full overflow-hidden;
   }
-  .force-dark .host-chip {
-    @apply border-white/25 bg-white/15 text-white;
+  .chapter-pad {
+    @apply px-4 py-20 sm:px-6 sm:py-28 lg:py-32;
+  }
+
+  .marquee-track {
+    animation: marquee-scroll 28s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 
   .page-pad {
@@ -238,6 +191,10 @@
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 .ticker-track {
   animation: ticker-scroll 40s linear infinite;
 }
@@ -245,7 +202,8 @@
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
-  .ticker-track {
+  .ticker-track,
+  .marquee-track {
     animation: none;
   }
 }
@@ -255,9 +213,9 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #304ffd;
+  background: var(--c4);
 }
 ::-webkit-scrollbar-thumb {
-  background: #ffffff;
+  background: var(--c2);
   border-radius: 999px;
 }

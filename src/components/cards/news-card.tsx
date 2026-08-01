@@ -50,7 +50,7 @@ export function NewsCard({
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#10164F]/70 to-transparent" />
         <div className="absolute left-4 top-4">
           <Badge variant={catVariant[article.category]}>{article.category}</Badge>
         </div>
@@ -59,21 +59,21 @@ export function NewsCard({
       <div className={cn("flex flex-1 flex-col p-4 sm:p-5", featured && "md:justify-center md:p-8")}>
         <h3
           className={cn(
-            "font-heading leading-tight tracking-wide text-white transition-colors group-hover:text-electric",
+            "font-heading leading-tight tracking-wide text-[#10164F] transition-colors group-hover:text-[#304FFE]",
             featured ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
           )}
         >
           {article.title}
         </h3>
-        <p className="mt-2 line-clamp-2 text-sm text-white/60">{article.description}</p>
-        <div className="mt-4 flex items-center justify-between text-xs text-white/45">
+        <p className="mt-2 line-clamp-2 text-sm text-[#10164F]/60">{article.description}</p>
+        <div className="mt-4 flex items-center justify-between text-xs text-[#10164F]/45">
           <span className="flex items-center gap-3">
             <span>{date}</span>
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" /> {article.readTime} min read
             </span>
           </span>
-          <ArrowUpRight className="h-4 w-4 text-electric transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ArrowUpRight className="h-4 w-4 text-[#304FFE] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
       </div>
     </motion.article>

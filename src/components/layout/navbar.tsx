@@ -18,94 +18,101 @@ export function Navbar() {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "py-2" : "py-4"
-      )}
-    >
-      <div className="container">
-        <nav
-          className={cn(
-            "glass-strong flex items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300",
-            scrolled && "shadow-neon"
-          )}
-        >
-          <Logo />
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        className={cn(
+          "transition-all duration-300",
+          scrolled
+            ? "bg-white/95 py-2 shadow-[0_12px_40px_-20px_rgba(16,22,79,0.35)] backdrop-blur-md"
+            : "bg-transparent py-4"
+        )}
+      >
+        <div className="container flex items-center justify-between gap-4">
+          <Logo inverted={!scrolled} />
 
-          <div className="hidden items-center gap-0.5 overflow-x-auto lg:flex xl:gap-1">
-            {navLinks.map((link) => {
+          <nav className="hidden items-center gap-1 lg:flex">
+            {navLinks.slice(0, 7).map((link) => {
               const active = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-bold uppercase tracking-wide transition-colors xl:px-3.5 xl:text-sm",
-                    active ? "text-[#304FFD]" : "text-[#304FFD]/55 hover:text-[#304FFD]"
+                    "px-3 py-2 text-[11px] font-bold uppercase tracking-[0.18em] transition-colors",
+                    scrolled
+                      ? active
+                        ? "text-[#304FFE]"
+                        : "text-[#10164F]/55 hover:text-[#10164F]"
+                      : active
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
                   )}
                 >
-                  {active && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-[#304FFD]/25 bg-[#304FFD]/10"
-                      transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                    />
-                  )}
-                  <span className="relative">{link.label}</span>
+                  {link.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
 
           <div className="flex items-center gap-2">
-            <LanguageSwitcher />
+            <div className={cn(!scrolled && "[&_button]:border-white/40 [&_button]:text-white")}>
+              <LanguageSwitcher />
+            </div>
             <ThemeToggle />
-            <Button asChild size="sm" variant="default" className="hidden md:inline-flex">
+            <Button
+              asChild
+              size="sm"
+              className={cn(
+                "hidden md:inline-flex",
+                scrolled ? "bg-[#304FFE] text-white" : "bg-white text-[#10164F] hover:bg-[#EAEDFF]"
+              )}
+            >
               <Link href="/login">Sign In</Link>
             </Button>
             <button
               onClick={() => setOpen((o) => !o)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#304FFD]/20 bg-[#304FFD]/10 text-[#304FFD] lg:hidden"
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full border-2 lg:hidden",
+                scrolled
+                  ? "border-[#10164F]/20 text-[#10164F]"
+                  : "border-white/40 text-white"
+              )}
               aria-label="Menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-        </nav>
+        </div>
 
         <AnimatePresence>
           {open && (
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="glass-strong mt-2 grid grid-cols-2 gap-1 rounded-2xl p-3 lg:hidden"
+              exit={{ opacity: 0, y: -8 }}
+              className="container mt-2 grid grid-cols-2 gap-1 rounded-2xl border border-[#10164F]/10 bg-white p-3 lg:hidden"
             >
-              {navLinks.map((link) => {
-                const active = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className={cn(
-                      "flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-colors",
-                      active ? "bg-[#304FFD]/10 text-[#304FFD]" : "text-[#304FFD]/70 hover:bg-[#304FFD]/5"
-                    )}
-                  >
-                    <link.icon className="h-4 w-4" />
-                    {link.label}
-                  </Link>
-                );
-              })}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "flex items-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-[#10164F]",
+                    pathname === link.href && "bg-[#EAEDFF]"
+                  )}
+                >
+                  <link.icon className="h-4 w-4" />
+                  {link.label}
+                </Link>
+              ))}
             </motion.div>
           )}
         </AnimatePresence>

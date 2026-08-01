@@ -25,11 +25,11 @@ export function GoldenGloveBoard() {
           <p className="section-label">
             <Hand className="h-3.5 w-3.5" /> Adidas Golden Glove
           </p>
-          <h2 className="mt-3 font-display text-4xl uppercase leading-none tracking-tight text-white sm:text-5xl">
+          <h2 className="mt-3 font-display text-4xl uppercase leading-none tracking-tight text-[#10164F] sm:text-5xl">
             Golden Glove Winners
           </h2>
         </div>
-        <p className="font-mono text-sm tracking-widest text-white/80">2010–2026</p>
+        <p className="font-mono text-sm tracking-widest text-[#10164F]/55">2010–2026</p>
       </div>
 
       <div className={cn("spectrum-frame mb-4")}>
@@ -42,10 +42,10 @@ export function GoldenGloveBoard() {
                 alt={hero.name}
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-transparent to-transparent sm:bg-gradient-to-r" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#10164F] via-transparent to-transparent sm:bg-gradient-to-r" />
             </div>
-            <div className="flex flex-col justify-end gap-3 bg-white px-5 py-6 text-[#304FFD] sm:px-8 sm:py-8">
-              <p className="font-display text-5xl leading-none sm:text-6xl">{hero.year}</p>
+            <div className="flex flex-col justify-end gap-3 bg-white px-5 py-6 text-[#10164F] sm:px-8 sm:py-8">
+              <p className="font-display text-5xl leading-none text-[#304FFE] sm:text-6xl">{hero.year}</p>
               <div className="flex items-end justify-between gap-3">
                 <h3 className="font-heading text-3xl uppercase leading-none tracking-wide sm:text-4xl">
                   {hero.name}
@@ -53,10 +53,10 @@ export function GoldenGloveBoard() {
                 <img
                   src={flagUrl(hero.code, "w80")}
                   alt={hero.country}
-                  className="h-8 w-12 rounded-md object-cover ring-2 ring-[#304FFD]/20"
+                  className="h-8 w-12 rounded-md object-cover ring-2 ring-[#10164F]/15"
                 />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#304FFD]/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#10164F]/55">
                 Best Goalkeeper · {hero.country}
               </p>
             </div>
@@ -75,7 +75,7 @@ export function GoldenGloveBoard() {
                   alt={g.name}
                   className="absolute inset-0 h-full w-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-[#304FFD]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#10164F] via-[#10164F]/40 to-transparent" />
                 <img
                   src={flagUrl(g.code, "w40")}
                   alt=""
@@ -83,8 +83,10 @@ export function GoldenGloveBoard() {
                 />
               </div>
               <div className="bg-white px-3 py-3">
-                <p className="truncate text-[11px] font-bold uppercase tracking-wider text-[#304FFD]">{g.name}</p>
-                <p className="font-display text-3xl leading-none text-[#304FFD]">{g.year}</p>
+                <p className="truncate text-[11px] font-bold uppercase tracking-wider text-[#10164F]">
+                  {g.name}
+                </p>
+                <p className="font-display text-3xl leading-none text-[#304FFE]">{g.year}</p>
               </div>
             </div>
           </div>

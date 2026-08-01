@@ -5,8 +5,6 @@ import { Target, Users, Building2, Trophy, Radio, Footprints, type LucideIcon } 
 import { AnimatedCounter } from "@/components/shared/animated-counter";
 import { cn } from "@/lib/utils";
 
-// A string key is used instead of passing the icon component directly, so the
-// card can be rendered from Server Components (functions aren't serializable).
 const iconMap: Record<string, LucideIcon> = {
   goals: Target,
   teams: Users,
@@ -27,10 +25,10 @@ interface Props {
 }
 
 const accentMap = {
-  electric: { text: "text-white", ring: "shadow-neon", bg: "bg-[#304FFD]/30", border: "border-white/30" },
-  pitch: { text: "text-white", ring: "shadow-neon-green", bg: "bg-[#00C853]/40", border: "border-[#00C853]/60" },
-  gold: { text: "text-[#304FFD]", ring: "shadow-gold", bg: "bg-white", border: "border-white" },
-  maple: { text: "text-white", ring: "shadow-neon", bg: "bg-[#E31C3D]/40", border: "border-[#E31C3D]/60" },
+  electric: { text: "text-[#304FFE]", ring: "shadow-neon", bg: "bg-[#EAEDFF]", border: "border-[#304FFE]/20" },
+  pitch: { text: "text-[#10164F]", ring: "shadow-neon", bg: "bg-[#EAEDFF]", border: "border-[#10164F]/15" },
+  gold: { text: "text-white", ring: "shadow-gold", bg: "bg-[#10164F]", border: "border-[#10164F]/20" },
+  maple: { text: "text-white", ring: "shadow-neon", bg: "bg-[#B71D1C]", border: "border-[#B71D1C]/30" },
 };
 
 export function StatsCard({ icon, label, value, suffix, accent = "electric" }: Props) {
@@ -44,11 +42,11 @@ export function StatsCard({ icon, label, value, suffix, accent = "electric" }: P
       <div className={cn("mb-4 flex h-12 w-12 items-center justify-center rounded-xl", a.bg, a.ring)}>
         <Icon className={cn("h-6 w-6", a.text)} />
       </div>
-      <div className="font-display text-5xl leading-none text-white">
+      <div className="font-display text-5xl leading-none text-[#10164F]">
         <AnimatedCounter to={value} suffix={suffix} />
       </div>
-      <p className="mt-2 text-sm uppercase tracking-widest text-white/50">{label}</p>
-      <div className={cn("pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full blur-2xl", a.bg)} />
+      <p className="mt-2 text-sm uppercase tracking-widest text-[#10164F]/50">{label}</p>
+      <div className={cn("pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full blur-2xl opacity-60", a.bg)} />
     </motion.div>
   );
 }

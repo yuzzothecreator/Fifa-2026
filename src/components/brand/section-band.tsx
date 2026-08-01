@@ -1,54 +1,60 @@
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** FIFA WC 2026 banner colors — used as backgrounds */
-export const WC26 = {
-  blue: "#304FFD",
-  green: "#00C853",
-  red: "#E31C3D",
-  white: "#FFFFFF",
-  black: "#000000",
+/**
+ * Official NYNJ / DD.NYC colors from
+ * https://nynjfwc26.com/wp-content/themes/fifa-dd.nyc/static/css/main.css
+ */
+export const NYNJ = {
+  white: "#FFFFFF", // --c0
+  navy: "#10164F", // --c1
+  blue: "#304FFE", // --c2
+  black: "#000000", // --c3
+  soft: "#EAEDFF", // --c4
+  red: "#B71D1C", // --c12
 } as const;
 
-export type BrandTone = "blue" | "green" | "red" | "white";
+export type BrandTone = "white" | "navy" | "blue" | "soft" | "red";
 
 const toneStyle: Record<BrandTone, CSSProperties> = {
-  blue: { backgroundColor: WC26.blue, color: WC26.white },
-  green: { backgroundColor: WC26.green, color: WC26.white },
-  red: { backgroundColor: WC26.red, color: WC26.white },
-  white: { backgroundColor: WC26.white, color: WC26.blue },
+  white: { backgroundColor: NYNJ.white, color: NYNJ.navy },
+  soft: { backgroundColor: NYNJ.soft, color: NYNJ.navy },
+  navy: { backgroundColor: NYNJ.navy, color: NYNJ.white },
+  blue: { backgroundColor: NYNJ.blue, color: NYNJ.white },
+  red: { backgroundColor: NYNJ.red, color: NYNJ.white },
 };
 
-/** Full-bleed curved green (TL) + red (BR) on a blue field — matches the banner */
+/** Keep export name for existing imports */
+export const WC26 = {
+  blue: NYNJ.blue,
+  green: NYNJ.blue,
+  red: NYNJ.red,
+  white: NYNJ.white,
+  black: NYNJ.black,
+  navy: NYNJ.navy,
+  soft: NYNJ.soft,
+} as const;
+
 export function BrandWaves({ className }: { className?: string }) {
   return (
     <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 1440 800"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Blue base */}
-        <rect width="1440" height="800" fill={WC26.blue} />
-        {/* Green top-left blob */}
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="none">
+        <rect width="1440" height="900" fill={NYNJ.navy} />
         <path
-          d="M0 0 H720 C900 0 980 80 960 220 C920 420 640 480 400 420 C180 360 40 220 0 140 Z"
-          fill={WC26.green}
+          d="M0 0 H760 C940 20 1020 120 990 280 C940 500 620 560 360 480 C140 410 30 240 0 160 Z"
+          fill={NYNJ.blue}
         />
-        {/* Red bottom-right blob */}
         <path
-          d="M1440 800 H720 C540 800 460 720 480 580 C520 380 800 320 1040 380 C1260 440 1400 580 1440 660 Z"
-          fill={WC26.red}
+          d="M1440 900 H680 C500 880 420 760 450 600 C500 380 820 320 1080 400 C1300 470 1410 640 1440 740 Z"
+          fill={NYNJ.red}
         />
       </svg>
     </div>
   );
 }
 
-/** Solid brand background for a whole section */
 export function SectionBand({
-  tone = "blue",
+  tone = "white",
   waves = false,
   className,
   children,
@@ -58,13 +64,35 @@ export function SectionBand({
   className?: string;
   children: ReactNode;
 }) {
+  const dark = tone === "navy" || tone === "blue" || tone === "red" || waves;
   return (
     <section
-      className={cn("relative w-full overflow-hidden", className)}
-      style={waves ? { backgroundColor: WC26.blue, color: WC26.white } : toneStyle[tone]}
+      className={cn("chapter", dark && "section-band-dark force-dark", className)}
+      style={waves ? { backgroundColor: NYNJ.navy, color: NYNJ.white } : toneStyle[tone]}
     >
       {waves && <BrandWaves />}
       <div className="relative z-10">{children}</div>
     </section>
+  );
+}
+
+export function BrandMarquee({
+  text = "HOME OF THE FIFA WORLD CUP 26™",
+  tone = "navy",
+}: {
+  text?: string;
+  tone?: BrandTone;
+}) {
+  const items = Array.from({ length: 8 }, () => `${text} · `);
+  return (
+    <div className="overflow-hidden border-y border-white/10 py-4" style={toneStyle[tone]}>
+      <div className="marquee-track flex w-max whitespace-nowrap font-display text-2xl uppercase tracking-tight sm:text-4xl md:text-5xl">
+        {[...items, ...items].map((t, i) => (
+          <span key={i} className="px-2" style={{ color: tone === "soft" || tone === "white" ? NYNJ.navy : NYNJ.white }}>
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }

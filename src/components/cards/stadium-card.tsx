@@ -27,25 +27,26 @@ export function StadiumCard({ stadium, index = 0 }: { stadium: Stadium; index?: 
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-[#304FFD]/30 to-transparent" />
-          <div className="stadium-lights pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#10164F] via-[#10164F]/40 to-transparent" />
           <div className="absolute bottom-4 left-5 right-5" style={{ transform: "translateZ(40px)" }}>
-            <p className="text-xs uppercase tracking-widest text-white/60">{stadium.localName}</p>
-            <h3 className="font-display text-3xl uppercase leading-none tracking-tight text-white">{stadium.name}</h3>
+            <p className="text-xs uppercase tracking-widest text-white/70">{stadium.localName}</p>
+            <h3 className="font-display text-3xl uppercase leading-none tracking-tight text-white">
+              {stadium.name}
+            </h3>
           </div>
         </div>
         <div className="space-y-2 p-5">
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm text-white/70">
-              <MapPin className="h-4 w-4 text-electric" />
+            <span className="flex items-center gap-2 text-sm text-[#10164F]/70">
+              <MapPin className="h-4 w-4 text-[#304FFE]" />
               {stadium.city}, {stadium.country}
             </span>
-            <span className="flex items-center gap-2 text-sm font-semibold text-white">
-              <Users className="h-4 w-4 text-pitch" />
+            <span className="flex items-center gap-2 text-sm font-semibold text-[#10164F]">
+              <Users className="h-4 w-4 text-[#B71D1C]" />
               {stadium.capacity.toLocaleString()}
             </span>
           </div>
-          <div className="flex items-center justify-between text-xs text-white/45">
+          <div className="flex items-center justify-between text-xs text-[#10164F]/45">
             <span className="flex items-center gap-1.5">
               <Calendar className="h-3.5 w-3.5" /> Opened {stadium.opened}
             </span>

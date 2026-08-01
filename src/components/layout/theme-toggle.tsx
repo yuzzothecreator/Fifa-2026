@@ -22,19 +22,19 @@ export function ThemeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         "relative flex h-10 w-[68px] items-center rounded-full border p-1 transition-colors",
-        isDark ? "border-white/40 bg-white/15" : "border-[#304FFD]/20 bg-[#304FFD]/10"
+        isDark ? "border-white/40 bg-white/15" : "border-[#10164F]/15 bg-[#EAEDFF]"
       )}
     >
       <Sun
         className={cn(
           "absolute left-2 h-4 w-4 transition-colors",
-          isDark ? "text-white/40" : "text-[#304FFD]"
+          isDark ? "text-white/40" : "text-[#304FFE]"
         )}
       />
       <Moon
         className={cn(
           "absolute right-2 h-4 w-4 transition-colors",
-          isDark ? "text-white" : "text-[#304FFD]/35"
+          isDark ? "text-white" : "text-[#10164F]/35"
         )}
       />
       <motion.span
@@ -42,7 +42,7 @@ export function ThemeToggle() {
         transition={{ type: "spring", stiffness: 500, damping: 32 }}
         className={cn(
           "z-10 flex h-8 w-8 items-center justify-center rounded-full shadow-lg",
-          isDark ? "ml-auto bg-white text-[#304FFD]" : "mr-auto bg-[#304FFD] text-white"
+          isDark ? "ml-auto bg-white text-[#10164F]" : "mr-auto bg-[#10164F] text-white"
         )}
       >
         {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}

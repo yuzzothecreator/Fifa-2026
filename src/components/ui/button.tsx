@@ -4,25 +4,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-black uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-black uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#304FFE] disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default:
-          "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
-        pitch:
-          "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
-        gold: "bg-white text-[#304FFD] shadow-[0_12px_28px_rgba(0,0,0,0.2)] hover:bg-white/90",
+        default: "bg-[#304FFE] text-white hover:brightness-110",
+        pitch: "bg-[#10164F] text-white hover:brightness-110",
+        gold: "bg-white text-[#10164F] hover:bg-[#EAEDFF]",
         outline:
-          "border border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10",
-        ghost: "text-white/80 hover:bg-white/10 hover:text-white",
-        secondary: "bg-white/15 text-white border border-white/25 hover:bg-white/25",
+          "border-2 border-[#10164F] bg-transparent text-[#10164F] hover:bg-[#10164F] hover:text-white",
+        ghost: "text-[#10164F]/80 hover:bg-[#EAEDFF] hover:text-[#10164F]",
+        secondary: "bg-[#EAEDFF] text-[#10164F] hover:bg-[#304FFE] hover:text-white",
       },
       size: {
-        default: "h-11 px-6 py-2",
-        sm: "h-9 px-4 text-xs",
+        default: "h-12 px-6 py-2",
+        sm: "h-10 px-4 text-xs",
         lg: "h-14 px-8 text-base",
-        icon: "h-11 w-11",
+        icon: "h-12 w-12",
       },
     },
     defaultVariants: { variant: "default", size: "default" },

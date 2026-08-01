@@ -5,11 +5,7 @@ import { cn } from "@/lib/utils";
 export function TrophyMark({ className }: { className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/fifa-logo.png"
-      alt="FIFA World Cup"
-      className={cn("object-contain", className)}
-    />
+    <img src="/fifa-logo.png" alt="FIFA World Cup" className={cn("object-contain", className)} />
   );
 }
 
@@ -27,7 +23,7 @@ export function Logo({
       <span
         className={cn(
           "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl ring-1",
-          inverted ? "bg-[#304FFD] ring-white/30" : "bg-[#304FFD] ring-[#304FFD]/20"
+          inverted ? "bg-white ring-white/40" : "bg-[#10164F] ring-[#10164F]/20"
         )}
       >
         <Image
@@ -44,15 +40,15 @@ export function Logo({
           <span
             className={cn(
               "block font-display text-2xl tracking-tight",
-              inverted ? "text-white" : "text-[#304FFD]"
+              inverted ? "text-white" : "text-[#10164F]"
             )}
           >
-            WC<span className={inverted ? "text-white" : "text-[#304FFD]"}>26</span>
+            WC<span className={inverted ? "text-white" : "text-[#304FFE]"}>26</span>
           </span>
           <span
             className={cn(
               "block text-[9px] font-bold uppercase tracking-[0.28em]",
-              inverted ? "text-white/70" : "text-[#304FFD]/55"
+              inverted ? "text-white/70" : "text-[#10164F]/55"
             )}
           >
             World Cup 2026

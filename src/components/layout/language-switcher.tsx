@@ -28,7 +28,7 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Change language"
-        className="flex h-10 items-center gap-2 rounded-full border border-[#304FFD]/20 bg-[#304FFD]/10 px-3 text-sm font-bold uppercase text-[#304FFD] transition-colors hover:border-[#304FFD]"
+        className="flex h-10 items-center gap-2 rounded-full border border-[#10164F]/20 bg-[#EAEDFF] px-3 text-sm font-bold uppercase text-[#10164F] transition-colors hover:border-[#304FFE]"
       >
         <Globe className="h-4 w-4" />
         <span className="hidden sm:inline">{active}</span>
@@ -43,8 +43,8 @@ export function LanguageSwitcher() {
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm text-[#304FFD]/70 transition-colors hover:bg-[#304FFD]/5",
-                active === l.code && "text-[#304FFD]"
+                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm text-[#10164F]/70 transition-colors hover:bg-[#EAEDFF]",
+                active === l.code && "text-[#304FFE]"
               )}
             >
               <span className="flex items-center gap-2">

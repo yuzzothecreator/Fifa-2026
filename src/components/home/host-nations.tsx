@@ -1,38 +1,50 @@
 import Link from "next/link";
 import { HOST_NATIONS, flagUrl } from "@/lib/data";
-import { WC26 } from "@/components/brand/section-band";
+import { NYNJ } from "@/components/brand/section-band";
 
+/** NYNJ schedule-row rhythm: soft → blue → navy */
 const hostBg: Record<string, string> = {
-  mx: WC26.green,
-  us: WC26.blue,
-  ca: WC26.red,
+  mx: NYNJ.soft,
+  us: NYNJ.blue,
+  ca: NYNJ.navy,
+};
+
+const hostText: Record<string, string> = {
+  mx: NYNJ.navy,
+  us: NYNJ.white,
+  ca: NYNJ.white,
 };
 
 export function HostNations() {
   return (
     <section className="w-full">
       <div className="grid md:grid-cols-3">
-        {HOST_NATIONS.map((h) => (
-          <Link
-            key={h.code}
-            href={`/teams/${h.code}`}
-            className="group flex items-center gap-4 px-6 py-8 text-white transition-opacity hover:opacity-90 md:px-8"
-            style={{ backgroundColor: hostBg[h.code] ?? WC26.blue }}
-          >
-            <img
-              src={flagUrl(h.code, "w160")}
-              alt={h.country}
-              className="h-12 w-16 rounded-lg object-cover ring-2 ring-white/50 transition-transform group-hover:scale-105"
-            />
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/80">
-                Host Nation
-              </p>
-              <h3 className="font-heading text-2xl tracking-wide text-white">{h.country}</h3>
-              <p className="text-xs text-white/75">{h.role}</p>
-            </div>
-          </Link>
-        ))}
+        {HOST_NATIONS.map((h) => {
+          const color = hostText[h.code] ?? NYNJ.white;
+          return (
+            <Link
+              key={h.code}
+              href={`/teams/${h.code}`}
+              className="group relative flex min-h-[280px] flex-col justify-end overflow-hidden p-8 sm:min-h-[340px] sm:p-10"
+              style={{ backgroundColor: hostBg[h.code] ?? NYNJ.navy, color }}
+            >
+              <img
+                src={flagUrl(h.code, "w320")}
+                alt=""
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="relative">
+                <p className="text-[11px] font-bold uppercase tracking-[0.35em] opacity-70">
+                  Host nation
+                </p>
+                <h3 className="mt-3 font-display text-5xl uppercase leading-none tracking-tight sm:text-6xl">
+                  {h.country}
+                </h3>
+                <p className="mt-3 text-sm opacity-75">{h.role}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
