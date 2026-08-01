@@ -28,7 +28,11 @@ export function TotalGoalsChart() {
                 At Every FIFA World Cup™
               </p>
             </div>
-            <img src="/fifa-logo.png" alt="FIFA" className="h-14 w-14 object-contain sm:h-16 sm:w-16" />
+            <img
+              src="/wc26-logo.png"
+              alt="FIFA"
+              className="h-10 w-[4.5rem] object-contain brightness-0 invert sm:h-12 sm:w-24"
+            />
           </div>
 
           <div className="mt-8 overflow-x-auto pb-2">

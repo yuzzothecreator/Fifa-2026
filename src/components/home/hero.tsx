@@ -21,12 +21,12 @@ export function Hero() {
         >
           <div className="mb-8 flex items-center gap-4">
             <Image
-              src="/fifa-logo.png"
-              alt="FIFA World Cup"
-              width={72}
-              height={72}
+              src="/wc26-logo.png"
+              alt="FIFA World Cup 2026"
+              width={160}
+              height={90}
               priority
-              className="h-14 w-14 object-contain sm:h-16 sm:w-16"
+              className="h-12 w-[5.5rem] object-contain brightness-0 invert sm:h-14 sm:w-28"
             />
             <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-white/85">
               FIFA World Cup 2026™

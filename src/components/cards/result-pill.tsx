@@ -74,7 +74,11 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
       <div className="text-center">
         <div className="spectrum-bar mx-auto mb-4 h-1 w-40 rounded-full" />
         <div className="flex items-center justify-center gap-3">
-          <img src="/fifa-logo.png" alt="" className="h-12 w-12 object-contain" />
+          <img
+            src="/wc26-logo.png"
+            alt=""
+            className="h-10 w-[4.5rem] object-contain brightness-0 invert"
+          />
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
             FIFA World Cup 2026™
           </p>

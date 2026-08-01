@@ -2,10 +2,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-export function TrophyMark({ className }: { className?: string }) {
+/** Black silhouette mark — invert on dark surfaces so it reads white */
+export function TrophyMark({
+  className,
+  light = false,
+}: {
+  className?: string;
+  light?: boolean;
+}) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src="/fifa-logo.png" alt="FIFA World Cup" className={cn("object-contain", className)} />
+    <img
+      src="/wc26-logo.png"
+      alt="FIFA World Cup 2026"
+      className={cn("object-contain", light && "brightness-0 invert", className)}
+    />
   );
 }
 
@@ -19,19 +30,17 @@ export function Logo({
   inverted?: boolean;
 }) {
   return (
-    <Link href="/" className={cn("group flex items-center gap-2.5", className)}>
-      <span
-        className={cn(
-          "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl ring-1",
-          inverted ? "bg-white ring-white/40" : "bg-[#10164F] ring-[#10164F]/20"
-        )}
-      >
+    <Link href="/" className={cn("group flex items-center gap-3", className)}>
+      <span className="relative flex h-10 w-[4.5rem] shrink-0 items-center justify-center sm:h-11 sm:w-20">
         <Image
-          src="/fifa-logo.png"
-          alt="FIFA"
-          width={40}
-          height={40}
-          className="relative h-9 w-9 object-contain"
+          src="/wc26-logo.png"
+          alt="FIFA World Cup 2026"
+          width={160}
+          height={90}
+          className={cn(
+            "h-full w-full object-contain",
+            inverted && "brightness-0 invert"
+          )}
           priority
         />
       </span>
