@@ -32,6 +32,8 @@ export function PanZoomCanvas({
   minScale = MIN_SCALE,
   maxScale = MAX_SCALE,
   initialScale = 0.85,
+  autoFit = true,
+  fitMinScale = 0.55,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -39,6 +41,10 @@ export function PanZoomCanvas({
   minScale?: number;
   maxScale?: number;
   initialScale?: number;
+  /** When false, open at initialScale instead of shrinking to fit */
+  autoFit?: boolean;
+  /** Never auto-fit smaller than this (keeps R32 cards readable) */
+  fitMinScale?: number;
 }) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -136,18 +142,22 @@ export function PanZoomCanvas({
     const cw = content.scrollWidth;
     const ch = content.scrollHeight;
     if (cw <= 0 || ch <= 0) return;
-    const scale = clamp(Math.min(vw / cw, vh / ch), minScale, maxScale);
+    const raw = Math.min(vw / cw, vh / ch);
+    const scale = clamp(Math.max(raw, fitMinScale), minScale, maxScale);
     const x = (vp.clientWidth - cw * scale) / 2;
-    const y = (vp.clientHeight - ch * scale) / 2;
+    const y = pad;
     commitAnimated({ x, y, scale });
-  }, [minScale, maxScale, commitAnimated]);
+  }, [minScale, maxScale, fitMinScale, commitAnimated]);
 
   const resetView = React.useCallback(() => {
     commitAnimated({ x: 24, y: 24, scale: initialScale });
   }, [initialScale, commitAnimated]);
 
   React.useEffect(() => {
-    const id = window.setTimeout(() => fitContent(), 50);
+    const id = window.setTimeout(() => {
+      if (autoFit) fitContent();
+      else commitInstant({ x: 28, y: 28, scale: initialScale });
+    }, 50);
     return () => {
       window.clearTimeout(id);
       stopLoop();

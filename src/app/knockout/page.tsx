@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { BracketTree } from "@/components/knockout/bracket-tree";
+import { ChampionPoster } from "@/components/knockout/champion-poster";
 import { Badge } from "@/components/ui/badge";
 import { knockoutMatches, flagUrl } from "@/lib/data";
 import type { Match } from "@/lib/types";
@@ -27,7 +28,9 @@ export default function KnockoutPage() {
       />
 
       <section className="container space-y-12 py-10">
-        <BracketTree />
+        <ChampionPoster />
+
+        <BracketTree showChampion={false} />
 
         <div>
           <div className="mb-6 flex items-center gap-4">
@@ -45,45 +48,14 @@ export default function KnockoutPage() {
                   <span className="h-px flex-1 bg-gradient-to-r from-[#304FFE]/30 to-transparent" />
                   <Badge variant="default">{roundMatches.length || "TBD"}</Badge>
                 </div>
-                {roundMatches.length === 0 ? (
-                  <div className="glass rounded-2xl p-8 text-center font-semibold text-[#10164F]/70">
-                    Awaiting confirmed fixtures for this round.
-                  </div>
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {roundMatches.map((m) => (
-                      <BracketCard key={m.id} match={m} />
-                    ))}
-                  </div>
-                )}
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {roundMatches.map((m) => (
+                    <BracketCard key={m.id} match={m} />
+                  ))}
+                </div>
               </div>
             );
           })}
-        </div>
-
-        <div className="pitch-panel relative overflow-hidden rounded-3xl border border-[#304FFE] p-8 md:p-12">
-          <div className="spectrum-bar absolute inset-x-0 top-0 h-1" />
-          <p className="text-xs font-black uppercase tracking-[0.3em] text-white">Champions · 19 July 2026</p>
-          <h3 className="mt-3 font-display text-4xl uppercase leading-none text-white md:text-6xl">
-            Spain win the World Cup
-          </h3>
-          <p className="mt-3 max-w-xl text-base font-medium text-white/95">
-            Spain 1–0 Argentina at MetLife Stadium — New York New Jersey. England take third with a 6–4 win over France.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              href="/matches/m104"
-              className="inline-flex text-sm font-black text-white underline-offset-4 hover:underline"
-            >
-              View Final →
-            </Link>
-            <Link
-              href="/matches/m103"
-              className="inline-flex text-sm font-black text-white/85 underline-offset-4 hover:underline"
-            >
-              Third-place play-off →
-            </Link>
-          </div>
         </div>
       </section>
     </>
