@@ -6,15 +6,24 @@ import { cn } from "@/lib/utils";
 
 type Transform = { x: number; y: number; scale: number };
 
-const MIN_SCALE = 0.35;
-const MAX_SCALE = 2.75;
+const MIN_SCALE = 0.4;
+const MAX_SCALE = 2.8;
 
 function clamp(n: number, min: number, max: number) {
   return Math.min(max, Math.max(min, n));
 }
 
+function nearlyEqual(a: Transform, b: Transform) {
+  return (
+    Math.abs(a.x - b.x) < 0.15 &&
+    Math.abs(a.y - b.y) < 0.15 &&
+    Math.abs(a.scale - b.scale) < 0.0008
+  );
+}
+
 /**
  * Map / schema-viewer style canvas: drag to pan, pinch or wheel to zoom.
+ * Zoom uses a smooth ease toward the target; pan stays 1:1 while dragging.
  */
 export function PanZoomCanvas({
   children,
@@ -23,6 +32,8 @@ export function PanZoomCanvas({
   minScale = MIN_SCALE,
   maxScale = MAX_SCALE,
   initialScale = 0.85,
+  autoFit = true,
+  fitMinScale = 0.55,
 }: {
   children: React.ReactNode;
   className?: string;
@@ -30,12 +41,18 @@ export function PanZoomCanvas({
   minScale?: number;
   maxScale?: number;
   initialScale?: number;
+  /** When false, open at initialScale instead of shrinking to fit */
+  autoFit?: boolean;
+  /** Never auto-fit smaller than this (keeps R32 cards readable) */
+  fitMinScale?: number;
 }) {
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
-  const [t, setT] = React.useState<Transform>({ x: 24, y: 24, scale: initialScale });
-  const tRef = React.useRef(t);
-  tRef.current = t;
+
+  const currentRef = React.useRef<Transform>({ x: 24, y: 24, scale: initialScale });
+  const targetRef = React.useRef<Transform>({ x: 24, y: 24, scale: initialScale });
+  const rafRef = React.useRef(0);
+  const [t, setT] = React.useState<Transform>(currentRef.current);
 
   const dragRef = React.useRef<{
     pointerId: number;
@@ -46,57 +63,105 @@ export function PanZoomCanvas({
     moved: boolean;
   } | null>(null);
   const suppressClickRef = React.useRef(false);
-  const pinchRef = React.useRef<{
-    dist: number;
-    scale: number;
-    midX: number;
-    midY: number;
-    x: number;
-    y: number;
-  } | null>(null);
+  const pinchRef = React.useRef<{ dist: number; scale: number } | null>(null);
   const [grabbing, setGrabbing] = React.useState(false);
 
+  const stopLoop = React.useCallback(() => {
+    if (rafRef.current) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+    }
+  }, []);
+
+  const startLoop = React.useCallback(() => {
+    if (rafRef.current) return;
+    const tick = () => {
+      const cur = currentRef.current;
+      const tg = targetRef.current;
+      // Smooth ease-out toward target (feels like map / Figma zoom)
+      const ease = 0.22;
+      const next: Transform = {
+        x: cur.x + (tg.x - cur.x) * ease,
+        y: cur.y + (tg.y - cur.y) * ease,
+        scale: cur.scale + (tg.scale - cur.scale) * ease,
+      };
+      if (nearlyEqual(next, tg)) {
+        currentRef.current = tg;
+        setT(tg);
+        rafRef.current = 0;
+        return;
+      }
+      currentRef.current = next;
+      setT(next);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  const commitInstant = React.useCallback((next: Transform) => {
+    stopLoop();
+    const clamped = { ...next, scale: clamp(next.scale, minScale, maxScale) };
+    currentRef.current = clamped;
+    targetRef.current = clamped;
+    setT(clamped);
+  }, [minScale, maxScale, stopLoop]);
+
+  const commitAnimated = React.useCallback(
+    (next: Transform) => {
+      targetRef.current = { ...next, scale: clamp(next.scale, minScale, maxScale) };
+      startLoop();
+    },
+    [minScale, maxScale, startLoop]
+  );
+
   const zoomAt = React.useCallback(
-    (clientX: number, clientY: number, nextScale: number) => {
+    (clientX: number, clientY: number, nextScale: number, animate = true) => {
       const el = viewportRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
-      const cur = tRef.current;
+      const cur = animate ? targetRef.current : currentRef.current;
       const scale = clamp(nextScale, minScale, maxScale);
       const px = clientX - rect.left;
       const py = clientY - rect.top;
-      // Keep the point under the cursor stable while scaling
       const x = px - ((px - cur.x) / cur.scale) * scale;
       const y = py - ((py - cur.y) / cur.scale) * scale;
-      setT({ x, y, scale });
+      const next = { x, y, scale };
+      if (animate) commitAnimated(next);
+      else commitInstant(next);
     },
-    [minScale, maxScale]
+    [minScale, maxScale, commitAnimated, commitInstant]
   );
 
   const fitContent = React.useCallback(() => {
     const vp = viewportRef.current;
     const content = contentRef.current;
     if (!vp || !content) return;
-    const pad = 40;
+    const pad = 48;
     const vw = vp.clientWidth - pad * 2;
     const vh = vp.clientHeight - pad * 2;
     const cw = content.scrollWidth;
     const ch = content.scrollHeight;
     if (cw <= 0 || ch <= 0) return;
-    const scale = clamp(Math.min(vw / cw, vh / ch), minScale, maxScale);
+    const raw = Math.min(vw / cw, vh / ch);
+    const scale = clamp(Math.max(raw, fitMinScale), minScale, maxScale);
     const x = (vp.clientWidth - cw * scale) / 2;
-    const y = (vp.clientHeight - ch * scale) / 2;
-    setT({ x, y, scale });
-  }, [minScale, maxScale]);
+    const y = pad;
+    commitAnimated({ x, y, scale });
+  }, [minScale, maxScale, fitMinScale, commitAnimated]);
 
   const resetView = React.useCallback(() => {
-    setT({ x: 24, y: 24, scale: initialScale });
-  }, [initialScale]);
+    commitAnimated({ x: 24, y: 24, scale: initialScale });
+  }, [initialScale, commitAnimated]);
 
-  // Fit once after mount (parent remounts via key when focus changes)
   React.useEffect(() => {
-    const id = window.setTimeout(() => fitContent(), 40);
-    return () => window.clearTimeout(id);
+    const id = window.setTimeout(() => {
+      if (autoFit) fitContent();
+      else commitInstant({ x: 28, y: 28, scale: initialScale });
+    }, 50);
+    return () => {
+      window.clearTimeout(id);
+      stopLoop();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -105,12 +170,10 @@ export function PanZoomCanvas({
     if (!el) return;
 
     const onWheel = (e: WheelEvent) => {
-      // Always zoom inside the canvas (schema/map feel)
       e.preventDefault();
-      const cur = tRef.current;
-      const delta = -e.deltaY;
-      const factor = Math.exp(delta * 0.0016);
-      zoomAt(e.clientX, e.clientY, cur.scale * factor);
+      const cur = targetRef.current;
+      const factor = Math.exp(-e.deltaY * 0.00135);
+      zoomAt(e.clientX, e.clientY, cur.scale * factor, true);
     };
 
     el.addEventListener("wheel", onWheel, { passive: false });
@@ -119,16 +182,19 @@ export function PanZoomCanvas({
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0) return;
-    // Don't start pan from interactive controls in the toolbar overlay
     const target = e.target as HTMLElement;
     if (target.closest("[data-panzoom-ui]")) return;
+
+    stopLoop();
+    currentRef.current = { ...targetRef.current };
+    setT(currentRef.current);
 
     dragRef.current = {
       pointerId: e.pointerId,
       startX: e.clientX,
       startY: e.clientY,
-      origX: tRef.current.x,
-      origY: tRef.current.y,
+      origX: currentRef.current.x,
+      origY: currentRef.current.y,
       moved: false,
     };
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
@@ -141,10 +207,10 @@ export function PanZoomCanvas({
     const dx = e.clientX - drag.startX;
     const dy = e.clientY - drag.startY;
     if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
-    setT({
+    commitInstant({
       x: drag.origX + dx,
       y: drag.origY + dy,
-      scale: tRef.current.scale,
+      scale: currentRef.current.scale,
     });
   };
 
@@ -160,14 +226,7 @@ export function PanZoomCanvas({
     if (e.touches.length !== 2) return;
     const [a, b] = [e.touches[0], e.touches[1]];
     const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-    pinchRef.current = {
-      dist,
-      scale: tRef.current.scale,
-      midX: (a.clientX + b.clientX) / 2,
-      midY: (a.clientY + b.clientY) / 2,
-      x: tRef.current.x,
-      y: tRef.current.y,
-    };
+    pinchRef.current = { dist, scale: targetRef.current.scale };
     dragRef.current = null;
   };
 
@@ -179,8 +238,7 @@ export function PanZoomCanvas({
     const dist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
     const midX = (a.clientX + b.clientX) / 2;
     const midY = (a.clientY + b.clientY) / 2;
-    const nextScale = clamp(pinch.scale * (dist / pinch.dist), minScale, maxScale);
-    zoomAt(midX, midY, nextScale);
+    zoomAt(midX, midY, pinch.scale * (dist / pinch.dist), true);
   };
 
   const onTouchEnd = () => {
@@ -190,7 +248,14 @@ export function PanZoomCanvas({
   const onDoubleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.closest("a,button,[data-panzoom-ui]")) return;
-    zoomAt(e.clientX, e.clientY, tRef.current.scale * 1.35);
+    zoomAt(e.clientX, e.clientY, targetRef.current.scale * 1.4, true);
+  };
+
+  const centerZoom = (factor: number) => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    zoomAt(r.left + r.width / 2, r.top + r.height / 2, targetRef.current.scale * factor, true);
   };
 
   const pct = Math.round(t.scale * 100);
@@ -198,36 +263,25 @@ export function PanZoomCanvas({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl border-2 border-[#10164F]/18 bg-[#EAEDFF]/70 shadow-[0_24px_60px_-28px_rgba(16,22,79,0.3)]",
+        "relative overflow-hidden rounded-3xl border-2 border-[#10164F]/25 bg-[#EAEDFF] shadow-[0_24px_60px_-28px_rgba(16,22,79,0.35)]",
         className
       )}
     >
-      {/* Toolbar */}
       <div
         data-panzoom-ui
-        className="absolute left-3 top-3 z-20 flex flex-wrap items-center gap-1.5 rounded-2xl border-2 border-[#10164F]/15 bg-white/95 p-1.5 shadow-lg backdrop-blur"
+        className="absolute left-3 top-3 z-20 flex flex-wrap items-center gap-1.5 rounded-2xl border-2 border-[#10164F]/20 bg-white p-1.5 shadow-lg"
       >
-        <span className="hidden items-center gap-1.5 px-2 text-[10px] font-black uppercase tracking-wider text-[#10164F]/70 sm:inline-flex">
+        <span className="hidden items-center gap-1.5 px-2 text-[10px] font-black uppercase tracking-wider text-[#10164F] sm:inline-flex">
           <Hand className="h-3.5 w-3.5 text-[#304FFE]" /> Drag · Pinch · Scroll
         </span>
-        <div className="mx-0.5 hidden h-6 w-px bg-[#10164F]/15 sm:block" />
-        <ToolBtn label="Zoom out" onClick={() => {
-          const el = viewportRef.current;
-          if (!el) return;
-          const r = el.getBoundingClientRect();
-          zoomAt(r.left + r.width / 2, r.top + r.height / 2, t.scale / 1.2);
-        }}>
+        <div className="mx-0.5 hidden h-6 w-px bg-[#10164F]/20 sm:block" />
+        <ToolBtn label="Zoom out" onClick={() => centerZoom(1 / 1.25)}>
           <Minus className="h-4 w-4" />
         </ToolBtn>
-        <span className="min-w-[3.25rem] text-center text-xs font-black tabular-nums text-[#10164F]">
+        <span className="min-w-[3.5rem] rounded-lg bg-[#EAEDFF] px-2 py-1 text-center text-xs font-black tabular-nums text-[#10164F]">
           {pct}%
         </span>
-        <ToolBtn label="Zoom in" onClick={() => {
-          const el = viewportRef.current;
-          if (!el) return;
-          const r = el.getBoundingClientRect();
-          zoomAt(r.left + r.width / 2, r.top + r.height / 2, t.scale * 1.2);
-        }}>
+        <ToolBtn label="Zoom in" onClick={() => centerZoom(1.25)}>
           <Plus className="h-4 w-4" />
         </ToolBtn>
         <ToolBtn label="Fit to view" onClick={fitContent}>
@@ -241,8 +295,8 @@ export function PanZoomCanvas({
       <div
         ref={viewportRef}
         className={cn(
-          "relative h-[min(78vh,880px)] w-full touch-none select-none overflow-hidden",
-          "bg-[radial-gradient(circle_at_1px_1px,rgba(16,22,79,0.12)_1px,transparent_0)] bg-[size:22px_22px]",
+          "relative h-[min(80vh,920px)] w-full touch-none select-none overflow-hidden",
+          "bg-[radial-gradient(circle_at_1px_1px,rgba(16,22,79,0.14)_1px,transparent_0)] bg-[size:20px_20px]",
           grabbing ? "cursor-grabbing" : "cursor-grab"
         )}
         onPointerDown={onPointerDown}
@@ -265,15 +319,15 @@ export function PanZoomCanvas({
           ref={contentRef}
           className={cn("origin-top-left will-change-transform", contentClassName)}
           style={{
-            transform: `translate(${t.x}px, ${t.y}px) scale(${t.scale})`,
+            transform: `translate3d(${t.x}px, ${t.y}px, 0) scale(${t.scale})`,
           }}
         >
           {children}
         </div>
       </div>
 
-      <p className="border-t border-[#10164F]/10 bg-white px-4 py-2 text-[11px] font-semibold text-[#10164F]/75">
-        Hand-drag to pan · scroll / pinch to zoom · double-click to zoom in · Fit centers the bracket
+      <p className="border-t-2 border-[#10164F]/15 bg-white px-4 py-2.5 text-[11px] font-bold text-[#10164F]">
+        Drag to pan · scroll / pinch to zoom · double-click zooms in · Fit frames the whole bracket
       </p>
     </div>
   );
@@ -297,7 +351,7 @@ function ToolBtn({
         e.stopPropagation();
         onClick();
       }}
-      className="flex h-9 w-9 items-center justify-center rounded-xl text-[#10164F] transition-colors hover:bg-[#EAEDFF] hover:text-[#304FFE]"
+      className="flex h-9 w-9 items-center justify-center rounded-xl border border-transparent text-[#10164F] transition-colors hover:border-[#304FFE]/30 hover:bg-[#EAEDFF] hover:text-[#304FFE]"
     >
       {children}
     </button>

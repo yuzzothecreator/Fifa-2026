@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/components/shared/page-header";
 import { BracketTree } from "@/components/knockout/bracket-tree";
+import { ChampionPoster } from "@/components/knockout/champion-poster";
 import { Badge } from "@/components/ui/badge";
 import { knockoutMatches, flagUrl } from "@/lib/data";
 import type { Match } from "@/lib/types";
@@ -27,7 +28,9 @@ export default function KnockoutPage() {
       />
 
       <section className="container space-y-12 py-10">
-        <BracketTree />
+        <ChampionPoster />
+
+        <BracketTree showChampion={false} />
 
         <div>
           <div className="mb-6 flex items-center gap-4">
@@ -45,45 +48,14 @@ export default function KnockoutPage() {
                   <span className="h-px flex-1 bg-gradient-to-r from-[#304FFE]/30 to-transparent" />
                   <Badge variant="default">{roundMatches.length || "TBD"}</Badge>
                 </div>
-                {roundMatches.length === 0 ? (
-                  <div className="glass rounded-2xl p-8 text-center font-semibold text-[#10164F]/70">
-                    Awaiting confirmed fixtures for this round.
-                  </div>
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                    {roundMatches.map((m) => (
-                      <BracketCard key={m.id} match={m} />
-                    ))}
-                  </div>
-                )}
+                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {roundMatches.map((m) => (
+                    <BracketCard key={m.id} match={m} />
+                  ))}
+                </div>
               </div>
             );
           })}
-        </div>
-
-        <div className="pitch-panel relative overflow-hidden rounded-3xl border border-[#304FFE] p-8 md:p-12">
-          <div className="spectrum-bar absolute inset-x-0 top-0 h-1" />
-          <p className="text-xs font-black uppercase tracking-[0.3em] text-white">Champions · 19 July 2026</p>
-          <h3 className="mt-3 font-display text-4xl uppercase leading-none text-white md:text-6xl">
-            Spain win the World Cup
-          </h3>
-          <p className="mt-3 max-w-xl text-base font-medium text-white/95">
-            Spain 1–0 Argentina at MetLife Stadium — New York New Jersey. England take third with a 6–4 win over France.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <Link
-              href="/matches/m104"
-              className="inline-flex text-sm font-black text-white underline-offset-4 hover:underline"
-            >
-              View Final →
-            </Link>
-            <Link
-              href="/matches/m103"
-              className="inline-flex text-sm font-black text-white/85 underline-offset-4 hover:underline"
-            >
-              Third-place play-off →
-            </Link>
-          </div>
         </div>
       </section>
     </>
@@ -92,32 +64,44 @@ export default function KnockoutPage() {
 
 function BracketCard({ match }: { match: Match }) {
   const done = match.status === "FINISHED";
+  const homeWin = done && (match.homeScore ?? 0) > (match.awayScore ?? 0);
+  const awayWin = done && (match.awayScore ?? 0) > (match.homeScore ?? 0);
+  // Penalty winners from note when scores tied
+  const noteWinHome =
+    done &&
+    Boolean(match.note?.toLowerCase().startsWith(match.homeCountry.toLowerCase()));
+  const noteWinAway =
+    done &&
+    Boolean(match.note?.toLowerCase().startsWith(match.awayCountry.toLowerCase()));
+
   return (
     <Link
       href={`/matches/${match.id}`}
       className={cn(
-        "glass block rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-neon",
-        done && "border-[#304FFE]/25"
+        "block rounded-2xl border-[3px] border-[#10164F]/20 bg-white p-5 shadow-[0_12px_32px_-16px_rgba(16,22,79,0.4)] transition-all hover:-translate-y-1 hover:border-[#304FFE] hover:shadow-[0_18px_40px_-14px_rgba(48,79,254,0.4)]",
+        done && "border-[#304FFE]/35"
       )}
     >
-      <div className="mb-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-[#10164F]/70">
-        <span>{match.stadium}</span>
+      <div className="mb-4 flex items-center justify-between text-[11px] font-black uppercase tracking-wider text-[#10164F]">
+        <span className="truncate">{match.stadium}</span>
         <Badge variant={done ? "pitch" : "muted"}>{done ? "FT" : match.status}</Badge>
       </div>
       <Side
         code={match.homeCode}
         country={match.homeCountry}
         score={match.homeScore}
-        highlight={done && (match.homeScore ?? 0) > (match.awayScore ?? 0)}
+        highlight={homeWin || noteWinHome}
       />
-      <div className="my-2 text-center font-display text-sm text-[#10164F]/40">vs</div>
+      <div className="my-2 text-center font-display text-sm font-black text-[#304FFE]">vs</div>
       <Side
         code={match.awayCode}
         country={match.awayCountry}
         score={match.awayScore}
-        highlight={done && (match.awayScore ?? 0) > (match.homeScore ?? 0)}
+        highlight={awayWin || noteWinAway}
       />
-      {match.note && <p className="mt-3 text-center text-[11px] font-semibold text-[#B71D1C]">{match.note}</p>}
+      {match.note && (
+        <p className="mt-3 text-center text-xs font-black text-[#B71D1C]">{match.note}</p>
+      )}
     </Link>
   );
 }
@@ -134,14 +118,29 @@ function Side({
   highlight?: boolean;
 }) {
   return (
-    <div className={cn("flex items-center gap-3 rounded-xl px-2 py-2", highlight && "bg-[#EAEDFF]")}>
-      {code === "tbd" ? (
-        <div className="h-6 w-9 rounded bg-[#EAEDFF]" />
-      ) : (
-        <img src={flagUrl(code, "w40")} alt="" className="h-6 w-9 rounded object-cover" />
+    <div
+      className={cn(
+        "flex items-center gap-3 rounded-xl px-3 py-2.5",
+        highlight ? "bg-[#304FFE] text-white" : "bg-[#EAEDFF]"
       )}
-      <span className={cn("flex-1 font-medium text-[#10164F]", highlight && "text-[#304FFE]")}>{country}</span>
-      {score != null && <span className="font-display text-2xl text-[#10164F]">{score}</span>}
+    >
+      {code === "tbd" ? (
+        <div className="h-8 w-11 rounded-md bg-white/30" />
+      ) : (
+        <img
+          src={flagUrl(code, "w80")}
+          alt=""
+          className="h-8 w-11 rounded-md object-cover ring-2 ring-white"
+        />
+      )}
+      <span className={cn("flex-1 text-base font-black", highlight ? "text-white" : "text-[#10164F]")}>
+        {country}
+      </span>
+      {score != null && (
+        <span className={cn("font-display text-3xl leading-none", highlight ? "text-white" : "text-[#10164F]")}>
+          {score}
+        </span>
+      )}
     </div>
   );
 }

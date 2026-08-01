@@ -38,8 +38,8 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
       transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
       whileHover={{ y: -6 }}
       className={cn(
-        "relative overflow-hidden rounded-2xl glass p-4 transition-shadow hover:shadow-neon sm:p-5",
-        isLive && "ring-2 ring-[#B71D1C]/40"
+        "relative overflow-hidden rounded-2xl border-[3px] border-[#10164F]/18 bg-white p-5 shadow-[0_14px_36px_-18px_rgba(16,22,79,0.4)] transition-shadow hover:border-[#304FFE] hover:shadow-[0_18px_44px_-14px_rgba(48,79,254,0.4)] sm:p-6",
+        isLive && "border-[#B71D1C] ring-2 ring-[#B71D1C]/30"
       )}
     >
       <div className="flex items-center justify-between gap-2">
@@ -74,46 +74,48 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
       <div className="mt-4 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:mt-5 sm:gap-3">
         <div className="flex min-w-0 flex-col items-center gap-1.5 text-center sm:gap-2">
           <Flag code={match.homeCode} country={match.homeCountry} />
-          <span className="line-clamp-2 font-heading text-sm tracking-wide text-[#10164F] sm:text-lg">
+          <span className="line-clamp-2 font-heading text-base font-bold tracking-wide text-[#10164F] sm:text-xl">
             {match.homeCountry}
           </span>
         </div>
 
         <div className="flex flex-col items-center px-1 sm:px-2">
           {isDone || isLive ? (
-            <div className="font-display text-3xl leading-none text-[#10164F] sm:text-4xl">
+            <div className="font-display text-4xl leading-none text-[#10164F] sm:text-5xl">
               {match.homeScore}
-              <span className="mx-1 text-[#10164F]/30">:</span>
+              <span className="mx-1.5 text-[#304FFE]">:</span>
               {match.awayScore}
             </div>
           ) : (
-            <div className="font-display text-xl text-[#304FFE] sm:text-2xl">VS</div>
+            <div className="font-display text-2xl font-black text-[#304FFE] sm:text-3xl">VS</div>
           )}
-          <span className="mt-1 text-[10px] uppercase tracking-widest text-[#10164F]/90">{d.time}</span>
+          <span className="mt-1.5 text-[11px] font-black uppercase tracking-widest text-[#10164F]">
+            {d.time}
+          </span>
         </div>
 
         <div className="flex min-w-0 flex-col items-center gap-1.5 text-center sm:gap-2">
           <Flag code={match.awayCode} country={match.awayCountry} />
-          <span className="line-clamp-2 font-heading text-sm tracking-wide text-[#10164F] sm:text-lg">
+          <span className="line-clamp-2 font-heading text-base font-bold tracking-wide text-[#10164F] sm:text-xl">
             {match.awayCountry}
           </span>
         </div>
       </div>
 
       {match.note && (
-        <p className="mt-3 rounded-xl bg-[#EAEDFF] px-3 py-2 text-center text-xs text-[#10164F]/80">
+        <p className="mt-3 rounded-xl bg-[#EAEDFF] px-3 py-2.5 text-center text-xs font-bold text-[#10164F]">
           {match.note}
         </p>
       )}
 
-      <div className="mt-4 flex flex-col gap-2 border-t border-[#10164F]/18 pt-4 text-xs text-[#10164F]/80 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-4 flex flex-col gap-2 border-t-2 border-[#10164F]/15 pt-4 text-sm font-semibold text-[#10164F] sm:flex-row sm:items-center sm:justify-between">
         <span className="flex min-w-0 items-center gap-1.5">
-          <MapPin className="h-3.5 w-3.5 shrink-0 text-[#304FFE]" />
+          <MapPin className="h-4 w-4 shrink-0 text-[#304FFE]" />
           <span className="truncate">
             {match.stadium}, {match.city}
           </span>
         </span>
-        <span className="shrink-0 font-semibold text-[#10164F]/90">
+        <span className="shrink-0 font-black text-[#10164F]">
           {d.weekday} {d.day} {d.month}
         </span>
       </div>
