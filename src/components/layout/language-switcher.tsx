@@ -28,10 +28,10 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen((o) => !o)}
         aria-label="Change language"
-        className="flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 text-sm font-medium text-white/80 backdrop-blur transition-colors hover:border-electric hover:text-electric"
+        className="flex h-10 items-center gap-2 rounded-full border border-[#304FFD]/20 bg-[#304FFD]/10 px-3 text-sm font-bold uppercase text-[#304FFD] transition-colors hover:border-[#304FFD]"
       >
         <Globe className="h-4 w-4" />
-        <span className="hidden sm:inline uppercase">{active}</span>
+        <span className="hidden sm:inline">{active}</span>
       </button>
       {open && (
         <div className="glass-strong absolute right-0 mt-2 w-44 overflow-hidden rounded-2xl p-1.5 shadow-neon">
@@ -43,8 +43,8 @@ export function LanguageSwitcher() {
                 setOpen(false);
               }}
               className={cn(
-                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm text-white/80 transition-colors hover:bg-white/10",
-                active === l.code && "text-electric"
+                "flex w-full items-center justify-between rounded-xl px-3 py-2 text-sm text-[#304FFD]/70 transition-colors hover:bg-[#304FFD]/5",
+                active === l.code && "text-[#304FFD]"
               )}
             >
               <span className="flex items-center gap-2">

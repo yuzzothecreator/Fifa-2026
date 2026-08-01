@@ -48,14 +48,14 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "relative whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-medium transition-colors xl:px-3.5 xl:text-sm",
-                    active ? "text-white" : "text-white/60 hover:text-white"
+                    "relative whitespace-nowrap rounded-full px-2.5 py-2 text-xs font-bold uppercase tracking-wide transition-colors xl:px-3.5 xl:text-sm",
+                    active ? "text-[#304FFD]" : "text-[#304FFD]/55 hover:text-[#304FFD]"
                   )}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full border border-gold/40 bg-gold/10"
+                      className="absolute inset-0 rounded-full border border-[#304FFD]/25 bg-[#304FFD]/10"
                       transition={{ type: "spring", stiffness: 400, damping: 32 }}
                     />
                   )}
@@ -73,7 +73,7 @@ export function Navbar() {
             </Button>
             <button
               onClick={() => setOpen((o) => !o)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#304FFD]/20 bg-[#304FFD]/10 text-[#304FFD] lg:hidden"
               aria-label="Menu"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -97,8 +97,8 @@ export function Navbar() {
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className={cn(
-                      "flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
-                      active ? "bg-gold/10 text-gold" : "text-white/70 hover:bg-white/5"
+                      "flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold transition-colors",
+                      active ? "bg-[#304FFD]/10 text-[#304FFD]" : "text-[#304FFD]/70 hover:bg-[#304FFD]/5"
                     )}
                   >
                     <link.icon className="h-4 w-4" />

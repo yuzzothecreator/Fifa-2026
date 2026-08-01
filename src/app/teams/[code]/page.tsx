@@ -45,7 +45,7 @@ export default function TeamDetailPage({ params }: { params: { code: string } })
         <div
           className="absolute inset-0 opacity-40"
           style={{
-            background: `radial-gradient(60% 80% at 20% 0%, ${team.color}66, transparent 60%), linear-gradient(180deg,#020617,#071426)`,
+            background: `radial-gradient(60% 80% at 20% 0%, rgba(48,79,253,0.25), transparent 60%), linear-gradient(180deg,#FFFFFF,#FFFFFF)`,
           }}
         />
         <div className="stadium-lights pointer-events-none absolute inset-0 opacity-50" />

@@ -44,15 +44,17 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // WC26 muted base tokens (soft depth, not neon)
-        navy: "#0c1018",
-        midnight: "#080a0f",
-        "fifa-blue": "#2A4A7C",
-        electric: "#4A6B94",
-        pitch: "#3F6F6B",
-        gold: "#C4A35A",
-        maple: "#8B4548",
-        sunset: "#B8755C",
+        // Background #FFFFFF · Font/accent #304FFD
+        navy: "#304FFD",
+        midnight: "#304FFD",
+        "fifa-blue": "#304FFD",
+        electric: "#304FFD",
+        pitch: "#304FFD",
+        gold: "#304FFD",
+        maple: "#304FFD",
+        sunset: "#304FFD",
+        soft: "#FFFFFF",
+        mist: "#FFFFFF",
       },
       fontFamily: {
         display: ["var(--font-anton)", "Impact", "sans-serif"],
@@ -65,15 +67,14 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        neon: "0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25)",
-        "neon-green": "0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25)",
-        gold: "0 10px 28px rgba(0,0,0,0.45), 0 2px 8px rgba(196,163,90,0.18)",
+        neon: "0 10px 28px rgba(48,79,253,0.18), 0 2px 8px rgba(48,79,253,0.08)",
+        "neon-green": "0 10px 28px rgba(48,79,253,0.18), 0 2px 8px rgba(48,79,253,0.08)",
+        gold: "0 12px 32px rgba(48,79,253,0.22), 0 2px 8px rgba(48,79,253,0.1)",
       },
       backgroundImage: {
         "grid-lines":
-          "linear-gradient(to right, rgba(196,163,90,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(74,107,148,0.06) 1px, transparent 1px)",
-        "wc26-spectrum":
-          "linear-gradient(90deg, #2A4A7C, #4A6B94, #3F6F6B, #C4A35A, #B8755C, #8B4548, #6B5A82)",
+          "linear-gradient(to right, rgba(48,79,253,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(48,79,253,0.08) 1px, transparent 1px)",
+        "wc26-spectrum": "linear-gradient(90deg, #304FFD, #FFFFFF, #304FFD)",
       },
       screens: {
         xs: "390px",

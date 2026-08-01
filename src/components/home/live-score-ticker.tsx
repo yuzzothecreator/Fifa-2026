@@ -14,12 +14,12 @@ export function LiveScoreTicker() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="force-dark relative z-40 border-y border-white/10 bg-midnight/90 backdrop-blur-xl">
-      <div className="spectrum-bar h-0.5 w-full" />
+    <div className="relative z-40 border-y border-[#304FFD]/15 bg-[#304FFD] text-white">
+      <div className="h-0.5 w-full bg-white/40" />
       <div className="flex items-center gap-0 overflow-hidden">
-        <div className="flex shrink-0 items-center gap-2 border-r border-white/10 bg-red-500/15 px-4 py-2.5">
-          <Radio className="h-3.5 w-3.5 animate-pulse text-red-400" />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-300">Scores</span>
+        <div className="flex shrink-0 items-center gap-2 border-r border-white/20 bg-white/10 px-4 py-2.5">
+          <Radio className="h-3.5 w-3.5 animate-pulse text-white" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">Scores</span>
         </div>
         <div className="relative flex-1 overflow-hidden py-2.5">
           <div className="ticker-track flex w-max gap-8 pl-6">
@@ -27,7 +27,7 @@ export function LiveScoreTicker() {
               <Link
                 key={`${m.id}-${i}`}
                 href={`/matches/${m.id}`}
-                className="flex items-center gap-3 whitespace-nowrap text-sm transition-colors hover:text-electric"
+                className="flex items-center gap-3 whitespace-nowrap text-sm transition-colors hover:text-white"
               >
                 <span className="flex items-center gap-1.5 text-white/80">
                   {m.homeCode !== "tbd" && (

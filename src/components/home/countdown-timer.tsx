@@ -28,12 +28,12 @@ export function CountdownTimer() {
 
   if (mounted && time.over) {
     return (
-      <div className="glass inline-flex items-center gap-3 rounded-2xl px-5 py-4">
+      <div className="inline-flex items-center gap-3 rounded-2xl border border-[#304FFD]/20 bg-[#304FFD]/5 px-5 py-4">
         <span className="relative flex h-3 w-3">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pitch opacity-75" />
-          <span className="relative inline-flex h-3 w-3 rounded-full bg-pitch" />
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#304FFD] opacity-75" />
+          <span className="relative inline-flex h-3 w-3 rounded-full bg-[#304FFD]" />
         </span>
-        <span className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
+        <span className="font-display text-2xl uppercase tracking-wide text-[#304FFD] sm:text-3xl">
           The tournament is underway
         </span>
       </div>
@@ -51,18 +51,22 @@ export function CountdownTimer() {
     <div className="flex w-full max-w-lg items-stretch gap-1.5 xs:gap-2 sm:gap-3">
       {units.map((u, i) => (
         <React.Fragment key={u.label}>
-          <div className="glass flex min-w-0 flex-1 flex-col items-center rounded-xl px-1.5 py-2.5 xs:rounded-2xl xs:px-3 sm:min-w-[84px] sm:flex-none sm:px-4 sm:py-3">
+          <div className="flex min-w-0 flex-1 flex-col items-center rounded-xl border border-[#304FFD]/15 bg-[#304FFD]/5 px-1.5 py-2.5 xs:rounded-2xl xs:px-3 sm:min-w-[84px] sm:flex-none sm:px-4 sm:py-3">
             <motion.span
               key={u.value}
               initial={{ y: -8, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="font-display text-2xl leading-none text-white xs:text-3xl sm:text-5xl"
+              className="font-display text-2xl leading-none text-[#304FFD] xs:text-3xl sm:text-5xl"
             >
               {mounted ? String(u.value).padStart(2, "0") : "--"}
             </motion.span>
-            <span className="mt-1 text-[8px] uppercase tracking-[0.15em] text-white/50 xs:mt-1.5 xs:text-[10px] xs:tracking-[0.2em]">{u.label}</span>
+            <span className="mt-1 text-[8px] uppercase tracking-[0.15em] text-[#304FFD]/50 xs:mt-1.5 xs:text-[10px] xs:tracking-[0.2em]">
+              {u.label}
+            </span>
           </div>
-          {i < units.length - 1 && <span className="self-center font-display text-xl text-electric/60 xs:text-2xl sm:text-4xl">:</span>}
+          {i < units.length - 1 && (
+            <span className="self-center font-display text-xl text-[#304FFD]/40 xs:text-2xl sm:text-4xl">:</span>
+          )}
         </React.Fragment>
       ))}
     </div>

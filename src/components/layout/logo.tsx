@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** FIFA World Cup trophy + FIFA wordmark (user-provided brand mark). */
 export function TrophyMark({ className }: { className?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -14,27 +13,48 @@ export function TrophyMark({ className }: { className?: string }) {
   );
 }
 
-export function Logo({ className, withText = true }: { className?: string; withText?: boolean }) {
+export function Logo({
+  className,
+  withText = true,
+  inverted = false,
+}: {
+  className?: string;
+  withText?: boolean;
+  inverted?: boolean;
+}) {
   return (
     <Link href="/" className={cn("group flex items-center gap-2.5", className)}>
-      <span className="relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-black ring-1 ring-gold/30">
-        <span className="spectrum-bar absolute inset-0 rounded-xl opacity-40 blur-md transition-opacity group-hover:opacity-70" />
+      <span
+        className={cn(
+          "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl ring-1",
+          inverted ? "bg-[#304FFD] ring-white/30" : "bg-[#304FFD] ring-[#304FFD]/20"
+        )}
+      >
         <Image
           src="/fifa-logo.png"
           alt="FIFA"
           width={40}
           height={40}
-          className="relative h-9 w-9 object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.55)]"
+          className="relative h-9 w-9 object-contain"
           priority
         />
       </span>
       {withText && (
         <span className="leading-none">
-          <span className="block font-display text-2xl tracking-tight">
-            <span className="text-white">WC</span>
-            <span className="spectrum-text">26</span>
+          <span
+            className={cn(
+              "block font-display text-2xl tracking-tight",
+              inverted ? "text-white" : "text-[#304FFD]"
+            )}
+          >
+            WC<span className={inverted ? "text-white" : "text-[#304FFD]"}>26</span>
           </span>
-          <span className="block text-[9px] font-semibold uppercase tracking-[0.28em] text-white/50">
+          <span
+            className={cn(
+              "block text-[9px] font-bold uppercase tracking-[0.28em]",
+              inverted ? "text-white/70" : "text-[#304FFD]/55"
+            )}
+          >
             World Cup 2026
           </span>
         </span>

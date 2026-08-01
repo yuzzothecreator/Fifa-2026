@@ -51,7 +51,7 @@ export function ResultPill({ match }: { match: Match }) {
         ) : scheduled ? (
           <span className="font-display text-sm text-electric">vs</span>
         ) : (
-          <span className="font-display text-sm text-red-400">LIVE</span>
+          <span className="font-display text-sm text-white">LIVE</span>
         )}
       </span>
 

@@ -4,19 +4,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-black uppercase tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#304FFD] disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "bg-gold text-[#1a160e] shadow-gold hover:brightness-105 hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]",
+          "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
         pitch:
-          "bg-pitch text-white shadow-neon-green hover:brightness-110",
-        gold: "bg-gold text-[#1a160e] shadow-gold hover:brightness-105",
+          "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
+        gold: "bg-[#304FFD] text-white shadow-[0_12px_28px_rgba(48,79,253,0.25)] hover:brightness-105",
         outline:
-          "border border-white/20 bg-white/[0.04] text-white backdrop-blur hover:border-gold/50 hover:text-gold",
-        ghost: "text-foreground/80 hover:bg-foreground/10 hover:text-foreground",
-        secondary: "bg-fifa-blue text-white shadow-neon hover:brightness-110",
+          "border border-[#304FFD]/30 bg-white text-[#304FFD] hover:border-[#304FFD] hover:bg-[#304FFD]/5",
+        ghost: "text-[#304FFD]/80 hover:bg-[#304FFD]/10 hover:text-[#304FFD]",
+        secondary: "bg-white text-[#304FFD] border border-[#304FFD]/20 hover:bg-[#304FFD]/5",
       },
       size: {
         default: "h-11 px-6 py-2",

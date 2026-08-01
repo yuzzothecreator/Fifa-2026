@@ -133,7 +133,7 @@ export default function FanZonePage() {
                   )}
                 >
                   <span className="flex h-8 w-8 items-center justify-center font-display text-xl text-white/40">
-                    {i < 3 ? <Medal className={cn("h-5 w-5", i === 0 ? "text-gold" : i === 1 ? "text-white/70" : "text-amber-700")} /> : i + 1}
+                    {i < 3 ? <Medal className={cn("h-5 w-5", i === 0 ? "text-gold" : i === 1 ? "text-white/70" : "text-white/45")} /> : i + 1}
                   </span>
                   <img src={flagUrl(u.country, "w40")} alt="" className="h-5 w-7 rounded-sm object-cover" />
                   <span className="flex-1 font-medium text-white">{u.name}</span>

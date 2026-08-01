@@ -42,12 +42,12 @@ const socials = [Twitter, Instagram, Youtube, Facebook, Github];
 
 export function Footer() {
   return (
-    <footer className="force-dark relative mt-24 border-t border-white/10 bg-midnight">
+    <footer className="relative mt-24 border-t border-white/20 bg-[#304FFD] text-white">
       <div className="stadium-lights pointer-events-none absolute inset-0 overflow-hidden opacity-40" />
       <div className="container relative py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo />
+            <Logo inverted />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
               The definitive digital home of the FIFA World Cup 2026. Every match, every goal,
               every moment — across the USA, Canada & Mexico.
@@ -57,7 +57,7 @@ export function Footer() {
                 <a
                   key={i}
                   href="#"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition-colors hover:border-electric hover:text-electric"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/70 transition-colors hover:border-white hover:text-white"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -71,7 +71,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-electric">
+                    <Link href={link.href} className="text-sm text-white/60 transition-colors hover:text-white">
                       {link.label}
                     </Link>
                   </li>
@@ -81,14 +81,14 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 grid gap-6 rounded-2xl glass p-6 md:grid-cols-2 md:items-center">
+        <div className="mt-12 grid gap-6 rounded-2xl border border-white/20 bg-white/10 p-6 md:grid-cols-2 md:items-center">
           <div>
             <h4 className="font-heading text-xl tracking-wide text-white">Never miss a moment</h4>
             <p className="text-sm text-white/60">Get fixtures, results and breaking news in your inbox.</p>
           </div>
           <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
             <Input type="email" placeholder="you@email.com" required />
-            <Button type="submit" variant="pitch" size="icon" aria-label="Subscribe">
+            <Button type="submit" variant="secondary" size="icon" aria-label="Subscribe">
               <Send className="h-4 w-4" />
             </Button>
           </form>

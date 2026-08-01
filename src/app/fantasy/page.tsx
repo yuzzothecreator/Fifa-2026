@@ -97,7 +97,7 @@ export default function FantasyPage() {
 
         <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_1.2fr]">
           {/* Pitch */}
-          <div className="relative overflow-hidden rounded-3xl border border-pitch/30 bg-gradient-to-b from-[#0a3d24] to-[#062816] p-6">
+          <div className="relative overflow-hidden rounded-3xl border border-[#304FFD]/30 bg-[#304FFD] p-6 text-white">
             <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:repeating-linear-gradient(0deg,transparent,transparent_28px,rgba(255,255,255,0.08)_28px,rgba(255,255,255,0.08)_30px)]" />
             <div className="relative space-y-6">
               {SLOTS.map((slot) => {
@@ -117,7 +117,7 @@ export default function FantasyPage() {
                             className={cn(
                               "flex h-20 w-20 flex-col items-center justify-center rounded-2xl border text-center transition-colors",
                               player
-                                ? "border-gold/50 bg-black/40 text-white"
+                                ? "border-gold/50 bg-[#304FFD]/40 text-white"
                                 : "border-dashed border-white/20 bg-white/5 text-white/30"
                             )}
                           >
