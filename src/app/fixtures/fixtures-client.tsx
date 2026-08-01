@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { PageHeader } from "@/components/shared/page-header";
 import { MatchCard } from "@/components/cards/match-card";
 import { ResultsWall } from "@/components/cards/result-pill";
+import { BracketTree } from "@/components/knockout/bracket-tree";
 import { matches, GROUP_LETTERS } from "@/lib/data";
 import type { MatchStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -16,16 +17,27 @@ const statusFilters: { key: "ALL" | MatchStatus; label: string }[] = [
   { key: "FINISHED", label: "Results" },
 ];
 
-const stageFilters = ["All", "Group Stage", "Round of 32", "Round of 16", "Quarter-final", "Final"] as const;
-const viewModes = ["cards", "wall"] as const;
+const stageFilters = [
+  "All",
+  "Group Stage",
+  "Round of 32",
+  "Round of 16",
+  "Quarter-final",
+  "Semi-final",
+  "Final",
+] as const;
+const viewModes = ["cards", "wall", "bracket"] as const;
 
 export default function FixturesClient() {
   const params = useSearchParams();
   const initialWall = params.get("view") === "results";
+  const initialBracket = params.get("view") === "bracket";
   const [status, setStatus] = React.useState<"ALL" | MatchStatus>(initialWall ? "FINISHED" : "ALL");
   const [stage, setStage] = React.useState<(typeof stageFilters)[number]>("All");
   const [group, setGroup] = React.useState<string>("All");
-  const [view, setView] = React.useState<(typeof viewModes)[number]>(initialWall ? "wall" : "cards");
+  const [view, setView] = React.useState<(typeof viewModes)[number]>(
+    initialBracket ? "bracket" : initialWall ? "wall" : "cards"
+  );
 
   const list = matches
     .filter((m) => (status === "ALL" ? true : m.status === status))
@@ -84,55 +96,61 @@ export default function FixturesClient() {
                     : "text-[#10164F] hover:bg-white hover:text-[#304FFE]"
                 )}
               >
-                {v === "wall" ? "Results wall" : "Cards"}
+                {v === "wall" ? "Results wall" : v === "bracket" ? "Bracket" : "Cards"}
               </button>
             ))}
           </div>
         </div>
 
-        <div className="mt-3 flex flex-wrap gap-2">
-          {stageFilters.map((s) => (
-            <button
-              key={s}
-              onClick={() => setStage(s)}
-              className={cn(
-                "rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-colors",
-                stage === s
-                  ? "border-[#10164F] bg-[#10164F] text-white"
-                  : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
-              )}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
+        {view !== "bracket" && (
+          <>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {stageFilters.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setStage(s)}
+                  className={cn(
+                    "rounded-full border px-4 py-1.5 text-[11px] font-semibold uppercase tracking-wider transition-colors",
+                    stage === s
+                      ? "border-[#10164F] bg-[#10164F] text-white"
+                      : "border-border bg-[#EAEDFF] text-[#10164F] hover:text-[#304FFE]"
+                  )}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
 
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          <button
-            onClick={() => setGroup("All")}
-            className={cn(
-              "rounded-lg border px-3 py-1 text-xs font-semibold",
-              group === "All" ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
-            )}
-          >
-            All groups
-          </button>
-          {GROUP_LETTERS.map((g) => (
-            <button
-              key={g}
-              onClick={() => setGroup(g)}
-              className={cn(
-                "h-8 w-8 rounded-lg border font-display text-sm",
-                group === g ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
-              )}
-            >
-              {g}
-            </button>
-          ))}
-        </div>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              <button
+                onClick={() => setGroup("All")}
+                className={cn(
+                  "rounded-lg border px-3 py-1 text-xs font-semibold",
+                  group === "All" ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
+                )}
+              >
+                All groups
+              </button>
+              {GROUP_LETTERS.map((g) => (
+                <button
+                  key={g}
+                  onClick={() => setGroup(g)}
+                  className={cn(
+                    "h-8 w-8 rounded-lg border font-display text-sm",
+                    group === g ? "border-gold bg-gold/15 text-gold" : "border-border text-[#10164F]"
+                  )}
+                >
+                  {g}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         <div className="mt-8">
-          {view === "wall" ? (
+          {view === "bracket" ? (
+            <BracketTree />
+          ) : view === "wall" ? (
             <ResultsWall matches={list} />
           ) : (
             <div className="space-y-10">
@@ -151,7 +169,9 @@ export default function FixturesClient() {
                 </div>
               ))}
               {list.length === 0 && (
-                <div className="glass rounded-2xl p-12 text-center text-white/60">No matches in this view.</div>
+                <div className="glass rounded-2xl p-12 text-center font-semibold text-[#10164F]/70">
+                  No matches in this view.
+                </div>
               )}
             </div>
           )}

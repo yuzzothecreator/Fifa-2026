@@ -294,6 +294,7 @@ export const matches: Match[] = [
   m("m59", "tr", "Türkiye", "us", "United States", "Los Angeles Stadium", "Inglewood", "2026-06-25T13:00:00-07:00", "FINISHED", "Group Stage", "D", 3, 2),
   m("m60", "py", "Paraguay", "au", "Australia", "San Francisco Bay Area Stadium", "Santa Clara", "2026-06-25T16:00:00-07:00", "FINISHED", "Group Stage", "D", 0, 0),
   // Round of 32 (verified FIFA results)
+  m("m73", "za", "South Africa", "ca", "Canada", "Los Angeles Stadium", "Inglewood", "2026-06-28T12:00:00-07:00", "FINISHED", "Round of 32", "—", 0, 1),
   m("m74", "de", "Germany", "py", "Paraguay", "Boston Stadium", "Foxborough", "2026-06-28T16:00:00-04:00", "FINISHED", "Round of 32", "—", 1, 1, "Paraguay win 4–3 on penalties"),
   m("m75", "nl", "Netherlands", "ma", "Morocco", "Monterrey Stadium", "Guadalupe", "2026-06-30T19:00:00-06:00", "FINISHED", "Round of 32", "—", 1, 1, "Morocco win 3–2 on penalties"),
   m("m76", "br", "Brazil", "jp", "Japan", "Houston Stadium", "Houston", "2026-06-30T17:00:00-05:00", "FINISHED", "Round of 32", "—", 2, 1),
@@ -303,20 +304,33 @@ export const matches: Match[] = [
   m("m80", "gb-eng", "England", "cd", "Congo DR", "Atlanta Stadium", "Atlanta", "2026-07-02T18:00:00-04:00", "FINISHED", "Round of 32", "—", 2, 1),
   m("m81", "us", "United States", "ba", "Bosnia and Herzegovina", "San Francisco Bay Area Stadium", "Santa Clara", "2026-07-02T14:00:00-07:00", "FINISHED", "Round of 32", "—", 2, 0),
   m("m82", "be", "Belgium", "sn", "Senegal", "Seattle Stadium", "Seattle", "2026-07-02T17:00:00-07:00", "FINISHED", "Round of 32", "—", 3, 2, "After extra time"),
+  m("m83", "pt", "Portugal", "hr", "Croatia", "Toronto Stadium", "Toronto", "2026-07-02T20:00:00-04:00", "FINISHED", "Round of 32", "—", 2, 1),
+  m("m84", "es", "Spain", "at", "Austria", "Los Angeles Stadium", "Inglewood", "2026-07-02T13:00:00-07:00", "FINISHED", "Round of 32", "—", 3, 0),
+  m("m85", "ch", "Switzerland", "dz", "Algeria", "BC Place Vancouver", "Vancouver", "2026-07-02T16:00:00-07:00", "FINISHED", "Round of 32", "—", 2, 0),
   m("m86", "ar", "Argentina", "cv", "Cabo Verde", "Miami Stadium", "Miami Gardens", "2026-07-03T15:00:00-04:00", "FINISHED", "Round of 32", "—", 3, 2, "After extra time"),
   m("m87", "co", "Colombia", "gh", "Ghana", "Kansas City Stadium", "Kansas City", "2026-07-03T18:00:00-05:00", "FINISHED", "Round of 32", "—", 1, 0),
   m("m88", "au", "Australia", "eg", "Egypt", "Dallas Stadium", "Arlington", "2026-07-03T20:00:00-05:00", "FINISHED", "Round of 32", "—", 1, 1, "Egypt win 4–2 on penalties"),
-  // Round of 16 — verified FIFA results
+  // Round of 16
   m("m89", "py", "Paraguay", "fr", "France", "Philadelphia Stadium", "Philadelphia", "2026-07-04T15:00:00-04:00", "FINISHED", "Round of 16", "—", 0, 1),
   m("m90", "ca", "Canada", "ma", "Morocco", "Houston Stadium", "Houston", "2026-07-04T18:00:00-05:00", "FINISHED", "Round of 16", "—", 0, 3),
-  // Later knockout ties as scheduled by FIFA (scores not fabricated)
-  m("m91", "br", "Brazil", "no", "Norway", "New York New Jersey Stadium", "East Rutherford", "2026-07-05T16:00:00-04:00", "SCHEDULED", "Round of 16", "—"),
-  m("m92", "mx", "Mexico", "gb-eng", "England", "Mexico City Stadium", "Mexico City", "2026-07-05T20:00:00-06:00", "SCHEDULED", "Round of 16", "—"),
-  m("m95", "ar", "Argentina", "eg", "Egypt", "Atlanta Stadium", "Atlanta", "2026-07-06T12:00:00-04:00", "SCHEDULED", "Round of 16", "—"),
-  m("m96", "ch", "Switzerland", "co", "Colombia", "BC Place Vancouver", "Vancouver", "2026-07-06T16:00:00-07:00", "SCHEDULED", "Round of 16", "—"),
-  m("m97", "fr", "France", "ma", "Morocco", "Boston Stadium", "Foxborough", "2026-07-07T16:00:00-04:00", "SCHEDULED", "Quarter-final", "—"),
-  // Final venue & date confirmed by FIFA — pairing TBD until later rounds complete
-  m("m104", "tbd", "Winner SF1", "tbd", "Winner SF2", "New York New Jersey Stadium", "East Rutherford", "2026-07-19T15:00:00-04:00", "SCHEDULED", "Final", "—", undefined, undefined, "Confirmed venue: MetLife Stadium · 19 July 2026"),
+  m("m91", "br", "Brazil", "no", "Norway", "New York New Jersey Stadium", "East Rutherford", "2026-07-05T16:00:00-04:00", "FINISHED", "Round of 16", "—", 1, 2),
+  m("m92", "mx", "Mexico", "gb-eng", "England", "Mexico City Stadium", "Mexico City", "2026-07-05T20:00:00-06:00", "FINISHED", "Round of 16", "—", 2, 3),
+  m("m93", "pt", "Portugal", "es", "Spain", "Dallas Stadium", "Arlington", "2026-07-06T15:00:00-05:00", "FINISHED", "Round of 16", "—", 0, 1),
+  m("m94", "us", "United States", "be", "Belgium", "Seattle Stadium", "Seattle", "2026-07-06T17:00:00-07:00", "FINISHED", "Round of 16", "—", 1, 4),
+  m("m95", "ar", "Argentina", "eg", "Egypt", "Atlanta Stadium", "Atlanta", "2026-07-06T12:00:00-04:00", "FINISHED", "Round of 16", "—", 3, 2),
+  m("m96", "ch", "Switzerland", "co", "Colombia", "BC Place Vancouver", "Vancouver", "2026-07-06T16:00:00-07:00", "FINISHED", "Round of 16", "—", 0, 0, "Switzerland win 4–3 on penalties"),
+  // Quarter-finals
+  m("m97", "fr", "France", "ma", "Morocco", "Boston Stadium", "Foxborough", "2026-07-09T16:00:00-04:00", "FINISHED", "Quarter-final", "—", 2, 0),
+  m("m98", "es", "Spain", "be", "Belgium", "Los Angeles Stadium", "Inglewood", "2026-07-10T12:00:00-07:00", "FINISHED", "Quarter-final", "—", 2, 1),
+  m("m99", "no", "Norway", "gb-eng", "England", "Miami Stadium", "Miami Gardens", "2026-07-11T17:00:00-04:00", "FINISHED", "Quarter-final", "—", 1, 2),
+  m("m100", "ar", "Argentina", "ch", "Switzerland", "Kansas City Stadium", "Kansas City", "2026-07-11T21:00:00-05:00", "FINISHED", "Quarter-final", "—", 2, 1),
+  // Semi-finals
+  m("m101", "fr", "France", "es", "Spain", "Dallas Stadium", "Arlington", "2026-07-14T15:00:00-05:00", "FINISHED", "Semi-final", "—", 0, 2),
+  m("m102", "gb-eng", "England", "ar", "Argentina", "Atlanta Stadium", "Atlanta", "2026-07-15T15:00:00-04:00", "FINISHED", "Semi-final", "—", 1, 2),
+  // Third-place play-off
+  m("m103", "fr", "France", "gb-eng", "England", "Miami Stadium", "Miami Gardens", "2026-07-18T17:00:00-04:00", "FINISHED", "Third-place", "—", 4, 6),
+  // Final — MetLife Stadium · Spain champions
+  m("m104", "es", "Spain", "ar", "Argentina", "New York New Jersey Stadium", "East Rutherford", "2026-07-19T15:00:00-04:00", "FINISHED", "Final", "—", 1, 0, "Spain win the FIFA World Cup 2026"),
 ];
 
 export const news: NewsArticle[] = [
@@ -541,5 +555,7 @@ export const HOST_NATIONS = [
 ] as const;
 
 export const knockoutMatches = matches.filter((m) =>
-  ["Round of 32", "Round of 16", "Quarter-final", "Semi-final", "Final"].some((s) => m.stage.includes(s))
+  ["Round of 32", "Round of 16", "Quarter-final", "Semi-final", "Third-place", "Final"].some((s) =>
+    m.stage.includes(s)
+  )
 );
