@@ -8,6 +8,7 @@ import { GoldenGloveBoard } from "@/components/home/golden-glove-board";
 import { TotalGoalsChart } from "@/components/home/total-goals-chart";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/shared/reveal";
+import { StatsCard } from "@/components/cards/stats-card";
 import { MatchCard } from "@/components/cards/match-card";
 import { TeamCard } from "@/components/cards/team-card";
 import { StadiumCard } from "@/components/cards/stadium-card";
@@ -15,7 +16,7 @@ import { NewsCard } from "@/components/cards/news-card";
 import { Button } from "@/components/ui/button";
 import { BrandMarquee, SectionBand } from "@/components/brand/section-band";
 import { CountdownTimer } from "@/components/home/countdown-timer";
-import { matches, teams, stadiums, news } from "@/lib/data";
+import { matches, teams, stadiums, news, tournamentStats } from "@/lib/data";
 
 export default function HomePage() {
   const liveOrNext = [
@@ -38,23 +39,37 @@ export default function HomePage() {
 
       <LiveScoreTicker />
 
-      {/* soft lavender chapter */}
+      {/* soft lavender chapter — intro + live tournament stats */}
       <SectionBand tone="soft" className="chapter-pad">
-        <div className="container grid gap-12 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
-            <SectionHeading
-              label="And we are one"
-              title="Welcome to the world’s greatest football show"
-              description="From city skyline to shoreline, three nations host a tournament unlike any other — with world-famous icons, local gems, and an unbridled love for the game on the global stage."
-            />
+        <div className="container space-y-12">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <SectionHeading
+                label="And we are one"
+                title="Welcome to the world’s greatest football show"
+                description="From city skyline to shoreline, three nations host a tournament unlike any other — with world-famous icons, local gems, and an unbridled love for the game on the global stage."
+              />
+            </div>
+            <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
+              <Button asChild>
+                <Link href="/fixtures">View Match Schedule</Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/stadiums">Explore Venues</Link>
+              </Button>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
-            <Button asChild>
-              <Link href="/fixtures">View Match Schedule</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="/stadiums">Explore Venues</Link>
-            </Button>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <StatsCard icon="goals" label="Goals Scored" value={tournamentStats.goalsScored} accent="pitch" />
+            <StatsCard icon="teams" label="Teams Qualified" value={tournamentStats.teamsQualified} accent="electric" />
+            <StatsCard icon="stadiums" label="Stadiums" value={tournamentStats.stadiums} accent="maple" />
+            <StatsCard
+              icon="trophy"
+              label="Matches Listed"
+              value={tournamentStats.matchesPlayed}
+              suffix={`/${tournamentStats.totalMatches}`}
+              accent="gold"
+            />
           </div>
         </div>
       </SectionBand>

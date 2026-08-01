@@ -166,7 +166,7 @@
   }
 
   .chapter {
-    @apply relative w-full overflow-hidden;
+    @apply relative w-full;
   }
   .chapter-pad {
     @apply px-4 py-20 sm:px-6 sm:py-28 lg:py-32;

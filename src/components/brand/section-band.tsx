@@ -67,7 +67,12 @@ export function SectionBand({
   const dark = tone === "navy" || tone === "blue" || tone === "red" || waves;
   return (
     <section
-      className={cn("chapter", dark && "section-band-dark force-dark", className)}
+      className={cn(
+        "chapter",
+        waves && "overflow-hidden",
+        dark && "section-band-dark force-dark",
+        className
+      )}
       style={waves ? { backgroundColor: NYNJ.navy, color: NYNJ.white } : toneStyle[tone]}
     >
       {waves && <BrandWaves />}

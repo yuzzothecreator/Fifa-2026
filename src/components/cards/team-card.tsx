@@ -17,7 +17,7 @@ export function TeamCard({ team, index = 0 }: { team: Team; index?: number }) {
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.45, delay: (index % 8) * 0.05 }}
       whileHover={{ y: -8 }}
       className="group relative overflow-hidden rounded-2xl glass p-5 transition-shadow hover:shadow-neon"

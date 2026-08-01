@@ -20,15 +20,10 @@ export function GoldenGloveBoard() {
 
   return (
     <section>
-      <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="section-label">
-            <Hand className="h-3.5 w-3.5" /> Adidas Golden Glove
-          </p>
-          <h2 className="mt-3 font-display text-4xl uppercase leading-none tracking-tight text-[#10164F] sm:text-5xl">
-            Golden Glove Winners
-          </h2>
-        </div>
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <p className="section-label">
+          <Hand className="h-3.5 w-3.5" /> Adidas Golden Glove
+        </p>
         <p className="font-mono text-sm tracking-widest text-[#10164F]/55">2010–2026</p>
       </div>
 
