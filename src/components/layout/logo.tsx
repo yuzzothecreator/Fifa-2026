@@ -24,7 +24,7 @@ export function Logo({ className, withText = true }: { className?: string; withT
           alt="FIFA"
           width={40}
           height={40}
-          className="relative h-9 w-9 object-contain drop-shadow-[0_0_10px_rgba(255,199,44,0.45)]"
+          className="relative h-9 w-9 object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.55)]"
           priority
         />
       </span>

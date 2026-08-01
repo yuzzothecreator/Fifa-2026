@@ -4,56 +4,52 @@
 
 @layer base {
   /*
-    FIFA World Cup 2026™ inspired system
-    Core: Black · White · Gold (#FFC72C)
-    FIFA Blue #0033A0 · Coastal Teal #00A099 · Maple Red #C8102E · Sunset #FF7300
-    + multicolor “We Are 26” spectrum for promotional accents
+    WC26 muted base palette — soft depth via shadow & gradient, not neon saturation
+    Gold #C4A35A · Blue #2A4A7C · Teal #3F6F6B · Maple #8B4548 · Sunset #B8755C
   */
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-    /* Primary = WC26 gold */
-    --primary: 44 100% 59%;
-    --primary-foreground: 0 0% 0%;
-    /* Secondary = coastal teal */
-    --secondary: 177 100% 31%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 68%;
-    --accent: 44 100% 59%;
-    --accent-foreground: 0 0% 0%;
-    --border: 0 0% 18%;
-    --input: 0 0% 12%;
-    --ring: 44 100% 59%;
+    --background: 220 18% 6%;
+    --foreground: 40 10% 96%;
+    --card: 220 16% 9%;
+    --card-foreground: 40 10% 96%;
+    --primary: 42 38% 56%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 175 22% 36%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 12% 14%;
+    --muted-foreground: 220 8% 62%;
+    --accent: 42 38% 56%;
+    --accent-foreground: 220 20% 8%;
+    --border: 220 10% 20%;
+    --input: 220 12% 16%;
+    --ring: 42 38% 56%;
     --radius: 1rem;
-    --fifa-blue: #0033a0;
-    --electric: #2f6bff;
-    --pitch: #00a099;
-    --gold: #ffc72c;
-    --maple: #c8102e;
-    --sunset: #ff7300;
-    --spectrum-mint: #7dffc8;
-    --spectrum-lime: #c8ff3c;
+    --fifa-blue: #2a4a7c;
+    --electric: #4a6b94;
+    --pitch: #3f6f6b;
+    --gold: #c4a35a;
+    --maple: #8b4548;
+    --sunset: #b8755c;
+    --spectrum-mint: #7a9e8e;
+    --spectrum-lime: #a3a86a;
   }
 
   .light {
-    --background: 40 30% 97%;
-    --foreground: 222 60% 10%;
+    --background: 40 20% 97%;
+    --foreground: 220 25% 14%;
     --card: 0 0% 100%;
-    --card-foreground: 222 60% 10%;
-    --primary: 44 100% 45%;
-    --primary-foreground: 0 0% 0%;
-    --secondary: 177 100% 28%;
+    --card-foreground: 220 25% 14%;
+    --primary: 42 35% 42%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 175 22% 32%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 40 20% 92%;
-    --muted-foreground: 220 15% 35%;
-    --accent: 44 100% 45%;
-    --accent-foreground: 0 0% 0%;
-    --border: 40 15% 82%;
-    --input: 40 15% 88%;
-    --ring: 44 100% 45%;
+    --muted: 40 12% 92%;
+    --muted-foreground: 220 10% 40%;
+    --accent: 42 35% 42%;
+    --accent-foreground: 0 0% 100%;
+    --border: 40 10% 84%;
+    --input: 40 10% 90%;
+    --ring: 42 35% 42%;
   }
 
   * {
@@ -68,20 +64,19 @@
   }
 
   body {
-    @apply bg-black text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     background-image:
-      radial-gradient(50% 40% at 8% 0%, rgba(0, 51, 160, 0.35), transparent 55%),
-      radial-gradient(45% 35% at 92% 8%, rgba(0, 160, 153, 0.22), transparent 55%),
-      radial-gradient(50% 40% at 50% 100%, rgba(255, 199, 44, 0.14), transparent 55%),
-      radial-gradient(40% 30% at 80% 70%, rgba(200, 16, 46, 0.1), transparent 55%);
+      radial-gradient(55% 42% at 10% 0%, rgba(42, 74, 124, 0.22), transparent 58%),
+      radial-gradient(48% 38% at 90% 8%, rgba(63, 111, 107, 0.16), transparent 58%),
+      radial-gradient(55% 45% at 50% 100%, rgba(196, 163, 90, 0.1), transparent 60%);
     background-attachment: fixed;
   }
 
   .light body {
     background-image:
-      radial-gradient(55% 40% at 10% 0%, rgba(0, 51, 160, 0.12), transparent 60%),
-      radial-gradient(50% 40% at 90% 10%, rgba(0, 160, 153, 0.1), transparent 60%),
-      radial-gradient(60% 50% at 50% 100%, rgba(255, 199, 44, 0.16), transparent 60%);
+      radial-gradient(55% 40% at 10% 0%, rgba(42, 74, 124, 0.08), transparent 60%),
+      radial-gradient(50% 40% at 90% 10%, rgba(63, 111, 107, 0.07), transparent 60%),
+      radial-gradient(60% 50% at 50% 100%, rgba(196, 163, 90, 0.1), transparent 60%);
   }
 
   html {
@@ -119,31 +114,31 @@
   }
 
   .neon-text {
-    text-shadow: 0 0 18px rgba(255, 199, 44, 0.55), 0 0 36px rgba(47, 107, 255, 0.35);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
   }
   .gold-text {
-    background: linear-gradient(180deg, #fff4c2 0%, #ffc72c 48%, #c99212 100%);
+    background: linear-gradient(180deg, #e6d4a8 0%, #c4a35a 50%, #8f7540 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .brand-gradient-text {
-    background: linear-gradient(100deg, #0033a0 0%, #2f6bff 35%, #00a099 70%, #ffc72c 100%);
+    background: linear-gradient(100deg, #2a4a7c 0%, #4a6b94 40%, #3f6f6b 70%, #c4a35a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  /* Official-feel WC26 multicolor spectrum */
+  /* Soft muted spectrum — depth via soft color transitions */
   .spectrum-text {
     background: linear-gradient(
       100deg,
-      #0033a0 0%,
-      #2f6bff 14%,
-      #00a099 28%,
-      #ffc72c 44%,
-      #ff7300 60%,
-      #c8102e 76%,
-      #9b2cff 100%
+      #2a4a7c 0%,
+      #4a6b94 18%,
+      #3f6f6b 36%,
+      #c4a35a 54%,
+      #b8755c 72%,
+      #8b4548 88%,
+      #6b5a82 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -152,60 +147,63 @@
   .spectrum-bar {
     background: linear-gradient(
       90deg,
-      #0033a0,
-      #2f6bff,
-      #00a099,
-      #ffc72c,
-      #ff7300,
-      #c8102e,
-      #9b2cff
+      #2a4a7c,
+      #4a6b94,
+      #3f6f6b,
+      #c4a35a,
+      #b8755c,
+      #8b4548,
+      #6b5a82
     );
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   }
   .spectrum-frame {
     position: relative;
     border-radius: 1.25rem;
-    padding: 3px;
+    padding: 2px;
     background: linear-gradient(
-      135deg,
-      #0033a0 0%,
-      #2f6bff 16%,
-      #00a099 32%,
-      #ffc72c 48%,
-      #ff7300 64%,
-      #c8102e 80%,
-      #9b2cff 100%
+      145deg,
+      #3a5788 0%,
+      #4a6b94 20%,
+      #3f6f6b 40%,
+      #c4a35a 60%,
+      #b8755c 80%,
+      #8b4548 100%
     );
+    box-shadow: 0 12px 40px -16px rgba(0, 0, 0, 0.65);
   }
   .spectrum-frame > .spectrum-frame-inner {
-    @apply h-full w-full overflow-hidden rounded-[1.1rem] bg-black;
+    @apply h-full w-full overflow-hidden rounded-[1.15rem] bg-[#0c1018];
   }
   .spectrum-frame-blue {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+    background: linear-gradient(135deg, #3a5788, #5a6b8a, #6b5a82);
   }
   .spectrum-frame-fire {
-    background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);
+    background: linear-gradient(135deg, #b8755c, #8b4548, #6b5a82);
   }
   .spectrum-frame-cyan {
-    background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #3f6f6b, #4a6b94, #5a6b8a);
   }
   .spectrum-frame-lime {
-    background: linear-gradient(135deg, #84cc16, #22c55e, #06b6d4);
+    background: linear-gradient(135deg, #7a9e8e, #3f6f6b, #4a6b94);
   }
   .result-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/80 px-2.5 py-1.5 text-sm font-semibold text-white transition-colors hover:border-white/50;
+    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#0c1018]/90 px-2.5 py-1.5 text-sm font-semibold text-white/90 transition-colors hover:border-white/30;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   }
   .result-pill-final {
-    @apply border-gold/80 text-gold shadow-[0_0_18px_rgba(255,199,44,0.35)];
+    @apply border-gold/50 text-gold;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   }
   .neon-lime {
-    color: #b8ff3c;
-    text-shadow: 0 0 12px rgba(184, 255, 60, 0.55);
+    color: #a3a86a;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
   .goals-bar-glow {
-    box-shadow: 0 0 18px rgba(184, 255, 60, 0.75), 0 0 36px rgba(0, 230, 118, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
   }
   .section-label {
-    @apply inline-flex items-center gap-2 rounded-full border border-gold/55 bg-gold/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:px-4 sm:text-xs sm:tracking-[0.25em];
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/35 bg-gold/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold sm:px-4 sm:text-xs sm:tracking-[0.25em];
   }
   .stadium-lights::before,
   .stadium-lights::after {
@@ -214,8 +212,8 @@
     top: -30%;
     width: 45%;
     height: 160%;
-    background: linear-gradient(180deg, rgba(47, 107, 255, 0.28), transparent 70%);
-    filter: blur(40px);
+    background: linear-gradient(180deg, rgba(74, 107, 148, 0.14), transparent 70%);
+    filter: blur(48px);
     pointer-events: none;
   }
   .stadium-lights::before {
@@ -226,7 +224,7 @@
   .stadium-lights::after {
     right: 5%;
     transform: rotate(-14deg);
-    background: linear-gradient(180deg, rgba(255, 199, 44, 0.22), transparent 70%);
+    background: linear-gradient(180deg, rgba(196, 163, 90, 0.12), transparent 70%);
     animation: spot-sweep 13s ease-in-out infinite reverse;
   }
   .card-glow {
@@ -234,7 +232,7 @@
   }
   .card-glow:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 50px -12px rgba(255, 199, 44, 0.35);
+    box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.55);
   }
   .pitch-panel {
     background:
@@ -284,6 +282,6 @@
   background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #0033a0, #ffc72c, #c8102e);
+  background: linear-gradient(180deg, #2a4a7c, #c4a35a, #8b4548);
   border-radius: 999px;
 }

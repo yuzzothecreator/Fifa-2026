@@ -29,7 +29,7 @@ export function GoldenGloveBoard() {
             Golden Glove Winners
           </h2>
         </div>
-        <p className="neon-lime font-mono text-sm tracking-widest">2010–2026</p>
+        <p className="font-mono text-sm tracking-widest text-gold/80">2010–2026</p>
       </div>
 
       {/* Hero winner */}
@@ -45,7 +45,7 @@ export function GoldenGloveBoard() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent sm:bg-gradient-to-r" />
             </div>
-            <div className="flex flex-col justify-end gap-3 bg-[var(--spectrum-mint)] px-5 py-6 text-black sm:px-8 sm:py-8">
+            <div className="flex flex-col justify-end gap-3 bg-[#9bb5a8] px-5 py-6 text-[#1a160e] sm:px-8 sm:py-8">
               <p className="font-display text-5xl leading-none sm:text-6xl">{hero.year}</p>
               <div className="flex items-end justify-between gap-3">
                 <h3 className="font-heading text-3xl uppercase leading-none tracking-wide sm:text-4xl">

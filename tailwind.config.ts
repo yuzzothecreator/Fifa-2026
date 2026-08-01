@@ -44,15 +44,15 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // FIFA World Cup 2026™ brand tokens
-        navy: "#0a1628",
-        midnight: "#000000",
-        "fifa-blue": "#0033A0",
-        electric: "#2F6BFF",
-        pitch: "#00A099",
-        gold: "#FFC72C",
-        maple: "#C8102E",
-        sunset: "#FF7300",
+        // WC26 muted base tokens (soft depth, not neon)
+        navy: "#0c1018",
+        midnight: "#080a0f",
+        "fifa-blue": "#2A4A7C",
+        electric: "#4A6B94",
+        pitch: "#3F6F6B",
+        gold: "#C4A35A",
+        maple: "#8B4548",
+        sunset: "#B8755C",
       },
       fontFamily: {
         display: ["var(--font-anton)", "Impact", "sans-serif"],
@@ -65,15 +65,15 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        neon: "0 0 22px rgba(47,107,255,0.5), 0 0 48px rgba(0,51,160,0.3)",
-        "neon-green": "0 0 22px rgba(0,160,153,0.5), 0 0 48px rgba(0,160,153,0.25)",
-        gold: "0 0 22px rgba(255,199,44,0.55), 0 0 44px rgba(255,199,44,0.25)",
+        neon: "0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25)",
+        "neon-green": "0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25)",
+        gold: "0 10px 28px rgba(0,0,0,0.45), 0 2px 8px rgba(196,163,90,0.18)",
       },
       backgroundImage: {
         "grid-lines":
-          "linear-gradient(to right, rgba(255,199,44,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(47,107,255,0.08) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(196,163,90,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(74,107,148,0.06) 1px, transparent 1px)",
         "wc26-spectrum":
-          "linear-gradient(90deg, #0033A0, #2F6BFF, #00A099, #FFC72C, #FF7300, #C8102E, #9B2CFF)",
+          "linear-gradient(90deg, #2A4A7C, #4A6B94, #3F6F6B, #C4A35A, #B8755C, #8B4548, #6B5A82)",
       },
       screens: {
         xs: "390px",

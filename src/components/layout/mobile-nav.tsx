@@ -21,7 +21,7 @@ export function MobileNav() {
                 active ? "text-gold" : "text-white/55"
               )}
             >
-              <link.icon className={cn("h-5 w-5 shrink-0", active && "drop-shadow-[0_0_8px_rgba(255,199,44,0.85)]")} />
+              <link.icon className={cn("h-5 w-5 shrink-0", active && "opacity-100 drop-shadow-[0_2px_6px_rgba(0,0,0,0.55)]")} />
               <span className="truncate">{link.label}</span>
             </Link>
           );

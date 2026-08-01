@@ -9,14 +9,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gold text-black shadow-gold hover:shadow-[0_0_34px_rgba(255,199,44,0.75)] hover:brightness-105",
+          "bg-gold text-[#1a160e] shadow-gold hover:brightness-105 hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]",
         pitch:
-          "bg-pitch text-white shadow-neon-green hover:shadow-[0_0_32px_rgba(0,160,153,0.7)] hover:brightness-110",
-        gold: "bg-gold text-black shadow-gold hover:brightness-105",
+          "bg-pitch text-white shadow-neon-green hover:brightness-110",
+        gold: "bg-gold text-[#1a160e] shadow-gold hover:brightness-105",
         outline:
-          "border border-white/30 bg-black/30 text-white backdrop-blur hover:border-gold hover:text-gold",
+          "border border-white/20 bg-white/[0.04] text-white backdrop-blur hover:border-gold/50 hover:text-gold",
         ghost: "text-foreground/80 hover:bg-foreground/10 hover:text-foreground",
-        secondary: "bg-fifa-blue text-white hover:brightness-110",
+        secondary: "bg-fifa-blue text-white shadow-neon hover:brightness-110",
       },
       size: {
         default: "h-11 px-6 py-2",

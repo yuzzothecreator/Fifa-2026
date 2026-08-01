@@ -76,7 +76,7 @@ export function Hero() {
                 width={88}
                 height={88}
                 priority
-                className="h-[4.25rem] w-[4.25rem] object-contain drop-shadow-[0_0_24px_rgba(255,215,0,0.4)] sm:h-[5.5rem] sm:w-[5.5rem]"
+                className="h-[4.25rem] w-[4.25rem] object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.55)] sm:h-[5.5rem] sm:w-[5.5rem]"
               />
               <div className="min-w-0">
                 <p className="font-display text-[1.65rem] uppercase leading-none tracking-tight text-white sm:text-4xl">
