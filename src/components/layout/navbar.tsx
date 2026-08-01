@@ -8,7 +8,6 @@ import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/nav";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
-import { ThemeToggle } from "./theme-toggle";
 import { LanguageSwitcher } from "./language-switcher";
 import { Button } from "@/components/ui/button";
 
@@ -35,7 +34,7 @@ export function Navbar() {
         )}
       >
         <div className="container flex items-center justify-between gap-4">
-          <Logo inverted={!scrolled} />
+          <Logo />
 
           <nav className="hidden items-center gap-1 lg:flex">
             {navLinks.slice(0, 7).map((link) => {
@@ -65,7 +64,6 @@ export function Navbar() {
             <div className={cn(!scrolled && "[&_button]:border-white/40 [&_button]:text-white")}>
               <LanguageSwitcher />
             </div>
-            <ThemeToggle />
             <Button
               asChild
               size="sm"

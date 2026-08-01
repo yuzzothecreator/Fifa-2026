@@ -52,7 +52,7 @@ export function Footer() {
       <div className="container relative z-10 py-20">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Logo inverted />
+            <Logo />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
               Built in the spirit of the official NYNJ host experience — every match, every goal, every moment.
             </p>

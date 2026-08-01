@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Anton, Bebas_Neue, Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${anton.variable} ${bebas.variable}`}>
       <body className="min-h-screen">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
@@ -64,7 +62,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="relative safe-bottom md:pb-0">{children}</main>
           <Footer />
           <MobileNav />
-        </ThemeProvider>
       </body>
     </html>
   );

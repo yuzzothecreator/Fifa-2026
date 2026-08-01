@@ -31,7 +31,7 @@ export function TotalGoalsChart() {
             <img
               src="/wc26-logo.png"
               alt="FIFA"
-              className="h-10 w-[4.5rem] object-contain brightness-0 invert sm:h-12 sm:w-24"
+              className="h-10 w-[4.5rem] object-contain sm:h-12 sm:w-24"
             />
           </div>
 

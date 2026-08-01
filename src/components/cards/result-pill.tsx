@@ -39,19 +39,19 @@ export function ResultPill({ match }: { match: Match }) {
       <span className="flex min-w-[4.5rem] flex-col items-center leading-none">
         {finished ? (
           <>
-            <span className="font-display text-lg tracking-wide">
-              {pens && <span className="mr-1 text-[10px] text-white/50">({pens.home})</span>}
+            <span className="font-display text-lg tracking-wide text-[#10164F]">
+              {pens && <span className="mr-1 text-[10px] text-[#10164F]/45">({pens.home})</span>}
               {match.homeScore ?? 0}
-              <span className="mx-1 text-white/40">-</span>
+              <span className="mx-1 text-[#10164F]/30">-</span>
               {match.awayScore ?? 0}
-              {pens && <span className="ml-1 text-[10px] text-white/50">({pens.away})</span>}
+              {pens && <span className="ml-1 text-[10px] text-[#10164F]/45">({pens.away})</span>}
             </span>
-            {aet && <span className="mt-0.5 text-[8px] uppercase tracking-widest text-white/45">AET</span>}
+            {aet && <span className="mt-0.5 text-[8px] uppercase tracking-widest text-[#10164F]/45">AET</span>}
           </>
         ) : scheduled ? (
-          <span className="font-display text-sm text-electric">vs</span>
+          <span className="font-display text-sm text-[#304FFE]">vs</span>
         ) : (
-          <span className="font-display text-sm text-white">LIVE</span>
+          <span className="font-display text-sm text-[#B71D1C]">LIVE</span>
         )}
       </span>
 
@@ -77,7 +77,7 @@ export function ResultsWall({ matches }: { matches: Match[] }) {
           <img
             src="/wc26-logo.png"
             alt=""
-            className="h-10 w-[4.5rem] object-contain brightness-0 invert"
+            className="h-10 w-[4.5rem] object-contain"
           />
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
             FIFA World Cup 2026™
