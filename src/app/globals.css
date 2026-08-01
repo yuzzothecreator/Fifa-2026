@@ -4,8 +4,8 @@
 
 @layer base {
   /*
-    Strict two-color system
-    Background #304FFD · Font #FFFFFF
+    FIFA World Cup 2026 brand (from official banner)
+    Blue #304FFD · Green #00C853 · Red #E31C3D · White #FFFFFF
   */
   :root {
     --background: 231 98% 59%;
@@ -25,6 +25,8 @@
     --ring: 0 0% 100%;
     --radius: 0.85rem;
     --blue: #304ffd;
+    --green: #00c853;
+    --red: #e31c3d;
     --white: #ffffff;
   }
 
@@ -59,12 +61,9 @@
 
   html,
   body {
-    @apply bg-[#304FFD] text-white font-sans antialiased;
+    @apply text-white font-sans antialiased;
     background-color: #304ffd !important;
-    background-image:
-      radial-gradient(65% 45% at 0% 0%, rgba(255, 255, 255, 0.12), transparent 55%),
-      radial-gradient(55% 40% at 100% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
-    background-attachment: fixed;
+    background-image: none;
     min-height: 100%;
   }
 
@@ -132,8 +131,17 @@
     color: #ffffff;
   }
   .spectrum-bar {
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, #00c853 0%, #304ffd 40%, #304ffd 60%, #e31c3d 100%);
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15);
+  }
+  .brand-bar-green {
+    background: #00c853;
+  }
+  .brand-bar-red {
+    background: #e31c3d;
+  }
+  .brand-bar-blue {
+    background: #304ffd;
   }
   .spectrum-frame {
     position: relative;

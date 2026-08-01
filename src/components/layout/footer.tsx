@@ -42,8 +42,11 @@ const socials = [Twitter, Instagram, Youtube, Facebook, Github];
 
 export function Footer() {
   return (
-    <footer className="relative mt-24 border-t border-white/20 bg-[#304FFD] text-white">
-      <div className="stadium-lights pointer-events-none absolute inset-0 overflow-hidden opacity-40" />
+    <footer className="relative mt-0 overflow-hidden text-white" style={{ backgroundColor: "#304FFD" }}>
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-20 -top-24 h-72 w-72 rounded-full" style={{ backgroundColor: "#00C853" }} />
+        <div className="absolute -bottom-28 -right-20 h-80 w-80 rounded-full" style={{ backgroundColor: "#E31C3D" }} />
+      </div>
       <div className="container relative py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>

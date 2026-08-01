@@ -14,10 +14,10 @@ export function LiveScoreTicker() {
   const doubled = [...items, ...items];
 
   return (
-    <div className="relative z-40 border-y border-[#304FFD]/15 bg-[#304FFD] text-white">
-      <div className="h-0.5 w-full bg-white/40" />
+    <div className="relative z-40 border-y border-white/20 bg-[#304FFD] text-white">
+      <div className="h-1 w-full bg-gradient-to-r from-[#00C853] via-white to-[#E31C3D]" />
       <div className="flex items-center gap-0 overflow-hidden">
-        <div className="flex shrink-0 items-center gap-2 border-r border-white/20 bg-white/10 px-4 py-2.5">
+        <div className="flex shrink-0 items-center gap-2 border-r border-white/20 bg-[#E31C3D] px-4 py-2.5">
           <Radio className="h-3.5 w-3.5 animate-pulse text-white" />
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">Scores</span>
         </div>
@@ -46,7 +46,7 @@ export function LiveScoreTicker() {
                     <img src={flagUrl(m.awayCode, "w40")} alt="" className="h-3 w-4 rounded-sm object-cover" />
                   )}
                 </span>
-                <span className="rounded-full bg-white/5 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/40">
+                <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">
                   {m.stage.replace("Group Stage · Opening Match", "Opening").split("·")[0].trim()}
                 </span>
               </Link>

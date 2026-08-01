@@ -23,13 +23,14 @@ interface Props {
   label: string;
   value: number;
   suffix?: string;
-  accent?: "electric" | "pitch" | "gold";
+  accent?: "electric" | "pitch" | "gold" | "maple";
 }
 
 const accentMap = {
-  electric: { text: "text-electric", ring: "shadow-neon", bg: "bg-electric/15", border: "border-electric/30" },
-  pitch: { text: "text-pitch", ring: "shadow-neon-green", bg: "bg-pitch/15", border: "border-pitch/30" },
-  gold: { text: "text-gold", ring: "shadow-gold", bg: "bg-gold/15", border: "border-gold/30" },
+  electric: { text: "text-white", ring: "shadow-neon", bg: "bg-[#304FFD]/30", border: "border-white/30" },
+  pitch: { text: "text-white", ring: "shadow-neon-green", bg: "bg-[#00C853]/40", border: "border-[#00C853]/60" },
+  gold: { text: "text-[#304FFD]", ring: "shadow-gold", bg: "bg-white", border: "border-white" },
+  maple: { text: "text-white", ring: "shadow-neon", bg: "bg-[#E31C3D]/40", border: "border-[#E31C3D]/60" },
 };
 
 export function StatsCard({ icon, label, value, suffix, accent = "electric" }: Props) {
