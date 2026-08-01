@@ -11,8 +11,7 @@ export function ThemeToggle() {
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
 
-  // Treat anything that isn't explicit "light" as dark (matches defaultTheme)
-  const isDark = !mounted ? true : theme !== "light";
+  const isDark = mounted ? theme === "dark" : false;
 
   return (
     <button
@@ -23,31 +22,27 @@ export function ThemeToggle() {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
         "relative flex h-10 w-[68px] items-center rounded-full border p-1 transition-colors",
-        isDark
-          ? "border-electric/40 bg-electric/10"
-          : "border-gold/50 bg-gold/20"
+        isDark ? "border-white/40 bg-white/15" : "border-[#304FFD]/20 bg-[#304FFD]/10"
       )}
     >
-      {/* Track icons (always visible) */}
       <Sun
         className={cn(
           "absolute left-2 h-4 w-4 transition-colors",
-          isDark ? "text-white/40" : "text-gold"
+          isDark ? "text-white/40" : "text-[#304FFD]"
         )}
       />
       <Moon
         className={cn(
           "absolute right-2 h-4 w-4 transition-colors",
-          isDark ? "text-electric" : "text-black/40"
+          isDark ? "text-white" : "text-[#304FFD]/35"
         )}
       />
-      {/* Sliding knob */}
       <motion.span
         layout
         transition={{ type: "spring", stiffness: 500, damping: 32 }}
         className={cn(
           "z-10 flex h-8 w-8 items-center justify-center rounded-full shadow-lg",
-          isDark ? "ml-auto bg-electric text-black shadow-neon" : "mr-auto bg-gold text-black shadow-gold"
+          isDark ? "ml-auto bg-white text-[#304FFD]" : "mr-auto bg-[#304FFD] text-white"
         )}
       >
         {isDark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}

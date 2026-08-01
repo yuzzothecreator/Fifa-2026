@@ -150,7 +150,7 @@ function RowActions() {
       <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/60 hover:border-electric hover:text-electric">
         <Pencil className="h-3.5 w-3.5" />
       </button>
-      <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/60 hover:border-red-500 hover:text-red-400">
+      <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/60 hover:border-white hover:text-white">
         <Trash2 className="h-3.5 w-3.5" />
       </button>
     </div>

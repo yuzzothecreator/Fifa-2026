@@ -41,7 +41,7 @@ export default function DashboardPage() {
             <div>
               <div className="mb-4 flex items-center gap-3">
                 <Badge variant="live"><Radio className="h-3 w-3 animate-pulse" /> Live Now</Badge>
-                <span className="h-px flex-1 bg-gradient-to-r from-red-500/40 to-transparent" />
+                <span className="h-px flex-1 bg-gradient-to-r from-electric/40 to-transparent" />
               </div>
               {live.length ? (
                 <div className="grid gap-5 md:grid-cols-2">

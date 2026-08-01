@@ -27,7 +27,7 @@ export function StadiumCard({ stadium, index = 0 }: { stadium: Stadium; index?: 
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-[#304FFD]/30 to-transparent" />
           <div className="stadium-lights pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           <div className="absolute bottom-4 left-5 right-5" style={{ transform: "translateZ(40px)" }}>
             <p className="text-xs uppercase tracking-widest text-white/60">{stadium.localName}</p>

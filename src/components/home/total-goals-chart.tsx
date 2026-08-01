@@ -5,26 +5,26 @@ import { worldCupGoalsHistory } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const palette = [
-  "#22c55e", "#84cc16", "#eab308", "#f97316", "#ef4444",
-  "#ec4899", "#a855f7", "#6366f1", "#3b82f6", "#06b6d4",
-  "#14b8a6", "#10b981", "#4ade80", "#facc15", "#fb923c",
-  "#f43f5e", "#d946ef", "#8b5cf6", "#60a5fa", "#2dd4bf",
-  "#a3e635", "#fbbf24", "#b8ff3c",
+  "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD",
+  "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF",
+  "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD",
+  "#FFFFFF", "#304FFD", "#FFFFFF", "#304FFD", "#FFFFFF",
+  "#304FFD", "#FFFFFF", "#304FFD",
 ];
 
 export function TotalGoalsChart() {
   const max = Math.max(...worldCupGoalsHistory.map((d) => d.goals));
 
   return (
-    <section className="force-dark">
+    <section>
       <div className="spectrum-frame">
-        <div className="spectrum-frame-inner p-5 sm:p-8">
+        <div className="spectrum-frame-inner bg-[#304FFD] p-5 text-white sm:p-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <h2 className="font-display text-3xl uppercase leading-none tracking-tight text-white sm:text-5xl">
                 Total Goals Scored
               </h2>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-[var(--spectrum-lime)]">
+              <p className="mt-2 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
                 At Every FIFA World Cup™
               </p>
             </div>
@@ -40,7 +40,7 @@ export function TotalGoalsChart() {
                     <span
                       className={cn(
                         "text-[9px] font-bold tabular-nums sm:text-[10px]",
-                        d.highlight ? "neon-lime" : "text-white/70"
+                        d.highlight ? "text-white" : "text-white/70"
                       )}
                     >
                       {d.goals}
@@ -55,7 +55,9 @@ export function TotalGoalsChart() {
                         d.highlight && "goals-bar-glow"
                       )}
                       style={{
-                        background: d.highlight ? "#b8ff3c" : palette[i % palette.length],
+                        background: d.highlight ? "#FFFFFF" : palette[i % palette.length],
+                        border: palette[i % palette.length] === "#FFFFFF" ? "1px solid rgba(255,255,255,0.5)" : "none",
+                        boxSizing: "border-box" as const,
                         minHeight: 8,
                       }}
                       title={`${d.year}: ${d.goals} goals`}
@@ -63,7 +65,7 @@ export function TotalGoalsChart() {
                     <span
                       className={cn(
                         "mt-1 origin-center -rotate-90 text-[8px] font-semibold tabular-nums sm:rotate-0 sm:text-[10px]",
-                        d.highlight ? "text-[var(--spectrum-lime)]" : "text-white/45"
+                        d.highlight ? "text-white" : "text-white/45"
                       )}
                     >
                       {d.year}
@@ -74,9 +76,9 @@ export function TotalGoalsChart() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-4 text-xs text-white/45">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-2 border-t border-white/15 pt-4 text-xs text-white/55">
             <span>FIFA World Cup™ editions · 1930–2026</span>
-            <span className="neon-lime font-semibold">2026 · 48 teams · 308 goals (projected)</span>
+            <span className="font-semibold text-white">2026 · 48 teams · 308 goals (projected)</span>
           </div>
         </div>
       </div>

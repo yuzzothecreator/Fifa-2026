@@ -50,7 +50,7 @@ export function NewsCard({
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD]/80 to-transparent" />
         <div className="absolute left-4 top-4">
           <Badge variant={catVariant[article.category]}>{article.category}</Badge>
         </div>

@@ -39,7 +39,7 @@ export function MatchCard({ match, index = 0 }: { match: Match; index?: number }
       whileHover={{ y: -6 }}
       className={cn(
         "relative overflow-hidden rounded-2xl glass p-4 transition-shadow hover:shadow-neon sm:p-5",
-        isLive && "border-red-500/40"
+        isLive && "border-[#304FFD]/50"
       )}
     >
       <div className="flex items-center justify-between gap-2">

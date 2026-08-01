@@ -17,11 +17,11 @@ export function MobileNav() {
               key={link.href}
               href={link.href}
               className={cn(
-                "flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[9px] font-semibold uppercase tracking-wide transition-colors xs:gap-1 xs:text-[10px]",
-                active ? "text-electric" : "text-white/55"
+                "flex min-w-0 flex-1 flex-col items-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[9px] font-bold uppercase tracking-wide transition-colors xs:gap-1 xs:text-[10px]",
+                active ? "text-[#304FFD]" : "text-[#304FFD]/45"
               )}
             >
-              <link.icon className={cn("h-5 w-5 shrink-0", active && "drop-shadow-[0_0_8px_rgba(0,180,255,0.85)]")} />
+              <link.icon className="h-5 w-5 shrink-0" />
               <span className="truncate">{link.label}</span>
             </Link>
           );

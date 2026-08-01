@@ -69,7 +69,7 @@ export function PlayerCard({
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#304FFD] via-transparent to-transparent" />
           <span className="absolute right-4 top-4 font-display text-6xl leading-none text-white/20">
             {player.number}
           </span>

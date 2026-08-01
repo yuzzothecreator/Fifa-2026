@@ -22,8 +22,7 @@ const stats = [
 
 export function Hero() {
   return (
-    <section className="force-dark relative flex min-h-[100svh] items-center overflow-hidden">
-      {/* Cinematic full-bleed */}
+    <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-white">
       <div className="absolute inset-0">
         <motion.img
           src={HERO_IMAGE}
@@ -31,34 +30,25 @@ export function Hero() {
           initial={{ scale: 1.08 }}
           animate={{ scale: 1 }}
           transition={{ duration: 8, ease: "easeOut" }}
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-center opacity-30"
         />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_70%_40%,transparent,rgba(0,0,0,0.75))]" />
+        <div className="absolute inset-0 bg-white/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/60 to-transparent" />
       </div>
 
       <div className="spectrum-bar absolute inset-x-0 top-0 z-[1] h-[3px]" />
-      <div className="stadium-lights pointer-events-none absolute inset-0 opacity-60" />
-
-      {/* Soft spectrum atmosphere */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-[-10%] top-[15%] h-[50%] w-[45%] rounded-full bg-electric/15 blur-[100px]"
+        className="pointer-events-none absolute left-[-10%] top-[15%] h-[50%] w-[45%] rounded-full bg-[#304FFD]/10 blur-[100px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[10%] right-[-5%] h-[40%] w-[40%] rounded-full bg-pitch/12 blur-[100px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-[20%] left-[40%] h-[30%] w-[30%] rounded-full bg-gold/10 blur-[90px]"
+        className="pointer-events-none absolute bottom-[10%] right-[-5%] h-[40%] w-[40%] rounded-full bg-[#304FFD]/08 blur-[100px]"
       />
 
       <div className="container relative z-10 w-full pb-12 pt-28 sm:pb-16 sm:pt-32 lg:pb-20">
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8 xl:gap-12">
-          {/* Main copy column */}
           <div className="lg:col-span-7 xl:col-span-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -72,15 +62,15 @@ export function Hero() {
                 width={88}
                 height={88}
                 priority
-                className="h-[4.25rem] w-[4.25rem] object-contain drop-shadow-[0_0_24px_rgba(255,215,0,0.4)] sm:h-[5.5rem] sm:w-[5.5rem]"
+                className="h-[4.25rem] w-[4.25rem] object-contain sm:h-[5.5rem] sm:w-[5.5rem]"
               />
               <div className="min-w-0">
-                <p className="font-display text-[1.65rem] uppercase leading-none tracking-tight text-white sm:text-4xl">
+                <p className="font-display text-[1.65rem] uppercase leading-none tracking-tight text-[#304FFD] sm:text-4xl">
                   FIFA World Cup
                 </p>
-                <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55 sm:text-xs sm:tracking-[0.35em]">
-                  <span className="spectrum-text">2026™</span>
-                  <span className="hidden text-white/25 sm:inline">·</span>
+                <p className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#304FFD]/55 sm:text-xs sm:tracking-[0.35em]">
+                  <span className="text-[#304FFD]">2026™</span>
+                  <span className="hidden text-[#304FFD]/25 sm:inline">·</span>
                   <span>Official Hub</span>
                 </p>
               </div>
@@ -95,14 +85,14 @@ export function Hero() {
               {hosts.map((h) => (
                 <span
                   key={h.code}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-3 py-1.5 backdrop-blur-md"
+                  className="inline-flex items-center gap-2 rounded-full border border-[#304FFD]/20 bg-white px-3 py-1.5 shadow-sm"
                 >
                   <img
                     src={flagUrl(h.code, "w40")}
                     alt=""
                     className="h-3.5 w-5 rounded-[2px] object-cover"
                   />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white sm:text-[11px]">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#304FFD] sm:text-[11px]">
                     {h.label}
                   </span>
                 </span>
@@ -113,13 +103,13 @@ export function Hero() {
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="mt-6 max-w-[14ch] font-display text-[2.75rem] uppercase leading-[0.88] tracking-tight text-white xs:text-5xl sm:mt-7 sm:max-w-none sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-8xl"
+              className="mt-6 max-w-[14ch] font-display text-[2.75rem] uppercase leading-[0.88] tracking-tight text-[#304FFD] xs:text-5xl sm:mt-7 sm:max-w-none sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-8xl"
             >
               The world&apos;s greatest
               <br />
-              <span className="spectrum-text neon-text">football show</span>
+              <span className="text-[#304FFD]">football show</span>
               <br className="hidden xs:block" />
-              <span className="text-white"> returns</span>
+              <span className="text-[#304FFD]"> returns</span>
             </motion.h1>
 
             <motion.div
@@ -133,7 +123,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.32 }}
-              className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-white/70 sm:mt-6 sm:text-lg"
+              className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-[#304FFD]/70 sm:mt-6 sm:text-lg"
             >
               48 nations. 16 cities. 104 matches. Live results, groups, stadiums and fantasy — the premium digital home of the biggest World Cup ever.
             </motion.p>
@@ -149,12 +139,7 @@ export function Hero() {
                   <CalendarDays className="h-5 w-5" /> Match Centre <ArrowRight className="h-5 w-5" />
                 </Link>
               </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="w-full border-white/30 bg-black/30 text-white hover:border-electric hover:text-electric sm:w-auto"
-              >
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
                 <Link href="/groups">
                   <Grid3X3 className="h-5 w-5" /> Groups & Standings
                 </Link>
@@ -167,7 +152,6 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Side panel — clock + stats */}
           <motion.aside
             initial={{ opacity: 0, x: 28 }}
             animate={{ opacity: 1, x: 0 }}
@@ -177,10 +161,10 @@ export function Hero() {
             <div className="spectrum-frame">
               <div className="spectrum-frame-inner p-4 sm:p-5">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#304FFD]/50">
                     Tournament clock
                   </p>
-                  <span className="rounded-full bg-pitch/20 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-pitch">
+                  <span className="rounded-full bg-[#304FFD]/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-[#304FFD]">
                     Live
                   </span>
                 </div>
@@ -188,11 +172,11 @@ export function Hero() {
                   <CountdownTimer />
                 </div>
 
-                <div className="mt-5 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 sm:gap-3">
+                <div className="mt-5 grid grid-cols-3 gap-2 border-t border-[#304FFD]/10 pt-4 sm:gap-3">
                   {stats.map((s) => (
                     <div key={s.label} className="text-center">
-                      <p className="font-display text-2xl leading-none text-white sm:text-3xl">{s.value}</p>
-                      <p className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-white/40 sm:text-[10px]">
+                      <p className="font-display text-2xl leading-none text-[#304FFD] sm:text-3xl">{s.value}</p>
+                      <p className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-[#304FFD]/40 sm:text-[10px]">
                         {s.label}
                       </p>
                     </div>
@@ -201,7 +185,7 @@ export function Hero() {
               </div>
             </div>
 
-            <p className="mt-4 hidden text-center text-[10px] uppercase tracking-[0.25em] text-white/35 lg:block">
+            <p className="mt-4 hidden text-center text-[10px] uppercase tracking-[0.25em] text-[#304FFD]/35 lg:block">
               USA · Canada · Mexico · June–July 2026
             </p>
           </motion.aside>
